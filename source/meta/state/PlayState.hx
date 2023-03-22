@@ -577,6 +577,16 @@ class PlayState extends MusicBeatState
 						Main.switchState(this, new OriginalChartingState());
 				}
 
+				if ((FlxG.keys.justPressed.EIGHT) && (!startingSong))
+				{
+					resetMusic();
+					//debug the dad if shift is held
+					if (FlxG.keys.pressed.SHIFT)
+						Main.switchState(this, new AnimationDebug(dadOpponent.curCharacter));
+					else
+						Main.switchState(this, new AnimationDebug(boyfriend.curCharacter));
+				}
+
 				if ((FlxG.keys.justPressed.SIX))
 				{
 					boyfriendStrums.autoplay = !boyfriendStrums.autoplay;
