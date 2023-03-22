@@ -691,12 +691,13 @@ class PlayState extends MusicBeatState
 
 			// Controls
 
+			#if !debug
 			// RESET = Quick Game Over Screen
 			if (controls.RESET && !startingSong && !isStoryMode)
 			{
 				health = 0;
 			}
-
+			#end
 			if (health <= 0 && startedCountdown)
 			{
 				paused = true;
