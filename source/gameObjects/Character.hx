@@ -459,6 +459,17 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT-alt', 'Parent Right Note Mom', 24, false);
 
 				playAnim('idle');
+
+			case 'grandpadeath-cloaked':
+				tex = Paths.getSparrowAtlas('characters/grandpadeath-cloaked');
+				frames = tex;
+				animation.addByPrefix('idle', 'cloakedidle', 24, false);
+				animation.addByPrefix('singUP', 'cloakedup', 24);
+				animation.addByPrefix('singRIGHT', 'cloakedright', 24);
+				animation.addByPrefix('singDOWN', 'cloakeddown', 24);
+				animation.addByPrefix('singLEFT', 'cloakedleft', 24);
+
+				playAnim('idle');
 			default:
 				// set up animations if they aren't already
 

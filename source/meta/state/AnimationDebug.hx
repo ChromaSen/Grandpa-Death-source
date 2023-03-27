@@ -1,5 +1,6 @@
 package meta.state;
 
+import Sys;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -8,10 +9,9 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import meta.*;
 import gameObjects.Boyfriend;
 import gameObjects.Character;
-import Sys;
+import meta.*;
 import meta.state.menus.MainMenuState;
 
 /**
@@ -85,8 +85,6 @@ class AnimationDebug extends FlxState
 			add(idleOnionDad);
 
 			char = dad;
-			dad.flipX = true;
-			idleOnionDad.flipX = true;
 			idleOnionDad.playAnim('idle');
 		}
 		else
@@ -104,8 +102,6 @@ class AnimationDebug extends FlxState
 			add(idleOnionBf);
 
 			char = bf;
-			bf.flipX = true;
-			idleOnionBf.flipX = true;
 			idleOnionBf.playAnim('idle');
 		}
 

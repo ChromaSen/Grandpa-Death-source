@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="grandpadeath-cloaked.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="cloakeddown0000" x="12" y="12" width="620" height="656" frameX="0" frameY="-10" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0001" x="12" y="12" width="620" height="656" frameX="0" frameY="-10" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0002" x="637" y="12" width="606" height="666" frameX="-7" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0003" x="637" y="12" width="606" height="666" frameX="-7" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0004" x="1248" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0005" x="1248" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0006" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0007" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0008" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0009" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0010" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0011" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0012" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakeddown0013" x="1857" y="12" width="604" height="666" frameX="-9" frameY="0" frameWidth="620" frameHeight="666"/>
+	<SubTexture name="cloakedidle0000" x="2466" y="12" width="605" height="691" frameX="-4" frameY="-1" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0001" x="2466" y="12" width="605" height="691" frameX="-4" frameY="-1" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0002" x="3076" y="12" width="602" height="690" frameX="-6" frameY="-2" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0003" x="3076" y="12" width="602" height="690" frameX="-6" frameY="-2" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0004" x="12" y="708" width="601" height="690" frameX="-4" frameY="-2" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0005" x="12" y="708" width="601" height="690" frameX="-4" frameY="-2" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0006" x="618" y="708" width="602" height="691" frameX="-1" frameY="-1" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0007" x="618" y="708" width="602" height="691" frameX="-1" frameY="-1" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0008" x="1225" y="708" width="602" height="692" frameX="0" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0009" x="1225" y="708" width="602" height="692" frameX="0" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0010" x="1832" y="708" width="602" height="692" frameX="-1" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0011" x="1832" y="708" width="602" height="692" frameX="-1" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0012" x="1832" y="708" width="602" height="692" frameX="-1" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedidle0013" x="1832" y="708" width="602" height="692" frameX="-1" frameY="0" frameWidth="609" frameHeight="692"/>
+	<SubTexture name="cloakedleft0000" x="2439" y="708" width="603" height="676" frameX="0" frameY="-7" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0001" x="2439" y="708" width="603" height="676" frameX="0" frameY="-7" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0002" x="3047" y="708" width="604" height="683"/>
+	<SubTexture name="cloakedleft0003" x="3047" y="708" width="604" height="683"/>
+	<SubTexture name="cloakedleft0004" x="12" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0005" x="12" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0006" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0007" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0008" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0009" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0010" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0011" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0012" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedleft0013" x="619" y="1405" width="602" height="683" frameX="-2" frameY="0" frameWidth="604" frameHeight="683"/>
+	<SubTexture name="cloakedright0000" x="1226" y="1405" width="584" height="676" frameX="-26" frameY="-9" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0001" x="1226" y="1405" width="584" height="676" frameX="-26" frameY="-9" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0002" x="1815" y="1405" width="596" height="685" frameX="0" frameY="0" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0003" x="1815" y="1405" width="596" height="685" frameX="0" frameY="0" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0004" x="2416" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0005" x="2416" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0006" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0007" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0008" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0009" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0010" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0011" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0012" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedright0013" x="3015" y="1405" width="594" height="684" frameX="-2" frameY="-1" frameWidth="610" frameHeight="685"/>
+	<SubTexture name="cloakedup0000" x="12" y="2095" width="607" height="712" frameX="-1" frameY="0" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0001" x="12" y="2095" width="607" height="712" frameX="-1" frameY="0" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0002" x="624" y="2095" width="609" height="705" frameX="0" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0003" x="624" y="2095" width="609" height="705" frameX="0" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0004" x="1238" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0005" x="1238" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0006" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0007" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0008" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0009" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0010" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0011" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0012" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+	<SubTexture name="cloakedup0013" x="1852" y="2095" width="609" height="705" frameX="-1" frameY="-7" frameWidth="610" frameHeight="712"/>
+</TextureAtlas>
