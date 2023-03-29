@@ -470,6 +470,17 @@ class Character extends FNFSprite
 				animation.addByPrefix('singLEFT', 'cloakedleft', 24);
 
 				playAnim('idle');
+
+			case 'grandpadeath':
+				tex = Paths.getSparrowAtlas('characters/grandpadeath');
+				frames = tex;
+				animation.addByPrefix('idle', 'GDidle', 24, false);
+				animation.addByPrefix('singUP', 'GD up', 24);
+				animation.addByPrefix('singRIGHT', 'GDright', 24);
+				animation.addByPrefix('singDOWN', 'GD down', 24);
+				animation.addByPrefix('singLEFT', 'GDleft', 24);
+
+				playAnim('idle');
 			default:
 				// set up animations if they aren't already
 
