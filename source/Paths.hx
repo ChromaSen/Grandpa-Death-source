@@ -285,6 +285,7 @@ class Paths
 		return voices;
 	}
 
+	//gdd was here
 	inline static public function voicesOpp(song:String):Any { //opponent voices (will pull opp.ogg)
 		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/opp';
 		var voices = returnSound('songs', songKey);
@@ -309,6 +310,7 @@ class Paths
 			trace(song + " does not have split vocals");
 		return hasVocals;
 	}
+	//gdd is no longer here
 
 	inline static public function inst(song:String):Any
 	{
