@@ -73,7 +73,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8));
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		healthBar.createFilledBar(CoolUtil.getDominantIconColour(PlayState.dadOpponent.curCharacter), CoolUtil.getDominantIconColour(PlayState.boyfriend.curCharacter));
 		// healthBar
 		add(healthBar);
 
