@@ -53,14 +53,17 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	public var foreground:FlxTypedGroup<FlxBasic>;
 
 
-	//grandpa death
-	var back:FlxSprite;
-	var background:FlxSprite;
-	var lava:FlxSprite;
-	var floor:FlxSprite;
-	var cages:FlxSprite;
-	var cage:FlxSprite;
+	//grandpa death old hell
+	var oldback:FlxSprite;
+	var oldbackground:FlxSprite;
+	var oldlava:FlxSprite;
+	var oldfloor:FlxSprite;
+	var oldcages:FlxSprite;
+	var oldcage:FlxSprite;
 	//
+
+	//granpappy death new hell
+	var carlos:FlxSprite; //left down right down left down right down left down right down left down right down left down right down
 
 
 	public function new(curStage)
@@ -89,42 +92,74 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		switch (curStage)
 		{
 			case 'hell':
-				curStage='hell';
+				//I FUCKING HATE STAGE IMPLEMENTATION -gdd
+				curStage = 'hell';
+				PlayState.defaultCamZoom = 0.5;
+
+				var sky = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/sky'));
+				sky.setPosition(-541.7, -383.1);
+				add(sky);
+
+				var cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
+				cages.setPosition(131.5, -187.95);
+				add(cages);
+
+				var cave = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cave'));
+				cave.setPosition(-654.45, 547.5);
+				add(cave);
+
+				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
+				lava.setPosition(-250, 276.1);
+				add(lava);
+
+				var ground = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/ground'));
+				ground.setPosition(-776.9, 86.4);
+				add(ground);
+
+				carlos = new FlxSprite();
+				carlos.frames = Paths.getSparrowAtlas('backgrounds/' + curStage + '/carlos'); //AWW RIIIIIIIIIIIIGHT
+				carlos.setPosition(1437.2, 29.65);
+				carlos.animation.addByPrefix('idle', 'carlos instance 1000');
+				add(carlos);
+				carlos.animation.play('idle');
+
+			case 'OLDhell':
+				curStage='OLDhell';
 				PlayState.defaultCamZoom=0.73;
 				trace(PlayState.defaultCamZoom);
 
-				back=new FlxSprite().loadGraphic(Paths.image('backgrounds/hell/back'));
-				back.setPosition(600.7, -1237.9);
-				back.antialiasing=false;
+				oldback=new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/back'));
+				oldback.setPosition(600.7, -1237.9);
+				oldback.antialiasing=false;
 			
-				background = new FlxSprite().loadGraphic(Paths.image('backgrounds/hell/background'));
-				background.setPosition(600.7, -1119.65);
-				background.antialiasing = false;
+				oldbackground = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/background'));
+				oldbackground.setPosition(600.7, -1119.65);
+				oldbackground.antialiasing = false;
 				
-				lava=new FlxSprite().loadGraphic(Paths.image('backgrounds/hell/lava'));
-				lava.setPosition(440.6, 456.3);
-				lava.antialiasing=false;
+				oldlava=new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/lava'));
+				oldlava.setPosition(440.6, 456.3);
+				oldlava.antialiasing=false;
 				
-				floor = new FlxSprite().loadGraphic(Paths.image('backgrounds/hell/base'));
-				floor.setPosition(672.85, -192.1);
-				floor.antialiasing = false;
+				oldfloor = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/base'));
+				oldfloor.setPosition(672.85, -192.1);
+				oldfloor.antialiasing = false;
 				
-				cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/hell/small_cages'));
-				cages.setPosition(2908.85, -404.7);
-				cages.antialiasing = false;
+				oldcages = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/small_cages'));
+				oldcages.setPosition(2908.85, -404.7);
+				oldcages.antialiasing = false;
 			
-				cage = new FlxSprite();
-				cage.frames = Paths.getSparrowAtlas('backgrounds/hell/cage');
-				cage.setPosition(2759.1, -409.6);
-				cage.antialiasing = false;
-				cage.animation.addByPrefix('idle', 'carlos образец',true);
+				oldcage = new FlxSprite();
+				oldcage.frames = Paths.getSparrowAtlas('backgrounds/OLDhell/cage');
+				oldcage.setPosition(2759.1, -409.6);
+				oldcage.antialiasing = false;
+				oldcage.animation.addByPrefix('idle', 'carlos образец',true);
 				
-				add(back);
-				add(background);
-				add(lava);
-				add(floor);
-				add(cages);
-				add(cage);
+				add(oldback);
+				add(oldbackground);
+				add(oldlava);
+				add(oldfloor);
+				add(oldcages);
+				add(oldcage);
 				
 			default:
 				PlayState.defaultCamZoom = 0.9;
@@ -212,6 +247,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		switch (curStage)
 		{
 			case 'hell':
+				gf.visible = false;
+				boyfriend.setPosition(859.7, 579.1);
+				dad.setPosition(188.05, 379.1);
+			case 'OLDhell':
 				gf.visible=false;
 				boyfriend.setPosition(2381.55, 498.4);
 				dad.setPosition(1500, 200);
@@ -236,6 +275,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		// trace('update backgrounds');
 		switch (PlayState.curStage)
 		{
+			case 'hell':
+				carlos.animation.play('idle', true); //up down left down right left down right down side to side
+
 			case 'highway':
 				// trace('highway update');
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
