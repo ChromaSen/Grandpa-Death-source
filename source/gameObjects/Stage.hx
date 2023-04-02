@@ -93,10 +93,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			case 'hell':
 				//I FUCKING HATE STAGE IMPLEMENTATION -gdd
+				//TODOS:
+				//fix carlos' position
+				//fix cage positions
+				//bring camera up, it's focusing too low currently
+				//(potentially) fix caves if they're shit after cam fix
+				//adjust BF and GD positions to be more faithful to the FLA
 				curStage = 'hell';
-				PlayState.defaultCamZoom = 0.5;
+				PlayState.defaultCamZoom = 0.6;
 
-				var sky = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/sky'));
+				var sky = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/sky')); //i could probably get away with just blowing this up massively but whatever
 				sky.setPosition(-541.7, -383.1);
 				add(sky);
 
@@ -105,7 +111,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(cages);
 
 				var cave = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cave'));
-				cave.setPosition(-654.45, 547.5);
+				cave.screenCenter(X);
+				cave.y = -650;
 				add(cave);
 
 				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
