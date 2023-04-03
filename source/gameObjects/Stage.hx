@@ -105,7 +105,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(sky);
 
 				var cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
-				cages.setPosition(-331.5, -87.95);
+				cages.setPosition(-331.5, -97.95);
 				cages.scrollFactor.set(0.5, 1);
 				add(cages);
 
@@ -113,15 +113,17 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				cave.screenCenter(X);
 				cave.x = cave.x - 200; //sorry i didn't know else to do it lol
 				cave.y = -550;
-				cave.scrollFactor.set(0.65, 1);
+				cave.scrollFactor.set(0.5, 1);
 				add(cave);
 
 				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
+				lava.scrollFactor.set(0.85, 1);
 				lava.setPosition(-250, 376.1);
 				add(lava);
 
 				var island = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/island'));
 				island.setPosition(-100, 606.1);
+				island.scrollFactor.set(0.85, 1);
 				add(island);
 
 				carlos = new FlxSprite();
