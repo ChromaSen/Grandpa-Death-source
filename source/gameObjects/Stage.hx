@@ -119,16 +119,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				lava.setPosition(-250, 276.1);
 				add(lava);
 
-				var ground = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/ground'));
-				ground.setPosition(-776.9, 86.4);
-				add(ground);
-
 				carlos = new FlxSprite();
 				carlos.frames = Paths.getSparrowAtlas('backgrounds/' + curStage + '/carlos'); //AWW RIIIIIIIIIIIIGHT
 				carlos.setPosition(1437.2, 29.65);
 				carlos.animation.addByPrefix('idle', 'carlos instance 1000');
 				add(carlos);
 				carlos.animation.play('idle');
+
+				var ground = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/ground'));
+				ground.setPosition(-776.9, 86.4);
+				add(ground);
 
 			case 'OLDhell':
 				curStage='OLDhell';
