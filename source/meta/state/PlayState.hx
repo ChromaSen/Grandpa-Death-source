@@ -125,6 +125,8 @@ class PlayState extends MusicBeatState
 
 	public static var forceZoom:Array<Float>;
 
+	public var isCamTweening:Bool = false;
+
 	public static var songScore:Int = 0;
 
 	var storyDifficultyText:String = "";
@@ -657,6 +659,12 @@ class PlayState extends MusicBeatState
 					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 
+					if (curStage == 'hell' && forceZoom[0] == 0.2)
+					{
+						isCamTweening = true;
+						FlxTween.num(forceZoom[0], 0, (Conductor.stepCrochet * 8) / 1000, {ease: FlxEase.backOut, onComplete: function(tween:FlxTween) {isCamTweening = false;}}, function(val:Float) {forceZoom[0] = val;});
+					}
+
 					if (char.curCharacter == 'mom')
 						vocals.volume = 1;
 				}
@@ -678,6 +686,13 @@ class PlayState extends MusicBeatState
 						case 'schoolEvil':
 							getCenterX = char.getMidpoint().x - 200;
 							getCenterY = char.getMidpoint().y - 200;
+						case 'hell':
+							getCenterY = char.getMidpoint().y - 200;
+							if (forceZoom[0] != 1.5)
+							{
+								isCamTweening = true;
+								FlxTween.num(forceZoom[0], 0.2, (Conductor.stepCrochet * 8) / 1000, {ease: FlxEase.backOut, onComplete: function(tween:FlxTween) {isCamTweening = false;}}, function(val:Float) {forceZoom[0] = val;});
+							}
 					}
 
 					camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
@@ -1552,7 +1567,8 @@ class PlayState extends MusicBeatState
 
 		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (!Init.trueSettings.get('Reduced Movements')))
 		{
-			FlxG.camera.zoom += 0.015;
+			if (!isCamTweening)
+				FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.05;
 			for (hud in strumHUD)
 				hud.zoom += 0.05;
