@@ -278,12 +278,39 @@ class Paths
 		return file;
 	}
 
-	inline static public function voices(song:String):Any
+	inline static public function voices(song:String):Any //normal voices (both characters in one file)
 	{
 		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Voices';
 		var voices = returnSound('songs', songKey);
 		return voices;
 	}
+
+	//gdd was here
+	inline static public function voicesOpp(song:String):Any { //opponent voices (will pull opp.ogg)
+		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/opp';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+
+	inline static public function voicesBf(song:String):Any { //player voices (will pull bf.ogg)
+		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/bf';
+		var voices = returnSound('songs', songKey);
+		return voices;
+	}
+
+	inline static public function doSplitVocalsExist(song:String) //checks if split vocals exist via opp.ogg
+	{
+		var hasVocals:Bool = false;
+		song = 'assets/songs/${CoolUtil.spaceToDash(song.toLowerCase())}/opp.ogg';
+		trace("checking " + song + " for split vocals");
+		hasVocals = FileSystem.exists(song);
+		if (hasVocals)
+			trace(song + " has split vocals");
+		else
+			trace(song + " does not have split vocals");
+		return hasVocals;
+	}
+	//gdd is no longer here
 
 	inline static public function inst(song:String):Any
 	{

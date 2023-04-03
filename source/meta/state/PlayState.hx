@@ -59,6 +59,8 @@ class PlayState extends MusicBeatState
 
 	public static var songMusic:FlxSound;
 	public static var vocals:FlxSound;
+	public static var vocalsOpp:FlxSound;
+	public static var hasSplitVocals:Bool = false;
 
 	public static var campaignScore:Int = 0;
 
@@ -1469,6 +1471,7 @@ class PlayState extends MusicBeatState
 			songMusic.play();
 			songMusic.onComplete = endSong;
 			vocals.play();
+			vocalsOpp.play();
 
 			resyncVocals();
 
@@ -1504,13 +1507,32 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
 
-		if (SONG.needsVoices)
+		hasSplitVocals = Paths.doSplitVocalsExist(SONG.song);
+
+		if (SONG.needsVoices && hasSplitVocals)
+		{
+			trace("loading split vocals");
+			vocals = new FlxSound().loadEmbedded(Paths.voicesBf(SONG.song), false, true); //bf vocals
+			vocalsOpp = new FlxSound().loadEmbedded(Paths.voicesOpp(SONG.song), false, true); //op vocals
+		}
+
+		else if (SONG.needsVoices && !hasSplitVocals)
+		{	
+			trace("loading normal voices");
 			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song), false, true);
+			vocalsOpp = new FlxSound();
+		}
+
 		else
+		{
+			trace("loading no vocals");
 			vocals = new FlxSound();
+			vocalsOpp = new FlxSound();
+		}
 
 		FlxG.sound.list.add(songMusic);
 		FlxG.sound.list.add(vocals);
+		FlxG.sound.list.add(vocalsOpp);
 
 		// generate the chart
 		unspawnNotes = ChartLoader.generateChartType(SONG, determinedChartType);
@@ -1530,10 +1552,13 @@ class PlayState extends MusicBeatState
 		trace('resyncing vocal time ${vocals.time}');
 		songMusic.pause();
 		vocals.pause();
+		vocalsOpp.pause();
 		Conductor.songPosition = songMusic.time;
 		vocals.time = Conductor.songPosition;
+		vocalsOpp.time = Conductor.songPosition;
 		songMusic.play();
 		vocals.play();
+		vocalsOpp.play();
 		trace('new vocal time ${Conductor.songPosition}');
 	}
 
@@ -1636,6 +1661,9 @@ class PlayState extends MusicBeatState
 
 		if (vocals != null)
 			vocals.stop();
+
+		if (vocalsOpp != null)
+			vocalsOpp.stop();
 	}
 
 	override function openSubState(SubState:FlxSubState)
@@ -1648,6 +1676,7 @@ class PlayState extends MusicBeatState
 				//	trace('nulled song');
 				songMusic.pause();
 				vocals.pause();
+				vocalsOpp.pause();
 				//	trace('nulled song finished');
 			}
 		}
@@ -1700,6 +1729,7 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		songMusic.volume = 0;
 		vocals.volume = 0;
+		vocalsOpp.volume = 0;
 		if (SONG.validScore)
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
@@ -1778,7 +1808,7 @@ class PlayState extends MusicBeatState
 		FlxTransitionableState.skipNextTransOut = true;
 
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-		ForeverTools.killMusic([songMusic, vocals]);
+		ForeverTools.killMusic([songMusic, vocals, vocalsOpp]);
 
 		// deliberately did not use the main.switchstate as to not unload the assets
 		FlxG.switchState(new PlayState());
