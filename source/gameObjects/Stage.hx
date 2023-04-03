@@ -94,11 +94,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'hell':
 				//I FUCKING HATE STAGE IMPLEMENTATION -gdd
 				//TODOS:
-				//fix carlos' position
-				//fix cage positions
 				//bring camera up, it's focusing too low currently
 				//(potentially) fix caves if they're shit after cam fix
-				//adjust BF and GD positions to be more faithful to the FLA
+				//add parallax? - tinb
 				curStage = 'hell';
 				PlayState.defaultCamZoom = 0.6;
 
@@ -107,21 +105,26 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(sky);
 
 				var cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
-				cages.setPosition(131.5, -187.95);
+				cages.setPosition(-331.5, -87.95);
 				add(cages);
 
 				var cave = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cave'));
 				cave.screenCenter(X);
-				cave.y = -650;
+				cave.x = cave.x - 200; //sorry i didn't know else to do it lol
+				cave.y = -550;
 				add(cave);
 
 				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
-				lava.setPosition(-250, 276.1);
+				lava.setPosition(-250, 376.1);
 				add(lava);
+
+				var island = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/island'));
+				island.setPosition(-100, 606.1);
+				add(island);
 
 				carlos = new FlxSprite();
 				carlos.frames = Paths.getSparrowAtlas('backgrounds/' + curStage + '/carlos'); //AWW RIIIIIIIIIIIIGHT
-				carlos.setPosition(1437.2, 29.65);
+				carlos.setPosition(1537.2, -59.65);
 				carlos.animation.addByPrefix('idle', 'carlos instance 1000');
 				add(carlos);
 				carlos.animation.play('idle');
@@ -255,8 +258,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			case 'hell':
 				gf.visible = false;
-				boyfriend.setPosition(859.7, 579.1);
-				dad.setPosition(188.05, 379.1);
+				boyfriend.setPosition(1029.7, 709.1);
+				dad.setPosition(88.05, 429.1);
 			case 'OLDhell':
 				gf.visible=false;
 				boyfriend.setPosition(2381.55, 498.4);
