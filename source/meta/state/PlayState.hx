@@ -158,6 +158,11 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
+	//per-section accuracy bullshit
+	public var sectionJudgements:Array<Int> = [];
+	public var sectionNotesHit:Int = 0;
+	public var curInstTrack:Int = 0; //the current instrumental track we're on, 0 = shit mix, 1 = bad mix, 2 = good mix, 3 = sick mix
+
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -1021,6 +1026,9 @@ class PlayState extends MusicBeatState
 					if (coolNote.childrenNotes.length > 0)
 						Timings.notesHit++;
 					healthCall(Timings.judgementsMap.get(foundRating)[3]);
+					//per section accuracy
+					sectionJudgments.push(Timings.judgementsMap.get(foundRating)[0]);
+					sectionNotesHit++;
 				}
 				else if (coolNote.isSustainNote)
 				{
@@ -1599,6 +1607,11 @@ class PlayState extends MusicBeatState
 				hud.zoom += 0.05;
 		}
 
+		if (curBeat % 4 == 0)
+		{
+
+		}
+
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
 			if (SONG.notes[Math.floor(curStep / 16)].changeBPM)
@@ -2048,5 +2061,58 @@ class PlayState extends MusicBeatState
 		if (Init.trueSettings.get('Disable Antialiasing') && Std.isOfType(Object, FlxSprite))
 			cast(Object, FlxSprite).antialiasing = false;
 		return super.add(Object);
+	}
+
+	function perSectionAccuracyBullshit()
+	{
+		var accuracy:Float = 0;
+		var ratingKeys:Array<String> = [];
+
+		//start off by getting the rating keys
+		for (rating in sectionJudgments)
+		{
+			switch (rating)
+			{
+				case 0: //sick
+					ratingKeys.push('sick');
+				
+				case 1: //good
+					ratingKeys.push('good');
+
+				case 2: //bad
+					ratingKeys.push('bad');
+
+				case 3: //shit
+					ratingKeys.push('shit');
+
+				case 4: //miss
+					ratingKeys.push('miss');
+			}
+		}
+
+		//and now we actually calculate the accuracy
+		for (judgment in ratingKeys)
+		{
+			accuracy += Math.max(0, Timings.judgmentsMap.get(judgment)[3]);
+		}
+
+		accuracy = accuracy / sectionNotesHit;
+
+		//and now we update which mix we should be on
+		switch (accuracy)
+		{
+			case accuracy < 75:
+				if (curInstTrack > 1)
+					curInstTrack--;
+
+			case accuracy > 75 && accuracy < 90:
+				//do nothing lol
+
+			case accuracy > 90:
+				if (curInstTrack < 3)
+					curInstTrack++;
+		}
+
+
 	}
 }
