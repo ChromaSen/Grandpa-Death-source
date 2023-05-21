@@ -58,6 +58,9 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 2;
 
 	public static var songMusic:FlxSound;
+	public static var songMusicShit:FlxSound;
+	public static var songMusicBad:FlxSound;
+	public static var songMusicSick:FlxSound;
 	public static var vocals:FlxSound;
 	public static var vocalsOpp:FlxSound;
 	public static var hasSplitVocals:Bool = false;
@@ -161,7 +164,9 @@ class PlayState extends MusicBeatState
 	//per-section accuracy bullshit
 	public var sectionJudgements:Array<Int> = [];
 	public var sectionNotesHit:Int = 0;
-	public var curInstTrack:Int = 0; //the current instrumental track we're on, 0 = shit mix, 1 = bad mix, 2 = good mix, 3 = sick mix
+	public var curInstTrack:Int = 2; //the current instrumental track we're on, 0 = shit mix, 1 = bad mix, 2 = good mix, 3 = sick mix
+
+	public static var hasInstSwitching:Bool = false; //does the song have multiple instrumentals?
 
 	function resetStatics()
 	{
@@ -654,6 +659,8 @@ class PlayState extends MusicBeatState
 						camDisplaceY = 0;
 					}
 					lastSection = Std.int(curStep / 16);
+					if (hasInstSwitching)
+						perSectionAccuracyBullshit();
 				}
 
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
@@ -1027,7 +1034,7 @@ class PlayState extends MusicBeatState
 						Timings.notesHit++;
 					healthCall(Timings.judgementsMap.get(foundRating)[3]);
 					//per section accuracy
-					sectionJudgments.push(Timings.judgementsMap.get(foundRating)[0]);
+					sectionJudgements.push(Timings.judgementsMap.get(foundRating)[0]);
 					sectionNotesHit++;
 				}
 				else if (coolNote.isSustainNote)
@@ -1477,6 +1484,12 @@ class PlayState extends MusicBeatState
 		if (!paused)
 		{
 			songMusic.play();
+			if (hasInstSwitching)
+			{
+				songMusicShit.play();
+				songMusicBad.play();
+				songMusicSick.play();
+			}
 			songMusic.onComplete = endSong;
 			vocals.play();
 			vocalsOpp.play();
@@ -1515,6 +1528,18 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
 
+		hasInstSwitching = Paths.multiInstCheck(SONG.song);
+
+		if (hasInstSwitching)
+		{
+			songMusicShit = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Shit"), false, true);
+			songMusicShit.volume = 0;
+			songMusicBad = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Bad"), false, true);
+			songMusicBad.volume = 0;
+			songMusicSick = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Sick"), false, true);
+			songMusicSick.volume = 0;
+		}
+
 		hasSplitVocals = Paths.doSplitVocalsExist(SONG.song);
 
 		if (SONG.needsVoices && hasSplitVocals)
@@ -1539,6 +1564,14 @@ class PlayState extends MusicBeatState
 		}
 
 		FlxG.sound.list.add(songMusic);
+
+		if (hasInstSwitching)
+		{
+			FlxG.sound.list.add(songMusicShit);
+			FlxG.sound.list.add(songMusicBad);
+			FlxG.sound.list.add(songMusicSick);
+		}
+
 		FlxG.sound.list.add(vocals);
 		FlxG.sound.list.add(vocalsOpp);
 
@@ -1559,12 +1592,30 @@ class PlayState extends MusicBeatState
 	{
 		trace('resyncing vocal time ${vocals.time}');
 		songMusic.pause();
+		if (hasInstSwitching)
+		{
+			songMusicShit.pause();
+			songMusicBad.pause();
+			songMusicSick.pause();
+		}
 		vocals.pause();
 		vocalsOpp.pause();
 		Conductor.songPosition = songMusic.time;
+		if (hasInstSwitching)
+		{
+			songMusicShit.time = Conductor.songPosition;
+			songMusicBad.time = Conductor.songPosition;
+			songMusicSick.time = Conductor.songPosition;	
+		}
 		vocals.time = Conductor.songPosition;
 		vocalsOpp.time = Conductor.songPosition;
 		songMusic.play();
+		if (hasInstSwitching)
+		{
+			songMusicShit.play();
+			songMusicBad.play();
+			songMusicSick.play();	
+		}
 		vocals.play();
 		vocalsOpp.play();
 		trace('new vocal time ${Conductor.songPosition}');
@@ -1672,6 +1723,16 @@ class PlayState extends MusicBeatState
 		if (songMusic != null)
 			songMusic.stop();
 
+		if (hasInstSwitching)
+		{
+			if (songMusicShit != null)
+				songMusicShit.stop();
+			if (songMusicBad != null)
+				songMusicBad.stop();
+			if (songMusicSick != null)
+				songMusicSick.stop();	
+		}
+
 		if (vocals != null)
 			vocals.stop();
 
@@ -1688,6 +1749,12 @@ class PlayState extends MusicBeatState
 			{
 				//	trace('nulled song');
 				songMusic.pause();
+				if (hasInstSwitching)
+				{
+					songMusicShit.pause();
+					songMusicBad.pause();
+					songMusicSick.pause();	
+				}
 				vocals.pause();
 				vocalsOpp.pause();
 				//	trace('nulled song finished');
@@ -1741,6 +1808,12 @@ class PlayState extends MusicBeatState
 	{
 		canPause = false;
 		songMusic.volume = 0;
+		if (hasInstSwitching)
+		{
+			songMusicShit.volume = 0;
+			songMusicBad.volume = 0;
+			songMusicSick.volume = 0;	
+		}
 		vocals.volume = 0;
 		vocalsOpp.volume = 0;
 		if (SONG.validScore)
@@ -1821,7 +1894,12 @@ class PlayState extends MusicBeatState
 		FlxTransitionableState.skipNextTransOut = true;
 
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-		ForeverTools.killMusic([songMusic, vocals, vocalsOpp]);
+		if (hasInstSwitching)
+		{
+			ForeverTools.killMusic([songMusic, vocals, vocalsOpp, songMusicShit, songMusicBad, songMusicSick]);
+		}
+		else
+			ForeverTools.killMusic([songMusic, vocals, vocalsOpp]);
 
 		// deliberately did not use the main.switchstate as to not unload the assets
 		FlxG.switchState(new PlayState());
@@ -2068,8 +2146,12 @@ class PlayState extends MusicBeatState
 		var accuracy:Float = 0;
 		var ratingKeys:Array<String> = [];
 
+		//pre-flight check, don't wanna run this if we haven't hit any notes!
+		if (sectionNotesHit == 0)
+			return;
+
 		//start off by getting the rating keys
-		for (rating in sectionJudgments)
+		for (rating in sectionJudgements)
 		{
 			switch (rating)
 			{
@@ -2091,28 +2173,80 @@ class PlayState extends MusicBeatState
 		}
 
 		//and now we actually calculate the accuracy
-		for (judgment in ratingKeys)
+		for (judgement in ratingKeys)
 		{
-			accuracy += Math.max(0, Timings.judgmentsMap.get(judgment)[3]);
+			accuracy += Math.max(0, Timings.judgementsMap.get(judgement)[3]); //maths is scary so i stole this from Timings.hx
+			#if debug
+			trace("current accuracy: " + accuracy);
+			#end
 		}
 
-		accuracy = accuracy / sectionNotesHit;
+
+		accuracy = (accuracy / sectionNotesHit);
+
+		#if debug
+		trace('final accuracy: ' + accuracy);
+		trace('sectionNotesHit: ' + sectionNotesHit);
+		#end
+
 
 		//and now we update which mix we should be on
-		switch (accuracy)
+		//accuracy under 75 moves you down a mix
+		//accuracy over 90 moves you up a mix
+		if (accuracy < 75 && curInstTrack > 0)
+			curInstTrack--;
+		else if (accuracy > 90 && curInstTrack < 4)
+			curInstTrack++;
+			
+		//now we actually update the inst
+		switch(curInstTrack)
 		{
-			case accuracy < 75:
-				if (curInstTrack > 1)
-					curInstTrack--;
+			case 0:
+				songMusicShit.volume = 1;
+				songMusicBad.volume = 0;
 
-			case accuracy > 75 && accuracy < 90:
-				//do nothing lol
+			case 1:
+				songMusicBad.volume = 1;
+				songMusicShit.volume = 0;
+				songMusic.volume = 0;
 
-			case accuracy > 90:
-				if (curInstTrack < 3)
-					curInstTrack++;
+			case 2:
+				songMusic.volume = 1;
+				songMusicSick.volume = 0;
+				songMusicBad.volume = 0;
+
+			case 3:
+				songMusicSick.volume = 1;
+				songMusic.volume = 0;
 		}
 
+		//now we just need to clean up after ourselves!
+		sectionJudgements = [];
+
+		sectionNotesHit = 0;
+
+		if (Init.trueSettings.get('Debug Info'))
+		{
+			//some debug info stuff here
+			switch(curInstTrack)
+			{
+				case 0:
+					uiHUD.curMixDebugText.text = 'CUR MIX: SHIT';
+					uiHUD.curMixDebugText.screenCenter(X);
+
+				case 1:
+					uiHUD.curMixDebugText.text = 'CUR MIX: BAD';
+					uiHUD.curMixDebugText.screenCenter(X);
+
+				case 2:
+					uiHUD.curMixDebugText.text = 'CUR MIX: GOOD';
+					uiHUD.curMixDebugText.screenCenter(X);
+
+				case 3:
+					uiHUD.curMixDebugText.text = 'CUR MIX: SICK';
+					uiHUD.curMixDebugText.screenCenter(X);
+			}
+		}
 
 	}
 }
