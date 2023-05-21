@@ -319,6 +319,36 @@ class Paths
 		return inst;
 	}
 
+	//HAHA I LIED GDD IS BACK
+	inline static public function multiInstCheck(song:String):Any
+	{
+		var songKey:String = 'assets/songs/${CoolUtil.spaceToDash(song.toLowerCase())}/InstSick.ogg'; //not a good way to check but it'll do for now
+		trace("checking " + songKey + " for multi-insts");
+		var hasMultiInsts = FileSystem.exists(songKey);
+		if (hasMultiInsts)
+			trace(songKey + " has multiple insts");
+		else
+			trace(songKey + " does not have multiple insts");
+
+		return hasMultiInsts;
+	}
+
+	/**
+	 * Loads a multi-inst track. Mix parameter is case sensitive!
+	 * @param song The song to load.
+	 * @param mix The mix (suffix after "inst" in the filename) to load. Case sensitive!
+	 * @return The selected mix of the song.
+	 */
+	inline static public function multiInst(song:String, mix:String):Any
+	{
+		var title:String = 'Inst' + mix;
+		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/' + title;
+		trace("loading " + songKey + " as multi-inst");
+		var inst = returnSound('songs', songKey);
+		return inst;
+	}
+	//gdd is gone again
+
 	inline static public function image(key:String, ?library:String, ?textureCompression:Bool = false)
 	{
 		var returnAsset:FlxGraphic = returnGraphic(key, library, textureCompression);

@@ -54,6 +54,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	var diffDisplay:String = CoolUtil.difficultyFromNumber(PlayState.storyDifficulty);
 	var engineDisplay:String = "FOREVER ENGINE v" + Main.gameVersion;
 
+	public var curMixDebugText:FlxText;
+
 	// eep
 	public function new()
 	{
@@ -137,6 +139,14 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		autoplayMark.screenCenter(X);
 		autoplayMark.visible = PlayState.boyfriendStrums.autoplay;
 
+		if (Init.trueSettings.get('Debug Info'))
+		{
+			curMixDebugText = new FlxText(-5, Init.trueSettings.get('Downscroll') ? FlxG.height - 60 : 60, FlxG.width, 'CUR MIX: ', 32);
+			curMixDebugText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+			curMixDebugText.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+			curMixDebugText.screenCenter(X);
+		}
+
 		// repositioning for it to not be covered by the receptors
 		if (Init.trueSettings.get('Centered Notefield'))
 		{
@@ -147,6 +157,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		}
 
 		add(autoplayMark);
+		add(curMixDebugText);
 	}
 
 	var counterTextSize:Int = 18;
