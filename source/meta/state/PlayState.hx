@@ -1034,8 +1034,11 @@ class PlayState extends MusicBeatState
 						Timings.notesHit++;
 					healthCall(Timings.judgementsMap.get(foundRating)[3]);
 					//per section accuracy
-					sectionJudgements.push(Timings.judgementsMap.get(foundRating)[0]);
-					sectionNotesHit++;
+					if (hasInstSwitching)
+					{
+						sectionJudgements.push(Timings.judgementsMap.get(foundRating)[0]);
+						sectionNotesHit++;
+					}
 				}
 				else if (coolNote.isSustainNote)
 				{
