@@ -13,6 +13,7 @@ import gameObjects.Boyfriend;
 import gameObjects.Character;
 import meta.*;
 import meta.state.menus.MainMenuState;
+import meta.data.Song.SwagSong;
 
 /**
 	*DEBUG MODE
@@ -54,6 +55,7 @@ class AnimationDebug extends FlxState
 	var camFollow:FlxObject;
 	var idleOnionDad:Character;
 	var idleOnionBf:Boyfriend;
+	var _song:SwagSong; //used to transition straight back to PlayState
 
 	public function new(daAnim:String = 'spooky')
 	{
@@ -204,6 +206,11 @@ class AnimationDebug extends FlxState
 			saveOffsets();
 		}
 
+		if (FlxG.keys.justPressed.P)
+		{
+			goToPlayState();
+		}
+
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			Main.switchState(this, new MainMenuState());
@@ -282,5 +289,11 @@ class AnimationDebug extends FlxState
 
 		trace("file closed, all done! :D");
 
+	}
+
+	function goToPlayState()
+	{
+		PlayState.SONG = _song;
+		Main.switchState(this, new PlayState());
 	}
 }
