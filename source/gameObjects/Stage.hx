@@ -60,11 +60,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var oldfloor:FlxSprite;
 	var oldcages:FlxSprite;
 	var oldcage:FlxSprite;
+	var overlay:FlxSprite;
 	//
 
 	//granpappy death new hell
 	var carlos:FlxSprite; //left down right down left down right down left down right down left down right down left down right down
-
+	var dumbfucks:FlxSprite;
 
 	public function new(curStage)
 	{
@@ -88,6 +89,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		// to apply to foreground use foreground.add(); instead of add();
 		foreground = new FlxTypedGroup<FlxBasic>();
 
+		var left:Int=-180;
+		var right:Int=-200;
 		//
 		switch (curStage)
 		{
@@ -137,6 +140,35 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				ground.setPosition(-776.9, 86.4);
 				add(ground);
 
+				for (i in 0...2)
+				{
+					//facing left
+					dumbfucks=new FlxSprite();
+					dumbfucks.frames=Paths.getSparrowAtlas("backgrounds/hell/skelehenchman");
+					dumbfucks.animation.addByPrefix("idle","henchmanbopper instance",24,true);
+					dumbfucks.animation.play("idle");
+					dumbfucks.antialiasing=false;
+					dumbfucks.updateHitbox();
+					dumbfucks.setPosition((i-1)*(1000+left),780);
+					foreground.add(dumbfucks);
+				}
+				for (i in 0...2)
+				{
+					//facing right
+					dumbfucks=new FlxSprite();
+					dumbfucks.frames=Paths.getSparrowAtlas("backgrounds/hell/skelehenchman");
+					dumbfucks.animation.addByPrefix("idle","henchmanbopper instance",24,true);
+					dumbfucks.animation.play("idle");
+					dumbfucks.antialiasing=false;
+					dumbfucks.updateHitbox();
+					dumbfucks.flipX=true;
+					dumbfucks.setPosition((i+1)*(1200+right),780);
+					foreground.add(dumbfucks);
+				}
+				overlay=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/overlay"));
+				overlay.updateHitbox();
+				overlay.scale.set(2,2);
+				add(overlay);
 			case 'OLDhell':
 				curStage='OLDhell';
 				PlayState.defaultCamZoom=0.73;

@@ -338,14 +338,11 @@ class PlayState extends MusicBeatState
 		strumHUD = [];
 		for (i in 0...strumLines.length)
 		{
-			// generate a new strum camera
 			strumHUD[i] = new FlxCamera();
 			strumHUD[i].bgColor.alpha = 0;
 
-			strumHUD[i].cameras = [camHUD];
 			allUIs.push(strumHUD[i]);
 			FlxG.cameras.add(strumHUD[i], false);
-			// set this strumline's camera to the designated camera
 			strumLines.members[i].cameras = [strumHUD[i]];
 		}
 		add(strumLines);
@@ -1091,6 +1088,21 @@ class PlayState extends MusicBeatState
 			else
 				altString = '';
 		}
+		/*
+		if(curSong.toLowerCase()=='granddad-battle'){
+			if (!coolNote.mustPress)
+			{
+				FlxG.camera.shake(0.0065,0.2);
+				for (ui in allUIs)
+					ui.shake(0.0020,0.1);
+
+				FlxTween.tween(boyfriend,{x:boyfriend.x+20},1,{
+					ease:FlxEase.quadOut,
+					onComplete:function(tsdfvpsdfk:FlxTween){}
+				});
+			}
+		}
+		*/
 
 		stringArrow = baseString + altString;
 		// if (coolNote.foreverMods.get('string')[0] != "")
@@ -1593,7 +1605,6 @@ class PlayState extends MusicBeatState
 
 	function resyncVocals():Void
 	{
-		trace('resyncing vocal time ${vocals.time}');
 		songMusic.pause();
 		if (hasInstSwitching)
 		{
@@ -1621,7 +1632,6 @@ class PlayState extends MusicBeatState
 		}
 		vocals.play();
 		vocalsOpp.play();
-		trace('new vocal time ${Conductor.songPosition}');
 	}
 
 	override function stepHit()
@@ -2179,18 +2189,11 @@ class PlayState extends MusicBeatState
 		for (judgement in ratingKeys)
 		{
 			accuracy += Math.max(0, Timings.judgementsMap.get(judgement)[3]); //maths is scary so i stole this from Timings.hx
-			#if debug
-			trace("current accuracy: " + accuracy);
-			#end
 		}
 
 
 		accuracy = (accuracy / sectionNotesHit);
 
-		#if debug
-		trace('final accuracy: ' + accuracy);
-		trace('sectionNotesHit: ' + sectionNotesHit);
-		#end
 
 
 		//and now we update which mix we should be on
