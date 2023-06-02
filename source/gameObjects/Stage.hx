@@ -66,6 +66,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	//granpappy death new hell
 	var carlos:FlxSprite; //left down right down left down right down left down right down left down right down left down right down
 	var dumbfucks:FlxSprite;
+	public var dumbFUCKS:Array<FlxSprite>=[];
 
 	public function new(curStage)
 	{
@@ -109,6 +110,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 				var cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
 				cages.setPosition(-331.5, -97.95);
+				cages.updateHitbox();
 				cages.scrollFactor.set(0.5, 1);
 				add(cages);
 
@@ -116,16 +118,19 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				cave.screenCenter(X);
 				cave.x = cave.x - 200; //sorry i didn't know else to do it lol
 				cave.y = -550;
+				cave.updateHitbox();
 				cave.scrollFactor.set(0.5, 1);
 				add(cave);
 
 				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
+				lava.updateHitbox();
 				lava.scrollFactor.set(0.85, 1);
 				lava.setPosition(-250, 376.1);
 				add(lava);
 
 				var island = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/island'));
 				island.setPosition(-100, 606.1);
+				island.updateHitbox();
 				island.scrollFactor.set(0.85, 1);
 				add(island);
 
@@ -140,35 +145,29 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				ground.setPosition(-776.9, 86.4);
 				add(ground);
 
-				for (i in 0...2)
-				{
-					//facing left
+				for(i in 0...4){
 					dumbfucks=new FlxSprite();
-					dumbfucks.frames=Paths.getSparrowAtlas("backgrounds/hell/skelehenchman");
-					dumbfucks.animation.addByPrefix("idle","henchmanbopper instance",24,true);
+					dumbfucks.frames=Paths.getSparrowAtlas('backgrounds/hell/skelehenchman');
+					dumbfucks.animation.addByPrefix("idle","henchmanbopper",24,true);
 					dumbfucks.animation.play("idle");
-					dumbfucks.antialiasing=false;
 					dumbfucks.updateHitbox();
-					dumbfucks.setPosition((i-1)*(1000+left),780);
+
+					if (i==2||i==3){
+						dumbfucks.flipX=true;
+					}
+
+					switch(i)
+					{
+						case 0:dumbfucks.setPosition(-500,680);
+						case 1:dumbfucks.setPosition(100,880);
+						case 2:dumbfucks.setPosition(1400,690);
+						case 3:dumbfucks.setPosition(800,880);
+					}
+
 					foreground.add(dumbfucks);
+					dumbFUCKS.push(dumbfucks);
 				}
-				for (i in 0...2)
-				{
-					//facing right
-					dumbfucks=new FlxSprite();
-					dumbfucks.frames=Paths.getSparrowAtlas("backgrounds/hell/skelehenchman");
-					dumbfucks.animation.addByPrefix("idle","henchmanbopper instance",24,true);
-					dumbfucks.animation.play("idle");
-					dumbfucks.antialiasing=false;
-					dumbfucks.updateHitbox();
-					dumbfucks.flipX=true;
-					dumbfucks.setPosition((i+1)*(1200+right),780);
-					foreground.add(dumbfucks);
-				}
-				overlay=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/overlay"));
-				overlay.updateHitbox();
-				overlay.scale.set(2,2);
-				add(overlay);
+
 			case 'OLDhell':
 				curStage='OLDhell';
 				PlayState.defaultCamZoom=0.73;

@@ -45,7 +45,7 @@ class GameOverSubstate extends MusicBeatSubState
 
 		PlayState.boyfriend.destroy();
 
-		camFollow = new FlxObject(bf.getGraphicMidpoint().x + 20, bf.getGraphicMidpoint().y - 40, 1, 1);
+		camFollow = new FlxObject(bf.getGraphicMidpoint().x - 60, bf.getGraphicMidpoint().y - 70, 1, 1);
 		add(camFollow);
 
 		Conductor.changeBPM(100);

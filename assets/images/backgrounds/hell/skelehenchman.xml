@@ -2,18 +2,18 @@
 <TextureAtlas imagePath="skelehenchman.png">
 	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
 	<!-- http://www.adobe.com/products/flash.html -->
-	<SubTexture name="henchmanbopper instance 10000" x="4" y="4" width="569" height="687" frameX="0" frameY="-5" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10001" x="4" y="4" width="569" height="687" frameX="0" frameY="-5" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10002" x="578" y="4" width="585" height="689" frameX="-1" frameY="-3" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10003" x="578" y="4" width="585" height="689" frameX="-1" frameY="-3" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10004" x="1168" y="4" width="577" height="691" frameX="-1" frameY="-1" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10005" x="1168" y="4" width="577" height="691" frameX="-1" frameY="-1" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10006" x="4" y="700" width="560" height="691" frameX="-2" frameY="-1" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10007" x="4" y="700" width="560" height="691" frameX="-2" frameY="-1" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10008" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10009" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10010" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10011" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10012" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
-	<SubTexture name="henchmanbopper instance 10013" x="569" y="700" width="566" height="692" frameX="-2" frameY="0" frameWidth="586" frameHeight="692"/>
+	<SubTexture name="henchmanbopper0000" x="4" y="4" width="517" height="675" frameX="0" frameY="-4" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0001" x="4" y="4" width="517" height="675" frameX="0" frameY="-4" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0002" x="526" y="4" width="532" height="676" frameX="-1" frameY="-3" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0003" x="526" y="4" width="532" height="676" frameX="-1" frameY="-3" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0004" x="1063" y="4" width="526" height="679" frameX="0" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0005" x="1063" y="4" width="526" height="679" frameX="0" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0006" x="4" y="688" width="509" height="678" frameX="-1" frameY="-1" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0007" x="4" y="688" width="509" height="678" frameX="-1" frameY="-1" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0008" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0009" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0010" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0011" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0012" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
+	<SubTexture name="henchmanbopper0013" x="518" y="688" width="515" height="679" frameX="-1" frameY="0" frameWidth="533" frameHeight="679"/>
 </TextureAtlas>

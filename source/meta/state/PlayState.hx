@@ -167,7 +167,7 @@ class PlayState extends MusicBeatState
 	public var curInstTrack:Int = 2; //the current instrumental track we're on, 0 = shit mix, 1 = bad mix, 2 = good mix, 3 = sick mix
 
 	public static var hasInstSwitching:Bool = false; //does the song have multiple instrumentals?
-
+	public var overlay:FlxSprite;
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -288,6 +288,13 @@ class PlayState extends MusicBeatState
 		darknessBG.alpha = (100 - Init.trueSettings.get('Stage Opacity')) / 100;
 		darknessBG.scrollFactor.set(0, 0);
 		add(darknessBG);
+
+		if(curStage=='hell'){
+			overlay=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/overlay"));
+			overlay.updateHitbox();
+			overlay.scale.set(10,10);
+			add(overlay);
+		}
 
 		// strum setup
 		strumLines = new FlxTypedGroup<Strumline>();
@@ -859,7 +866,6 @@ class PlayState extends MusicBeatState
 								{
 									// set the end hold offset yeah I hate that I fix this like this
 									daNote.endHoldOffset = (daNote.prevNote.y - (daNote.y + daNote.height));
-									trace(daNote.endHoldOffset);
 								}
 								else
 									daNote.y += daNote.endHoldOffset;
@@ -1089,7 +1095,7 @@ class PlayState extends MusicBeatState
 				altString = '';
 		}
 		/*
-		if(curSong.toLowerCase()=='granddad-battle'){
+		if(curStage=='hell'){
 			if (!coolNote.mustPress)
 			{
 				FlxG.camera.shake(0.0065,0.2);
@@ -1103,6 +1109,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		*/
+		
 
 		stringArrow = baseString + altString;
 		// if (coolNote.foreverMods.get('string')[0] != "")
