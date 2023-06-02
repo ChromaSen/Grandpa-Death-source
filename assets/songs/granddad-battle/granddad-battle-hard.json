@@ -1,6 +1,6 @@
 {
 	"song": {
-		"player1": "bf-gd",
+		"player1": "bf",
 		"notes": [
 			{
 				"sectionNotes": [
@@ -594,10 +594,10 @@
 				"mustHitSection": true
 			}
 		],
-		"player2": "granddad",
+		"player2": "grandpadeath-cloaked",
 		"player3": null,
 		"song": "Granddad Battle",
-		"stage": "gd",
+		"stage": "hell",
 		"needsVoices": true,
 		"validScore": true,
 		"bpm": 190,

@@ -1094,21 +1094,20 @@ class PlayState extends MusicBeatState
 			else
 				altString = '';
 		}
-		/*
-		if(curStage=='hell'){
+		if(curSong.toLowerCase()=='granddad battle'){
 			if (!coolNote.mustPress)
 			{
-				FlxG.camera.shake(0.0065,0.2);
+				FlxG.camera.shake(0.0033,0.2);
 				for (ui in allUIs)
-					ui.shake(0.0020,0.1);
-
+					ui.shake(0.0015,0.1);
+/*
 				FlxTween.tween(boyfriend,{x:boyfriend.x+20},1,{
 					ease:FlxEase.quadOut,
 					onComplete:function(tsdfvpsdfk:FlxTween){}
 				});
+				*/
 			}
 		}
-		*/
 		
 
 		stringArrow = baseString + altString;
@@ -1499,6 +1498,8 @@ class PlayState extends MusicBeatState
 	function startSong():Void
 	{
 		startingSong = false;
+
+		trace(curSong.toLowerCase());
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;

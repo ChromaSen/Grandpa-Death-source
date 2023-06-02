@@ -61,6 +61,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var oldcages:FlxSprite;
 	var oldcage:FlxSprite;
 	var overlay:FlxSprite;
+	var vignette:FlxSprite;
 	//
 
 	//granpappy death new hell
@@ -166,46 +167,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 					foreground.add(dumbfucks);
 					dumbFUCKS.push(dumbfucks);
-				}
-
-			case 'OLDhell':
-				curStage='OLDhell';
-				PlayState.defaultCamZoom=0.73;
-				trace(PlayState.defaultCamZoom);
-
-				oldback=new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/back'));
-				oldback.setPosition(600.7, -1237.9);
-				oldback.antialiasing=false;
-			
-				oldbackground = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/background'));
-				oldbackground.setPosition(600.7, -1119.65);
-				oldbackground.antialiasing = false;
-				
-				oldlava=new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/lava'));
-				oldlava.setPosition(440.6, 456.3);
-				oldlava.antialiasing=false;
-				
-				oldfloor = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/base'));
-				oldfloor.setPosition(672.85, -192.1);
-				oldfloor.antialiasing = false;
-				
-				oldcages = new FlxSprite().loadGraphic(Paths.image('backgrounds/OLDhell/small_cages'));
-				oldcages.setPosition(2908.85, -404.7);
-				oldcages.antialiasing = false;
-			
-				oldcage = new FlxSprite();
-				oldcage.frames = Paths.getSparrowAtlas('backgrounds/OLDhell/cage');
-				oldcage.setPosition(2759.1, -409.6);
-				oldcage.antialiasing = false;
-				oldcage.animation.addByPrefix('idle', 'carlos образец',true);
-				
-				add(oldback);
-				add(oldbackground);
-				add(oldlava);
-				add(oldfloor);
-				add(oldcages);
-				add(oldcage);
-				
+				}		
+				vignette=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
+				vignette.screenCenter();
+				vignette.cameras=[PlayState.camHUD];
+				vignette.alpha=0.5;
+				add(vignette);
 			default:
 				PlayState.defaultCamZoom = 0.9;
 				curStage = 'stage';
@@ -292,13 +259,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		switch (curStage)
 		{
 			case 'hell':
-				gf.visible = false;
 				boyfriend.setPosition(1029.7, 709.1);
 				dad.setPosition(88.05, 429.1);
-			case 'OLDhell':
-				gf.visible=false;
-				boyfriend.setPosition(2381.55, 498.4);
-				dad.setPosition(1500, 200);
+				gf.setPosition(538,250);
 			case 'highway':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
