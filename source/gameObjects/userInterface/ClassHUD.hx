@@ -52,9 +52,9 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song);
 	var diffDisplay:String = CoolUtil.difficultyFromNumber(PlayState.storyDifficulty);
-	var engineDisplay:String = "FOREVER ENGINE v" + Main.gameVersion;
+	var engineDisplay:String = " ";
 
-	public var curMixDebugText:FlxText;
+	public var curMixDebugText:FlxText; //debug text for multi-inst tracks
 
 	// eep
 	public function new()
@@ -139,7 +139,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		autoplayMark.screenCenter(X);
 		autoplayMark.visible = PlayState.boyfriendStrums.autoplay;
 
-		if (Init.trueSettings.get('Debug Info'))
+		if (Init.trueSettings.get('Debug Info') && PlayState.hasInstSwitching)
 		{
 			curMixDebugText = new FlxText(-5, Init.trueSettings.get('Downscroll') ? FlxG.height - 60 : 60, FlxG.width, 'CUR MIX: ', 32);
 			curMixDebugText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);

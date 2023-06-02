@@ -25,16 +25,16 @@ class Timings
 
 	public static var msThreshold:Float = 0;
 
-	// set the score judgements for later use
+	// set the score judgements for later use, thanks for the word ideas GPT!
 	public static var scoreRating:Map<String, Int> = [
-		"S+" => 100,
-		"S" => 95,
-		"A" => 90,
-		"b" => 85,
-		"c" => 80,
-		"d" => 75,
-		"e" => 70,
-		"f" => 65,
+		"SATANIC!!!" => 100,
+		"Stygian" => 95,
+		"Abyssal" => 90,
+		"Blasphemous" => 85,
+		"Cursed" => 80,
+		"Damned" => 75,
+		"Eldritch" => 70,
+		"Fetid" => 65,
 	];
 
 	public static var ratingFinal:String = "N/A";

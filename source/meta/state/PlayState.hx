@@ -2161,8 +2161,9 @@ class PlayState extends MusicBeatState
 		return super.add(Object);
 	}
 
-	function perSectionAccuracyBullshit()
+	function perSectionAccuracyBullshit() //by GDD
 	{
+		//ALRIGHT RAMBLERS, LET'S GET RAMBLIN
 		var accuracy:Float = 0;
 		var ratingKeys:Array<String> = [];
 
@@ -2170,7 +2171,7 @@ class PlayState extends MusicBeatState
 		if (sectionNotesHit == 0)
 			return;
 
-		//start off by getting the rating keys
+		//start off by getting the rating keys to properly convert them into accuracies later
 		for (rating in sectionJudgements)
 		{
 			switch (rating)
@@ -2198,8 +2199,8 @@ class PlayState extends MusicBeatState
 			accuracy += Math.max(0, Timings.judgementsMap.get(judgement)[3]); //maths is scary so i stole this from Timings.hx
 		}
 
-
-		accuracy = (accuracy / sectionNotesHit);
+		//should this be floored? maybe! has it broken? no! do i care? also no (until it breaks!)
+		accuracy = (accuracy / sectionNotesHit); //get the true accuracy by taking the total accuracy of all notes hit and dividing it by the notes hit in that section (example, 16 notes at 100% accuracy would be 1600 accuracy, divided by 16 notes equals 100% accuracy.)
 
 
 
@@ -2214,21 +2215,21 @@ class PlayState extends MusicBeatState
 		//now we actually update the inst
 		switch(curInstTrack)
 		{
-			case 0:
+			case 0: //you're going to the SHIT MIX
 				songMusicShit.volume = 1;
 				songMusicBad.volume = 0;
 
-			case 1:
+			case 1: //i'm gonna be genuinely surprised if more than a handful of people go to the bad mix
 				songMusicBad.volume = 1;
 				songMusicShit.volume = 0;
 				songMusic.volume = 0;
 
-			case 2:
+			case 2: //i wonder how the ost is gonna handle multi-inst tracks? should probably come up with a better name than that, too wordy.
 				songMusic.volume = 1;
 				songMusicSick.volume = 0;
 				songMusicBad.volume = 0;
 
-			case 3:
+			case 3: //is the sick mix gonna be considered the default song?
 				songMusicSick.volume = 1;
 				songMusic.volume = 0;
 		}
@@ -2240,7 +2241,7 @@ class PlayState extends MusicBeatState
 
 		if (Init.trueSettings.get('Debug Info'))
 		{
-			//some debug info stuff here
+			//some debug info stuff here for testan purposes
 			switch(curInstTrack)
 			{
 				case 0:
