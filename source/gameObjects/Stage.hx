@@ -69,6 +69,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var dumbfucks:FlxSprite;
 	public var dumbFUCKS:Array<FlxSprite>=[];
 
+	//gramps
+	public var sky:FlxSprite;
+	public var clouds:FlxSprite;
+	public var mountains:FlxSprite;
+	public var ground:FlxSprite;
+
 	public function new(curStage)
 	{
 		super();
@@ -173,6 +179,35 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				vignette.cameras=[PlayState.camHUD];
 				vignette.alpha=0.5;
 				add(vignette);
+			case 'gramps':
+				curStage='gramps';
+				PlayState.defaultCamZoom=0.8;
+				sky=new FlxSprite().loadGraphic(Paths.image("backgrounds/gramps/sky"));
+				sky.updateHitbox();
+				sky.scale.set(1.05,1.05);
+				sky.screenCenter();
+				sky.setPosition(-827,-241);
+				sky.antialiasing=false;
+				add(sky);
+				clouds=new FlxSprite().loadGraphic(Paths.image("backgrounds/gramps/clouds"));
+				clouds.updateHitbox();
+				clouds.screenCenter();
+				clouds.setPosition(-1900,-107.5);
+				clouds.antialiasing=false;
+				add(clouds);
+				mountains=new FlxSprite().loadGraphic(Paths.image("backgrounds/gramps/mountains"));
+				mountains.updateHitbox();
+				mountains.scale.set(1.1,1.1);
+				mountains.screenCenter();
+				mountains.setPosition(-813,192);
+				mountains.antialiasing=false;
+				add(mountains);
+				ground=new FlxSprite().loadGraphic(Paths.image("backgrounds/gramps/ground"));
+				ground.updateHitbox();
+				ground.screenCenter();
+				ground.setPosition(-771.5,892.5);
+				ground.antialiasing=false;
+				add(ground);
 			default:
 				PlayState.defaultCamZoom = 0.9;
 				curStage = 'stage';
@@ -265,7 +300,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'highway':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
-		
+			case 'gramps':
+				dad.setPosition(-740,234);
+				boyfriend.setPosition(1050,740);
+				gf.visible=false; //from now
 		}
 	}
 

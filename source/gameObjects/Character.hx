@@ -8,6 +8,7 @@ import flixel.FlxG;
 import flixel.addons.util.FlxSimplex;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.frames.FlxFramesCollection;
 import gameObjects.userInterface.HealthIcon;
 import meta.*;
 import meta.data.*;
@@ -158,6 +159,15 @@ class Character extends FNFSprite
 				animation.addByPrefix('singDOWN', 'GD down', 24);
 				animation.addByPrefix('singLEFT', 'GDleft', 24);
 
+				playAnim('idle');
+			case 'gramps':
+				tex=Paths.getSparrowAtlas("characters/gramps");
+				frames=tex;
+				animation.addByPrefix('idle','idlefull',24,false);
+				animation.addByPrefix('singUP','up',24);
+				animation.addByPrefix('singRIGHT', 'right', 24);
+				animation.addByPrefix('singDOWN', 'down', 24);
+				animation.addByPrefix('singLEFT', 'left', 24);
 				playAnim('idle');
 			default:
 				// set up animations if they aren't already

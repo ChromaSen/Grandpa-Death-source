@@ -168,6 +168,7 @@ class PlayState extends MusicBeatState
 
 	public static var hasInstSwitching:Bool = false; //does the song have multiple instrumentals?
 	public var overlay:FlxSprite;
+	public var newdad:Character;
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -292,6 +293,11 @@ class PlayState extends MusicBeatState
 		add(darknessBG);
 
 		if(curStage=='hell'){
+			//newdad=new Character();
+			//newdad.setCharacter(dadOpponent.x,dadOpponent.y,"grandpadeath");
+			//insert(members.indexOf(dadOpponent),newdad);
+
+			//preloadCharacter("grandpadeath","grandpadeath");
 			overlay=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/overlay"));
 			overlay.updateHitbox();
 			overlay.scale.set(10,10);
@@ -1096,7 +1102,7 @@ class PlayState extends MusicBeatState
 			else
 				altString = '';
 		}
-		if(curSong.toLowerCase()=='granddad battle'){
+		if(dadOpponent.curCharacter=='grandpadeath-cloaked'){
 			if (!coolNote.mustPress)
 			{
 				FlxG.camera.shake(0.0033,0.2);
@@ -1651,6 +1657,14 @@ class PlayState extends MusicBeatState
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
 		//*/
+		/*
+		if(curSong.toLowerCase()=='granddad battle'){
+			switch(curStep){
+				case 30:
+					dadOpponent=newdad;
+			}
+		}
+		*/
 	}
 
 	private function charactersDance(curBeat:Int)
@@ -1732,6 +1746,14 @@ class PlayState extends MusicBeatState
 			for (hud in allUIs)
 				hud.zoom += 0.03;
 		}
+	}
+
+	public static function preloadCharacter(name:String,?sprite:String)
+	{
+		if (name==null)return;
+		if (sprite==null)sprite=name;
+		Assets.getText(Paths.xml('characters/$name'));
+		Paths.image('characters/$sprite');
 	}
 
 	//
