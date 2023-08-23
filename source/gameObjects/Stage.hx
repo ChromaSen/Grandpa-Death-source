@@ -295,7 +295,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			case 'hell':
 				boyfriend.setPosition(1029.7, 709.1);
-				dad.setPosition(88.05, 429.1);
+				dad.setPosition(88.05,dad.curCharacter=='gd-true'?289.1:429.1);
+				trace(dad.getPosition());
 				gf.setPosition(538,250);
 			case 'highway':
 				boyfriend.y -= 220;

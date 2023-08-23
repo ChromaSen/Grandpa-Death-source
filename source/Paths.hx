@@ -129,7 +129,7 @@ class Paths
 				var newGraphic:FlxGraphic;
 				if (textureCompression)
 				{
-					var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, true, 0);
+					var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, /*false*/ true,0);
 					texture.uploadFromBitmapData(bitmap);
 					currentTrackedTextures.set(key, texture);
 					bitmap.dispose();

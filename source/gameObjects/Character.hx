@@ -87,22 +87,20 @@ class Character extends FNFSprite
 			case 'bf':
 				frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
 
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-				animation.addByPrefix('hey', 'BF HEY', 24, false);
-				animation.addByPrefix('scared', 'BF idle shaking', 24);
+				animation.addByPrefix('idle', 'BF idle', 24, false);
+				animation.addByPrefix('singUP', 'BF up0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF left0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF right0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF down0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF up miss', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF left miss', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF right miss', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF down miss', 24, false);
 
 				playAnim('idle');
 
 				flipX = true;
-
+				characterData.camOffsetX =150;
 				characterData.offsetY = 70;
 			/*
 				case 'bf-og':
@@ -147,6 +145,16 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT', 'cloakedright', 24);
 				animation.addByPrefix('singDOWN', 'cloakeddown', 24);
 				animation.addByPrefix('singLEFT', 'cloakedleft', 24);
+
+				playAnim('idle');
+			case 'gd-true':
+				tex = Paths.getSparrowAtlas('characters/GD-true');
+				frames = tex;
+				animation.addByPrefix('idle', 'gd idle', 24, false);
+				animation.addByPrefix('singUP', 'gd up', 24);
+				animation.addByPrefix('singRIGHT', 'gd right', 24);
+				animation.addByPrefix('singDOWN', 'gd down', 24);
+				animation.addByPrefix('singLEFT', 'gd left', 24);
 
 				playAnim('idle');
 
