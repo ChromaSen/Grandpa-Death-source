@@ -1116,6 +1116,11 @@ class PlayState extends MusicBeatState
 				*/
 			}
 		}
+		if(curSong.toLowerCase()=='reaper-rhythm'){
+			if(!coolNote.mustPress){
+				FlxG.camera.zoom+=0.001;
+			}
+		}
 		
 
 		stringArrow = baseString + altString;
@@ -1665,6 +1670,14 @@ class PlayState extends MusicBeatState
 			}
 		}
 		*/
+		if (curSong.toLowerCase()=='reaper-rhythm'){
+			switch(curStep){
+				case 1172:
+					defaultCamZoom=0.85;
+				case 1184:
+					defaultCamZoom=0.6;
+			}
+		}
 	}
 
 	private function charactersDance(curBeat:Int)
@@ -1694,6 +1707,13 @@ class PlayState extends MusicBeatState
 			for (hud in strumHUD)
 				hud.zoom += 0.05;
 		}
+
+		//if(curSong.toLowerCase()=='reaper-rhythm'){
+			//if((curBeat>=68&&curBeat<132)||(curBeat>=228&&curBeat<292)){
+			//	FlxG.camera.zoom+=0.015;
+				//camHUD.zoom+=0.03;
+			//}
+		//}
 
 		if (curBeat % 4 == 0)
 		{
