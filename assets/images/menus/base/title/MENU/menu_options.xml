@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_options.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="12" y="12" width="279" height="621"/>
+	<SubTexture name="options selected0000" x="296" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0001" x="646" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0002" x="646" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0003" x="996" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0004" x="996" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0005" x="1346" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0006" x="1346" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0007" x="12" y="723" width="345" height="706"/>
+	<SubTexture name="options selected0008" x="12" y="723" width="345" height="706"/>
+	<SubTexture name="options selected0009" x="296" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0010" x="296" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0011" x="296" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0012" x="296" y="12" width="345" height="706"/>
+	<SubTexture name="options selected0013" x="296" y="12" width="345" height="706"/>
+</TextureAtlas>

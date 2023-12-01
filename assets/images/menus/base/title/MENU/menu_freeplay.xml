@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_freeplay.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="12" y="12" width="278" height="621"/>
+	<SubTexture name="freeplay selected0000" x="295" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0001" x="645" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0002" x="995" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0003" x="1345" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0004" x="1695" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0005" x="1695" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0006" x="2045" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0007" x="2395" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0008" x="2395" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0009" x="2395" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0010" x="2745" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0011" x="2745" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0012" x="2745" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0013" x="3095" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0014" x="3095" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0015" x="3445" y="12" width="345" height="706"/>
+	<SubTexture name="freeplay selected0016" x="12" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0017" x="362" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0018" x="712" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0019" x="1062" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0020" x="1062" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0021" x="1412" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0022" x="1762" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0023" x="1762" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0024" x="1762" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0025" x="2112" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0026" x="2112" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0027" x="2112" y="723" width="345" height="706"/>
+	<SubTexture name="freeplay selected0028" x="2462" y="723" width="345" height="706"/>
+</TextureAtlas>
