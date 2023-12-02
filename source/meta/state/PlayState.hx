@@ -1118,7 +1118,7 @@ class PlayState extends MusicBeatState
 		}
 		if(curSong.toLowerCase()=='reaper-rhythm'){
 			if(!coolNote.mustPress){
-				FlxG.camera.zoom+=0.001;
+				FlxG.camera.zoom+=0.0035;
 			}
 		}
 		

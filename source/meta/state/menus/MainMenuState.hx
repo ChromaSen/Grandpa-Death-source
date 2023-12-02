@@ -27,11 +27,12 @@ using StringTools;
 **/
 class MainMenuState extends MusicBeatState
 {
-	private var menuItems:Array<MainMenuItem> = [];
-	private var curSelected:Int = -1;
+	public var menuItems:Array<MainMenuItem> = [];
+	public var curSelected:Int = -1;
 	public var bg:FlxSprite; // the background has been separated for more control
 	public var magenta:FlxSprite;
-	private var optionShit:Array<String> = ['story', 'bonus', 'freeplay', 'options'];
+	public var optionShit:Array<String> = ['story', 'bonus', 'freeplay', 'options'];
+	public var curDiff:Int=1;
 
 	public var camFollow:FlxObject;
 
@@ -125,9 +126,32 @@ class MainMenuState extends MusicBeatState
 						Offset(menuItem);
 						persistentUpdate=false;
 
-						new FlxTimer().start(0.2,function(t:FlxTimer){
-							Main.switchState(this, new StoryMenuState());
-						});
+
+							PlayState.storyPlaylist=['reaper-rhythm'];
+
+							/*
+							add in the playlist all the week songs when you're done with charting them
+							
+							the order is:
+							 	>deadbattle
+							 	>reapers rhythm
+							 	>behold the apocalypse
+							*/
+							
+							PlayState.isStoryMode = true;
+
+							var diffic:String = '-' + CoolUtil.difficultyFromNumber(curDiff).toLowerCase();
+							diffic = diffic.replace('-normal', '');
+
+							PlayState.storyDifficulty = curDiff;
+
+							PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+							PlayState.storyWeek = 0;
+							PlayState.campaignScore = 0;
+							new FlxTimer().start(1,function(tmr:FlxTimer)
+							{
+								Main.switchState(this,new PlayState());
+							});
 					}
 				case 'bonus':
 					menuItem.animation.play("idle");
@@ -259,7 +283,8 @@ class MainMenuState extends MusicBeatState
 
 	private function Offset(ghffdghfdghdfgh:MainMenuItem)
 	{
-		new FlxTimer().start(0.01,function(dssdadsfadfsa:FlxTimer)
+		ghffdghfdghdfgh.offset.set(3,3);
+		new FlxTimer().start(0.03,function(dssdadsfadfsa:FlxTimer)
 		{
 			ghffdghfdghdfgh.offset.set();
 		});
