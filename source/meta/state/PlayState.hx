@@ -169,6 +169,9 @@ class PlayState extends MusicBeatState
 	public static var hasInstSwitching:Bool = false; //does the song have multiple instrumentals?
 	public var overlay:FlxSprite;
 	public var newdad:Character;
+
+	public var grampsBody:Character;
+
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -249,6 +252,7 @@ class PlayState extends MusicBeatState
 		//hey tinb here can you move grandpadeath up a bit i cant do it lol
 
 		dadOpponent = new Character().setCharacter(50, 850, SONG.player2);
+
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
 		// if you want to change characters later use setCharacter() instead of new or it will break
@@ -257,6 +261,11 @@ class PlayState extends MusicBeatState
 
 		stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
 		stageBuild.dadPosition(curStage, boyfriend, dadOpponent, gf, camPos);
+
+		if (SONG.player2 == "gramps-head")
+		{
+			grampsBody = new Character().setCharacter(dadOpponent.x, dadOpponent.y, "gramps-body");
+		}
 
 		if (SONG.assetModifier != null && SONG.assetModifier.length > 1)
 			assetModifier = SONG.assetModifier;
