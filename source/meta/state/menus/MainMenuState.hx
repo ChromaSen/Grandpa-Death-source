@@ -169,6 +169,11 @@ class MainMenuState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 						Offset(menuItem);
 						trace('test');
+						//hiiii sorry i need to check the chart works sooooooooooo - gdd
+						new FlxTimer().start(1,function(tmr:FlxTimer)
+						{
+							Main.switchState(this,new FreeplayState());
+						});
 					}
 				case 'options':
 					menuItem.animation.play("idle");
