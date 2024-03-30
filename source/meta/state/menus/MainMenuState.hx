@@ -183,7 +183,13 @@ class MainMenuState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 						Offset(menuItem);
 						trace('test');
+						//and this is because i refuse to play without upscroll and DFJK - gdd
+						new FlxTimer().start(1,function(tmr:FlxTimer)
+						{
+							Main.switchState(this,new OptionsMenuState());
+						});
 					}
+					
 				
 			}
 			add(menuItem);
