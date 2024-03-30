@@ -1,11 +1,11 @@
 package meta.state;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.display.FlxGridOverlay;
 import flixel.text.FlxText;
 import gameObjects.Character;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.FlxSprite;
 import meta.state.menus.MainMenuState;
 
 
@@ -45,7 +45,7 @@ class TestState extends FlxState
 
         grampsGhost = new Character().setCharacter(0, 1000, "gramps");
         grampsGhost.alpha = 0.5;
-        grampsGhost.color = 0xFF00AF00
+        grampsGhost.color = 0xFF00AF00;
         add(grampsGhost);
 
         text = new FlxText(FlxG.width * 0.5, FlxG.height, FlxG.width, 'HEAD XY: ${grampsHead.x}, ${grampsHead.y} \nBODY XY: ${grampsBody.x}, ${grampsBody.y}', 32);

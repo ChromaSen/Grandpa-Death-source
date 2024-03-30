@@ -84,8 +84,8 @@ class Character extends FNFSprite
 
 				playAnim('idle');
 
-			case 'bf':
-				frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
+			case 'bf-guitar':
+				frames = Paths.getSparrowAtlas('characters/bfguitar');
 
 				animation.addByPrefix('idle', 'BF idle', 24, false);
 				animation.addByPrefix('singUP', 'BF up0', 24, false);
@@ -102,6 +102,27 @@ class Character extends FNFSprite
 				flipX = true;
 				characterData.camOffsetX =150;
 				characterData.offsetY = 70;
+
+		case 'bf':
+			frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
+
+			animation.addByPrefix('idle', 'BF idle dance', 24, false);
+			animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+			animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+			animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+			animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+			animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+			animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+			animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+			animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+			animation.addByPrefix('hey', 'BF HEY', 24, false);
+			animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+			playAnim('idle');
+
+			flipX = true;
+
+			characterData.offsetY = 70;
 			/*
 				case 'bf-og':
 					frames = Paths.getSparrowAtlas('characters/og/BOYFRIEND');

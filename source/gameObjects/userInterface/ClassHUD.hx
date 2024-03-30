@@ -62,6 +62,9 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		// call the initializations and stuffs
 		super();
 
+		if(PlayState.SONG.song.toLowerCase()=='reaper-rhythm'){
+			infoDisplay="Reaper's Rhythm";
+		}
 		// le healthbar setup
 		var barY = FlxG.height * 0.875;
 		if (Init.trueSettings.get('Downscroll'))

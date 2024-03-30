@@ -14,11 +14,15 @@ import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import gameObjects.background.*;
 import meta.CoolUtil;
 import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
 import meta.state.PlayState;
+import meta.state.PlayState;
+import openfl.display.GraphicsShader;
+import sys.io.File;
 
 using StringTools;
 
@@ -69,6 +73,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var dumbfucks:FlxSprite;
 	public var dumbFUCKS:Array<FlxSprite>=[];
 
+	public var cages:FlxSprite;
+	public var cave:FlxSprite;
+	public var lava:FlxSprite;
+	public var island:FlxSprite;
+
 	//gramps
 	public var sky:FlxSprite;
 	public var clouds:FlxSprite;
@@ -111,17 +120,18 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				curStage = 'hell';
 				PlayState.defaultCamZoom = 0.6;
 
-				var sky = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/sky')); //i could probably get away with just blowing this up massively but whatever
+				sky = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/sky')); //i could probably get away with just blowing this up massively but whatever
 				sky.setPosition(-541.7, -383.1);
 				add(sky);
 
-				var cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
+
+				cages = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cages'));
 				cages.setPosition(-331.5, -97.95);
 				cages.updateHitbox();
 				cages.scrollFactor.set(0.5, 1);
 				add(cages);
 
-				var cave = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cave'));
+				cave = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/cave'));
 				cave.screenCenter(X);
 				cave.x = cave.x - 200; //sorry i didn't know else to do it lol
 				cave.y = -550;
@@ -129,13 +139,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				cave.scrollFactor.set(0.5, 1);
 				add(cave);
 
-				var lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
+				lava = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/lava'));
 				lava.updateHitbox();
 				lava.scrollFactor.set(0.85, 1);
 				lava.setPosition(-250, 376.1);
 				add(lava);
 
-				var island = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/island'));
+				island = new FlxSprite().loadGraphic(Paths.image('backgrounds/' + curStage + '/island'));
 				island.setPosition(-100, 606.1);
 				island.updateHitbox();
 				island.scrollFactor.set(0.85, 1);
