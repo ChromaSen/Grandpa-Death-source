@@ -17,6 +17,7 @@ import flixel.math.FlxRandom;
 import flixel.math.FlxRect;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.system.FlxSound;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -120,7 +121,7 @@ class PlayState extends MusicBeatState
 	public static var camHUD:FlxCamera;
 	public static var camGame:FlxCamera;
 	public static var dialogueHUD:FlxCamera;
-
+	public static var lyrics:FlxCamera;
 	public var camDisplaceX:Float = 0;
 	public var camDisplaceY:Float = 0; // might not use depending on result
 
@@ -172,6 +173,15 @@ class PlayState extends MusicBeatState
 
 	public var grampsBody:Character;
 
+	public var grandpaspeech:FlxText;
+	public var vignette:FlxSprite;
+	public var fadein:FlxSprite;
+	public var bta:FlxSprite;
+
+	public var grampalyrics:Array<String>=[
+		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
+	];
+
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -212,9 +222,12 @@ class PlayState extends MusicBeatState
 		// create the hud camera (separate so the hud stays on screen)
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
+		lyrics = new FlxCamera();
+		lyrics.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(lyrics, false);
 		allUIs.push(camHUD);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
@@ -243,11 +256,54 @@ class PlayState extends MusicBeatState
 		stageBuild = new Stage(curStage);
 		add(stageBuild);
 
+		switch(curStage){
+			case 'hell':
+				bta=new FlxSprite();
+				bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
+				bta.screenCenter();
+				bta.animation.addByPrefix('bta','bta',30,false);
+				bta.cameras = [lyrics];
+				bta.alpha=0;
+				add(bta);
+				vignette = new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
+				vignette.screenCenter();
+				vignette.cameras = [camHUD];
+				vignette.alpha = 0.5;
+				add(vignette);
+
+				trace('test');
+				grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
+				grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+				grandpaspeech.borderSize=1;
+				grandpaspeech.scrollFactor.set();
+				grandpaspeech.alpha=1;
+				grandpaspeech.updateHitbox();
+				grandpaspeech.screenCenter();
+				grandpaspeech.y+=180;
+				grandpaspeech.scale.set(1.5,1.5);
+
+				grandpaspeech.cameras=[lyrics];
+				add(grandpaspeech);
+		}
+
 		// set up characters here too
 		gf = new Character();
 		gf.adjustPos = false;
 		gf.setCharacter(300, 100, stageBuild.returnGFtype(curStage));
 		gf.scrollFactor.set(0.95, 0.95);
+
+		switch(curStage){
+			case 'hell':
+				//dont ask aswell
+				dadOpponent=new Character();
+				dadOpponent.setCharacter(88.05,289.1,'gd-true');
+				add(dadOpponent);
+				remove(dadOpponent);
+				boyfriend=new Boyfriend();
+				boyfriend.setCharacter(1029.7,709.1,'bf-guitar');
+				add(boyfriend);
+				remove(boyfriend);
+		}
 
 		//hey tinb here can you move grandpadeath up a bit i cant do it lol
 
@@ -1111,7 +1167,7 @@ class PlayState extends MusicBeatState
 			else
 				altString = '';
 		}
-		if(dadOpponent.curCharacter=='grandpadeath-cloaked'){
+		if(dadOpponent.curCharacter=='grandpadeath-cloaked'||dadOpponent.curCharacter=='gd-true'){
 			if (!coolNote.mustPress)
 			{
 				FlxG.camera.shake(0.0033,0.2);
@@ -1123,6 +1179,21 @@ class PlayState extends MusicBeatState
 					onComplete:function(tsdfvpsdfk:FlxTween){}
 				});
 				*/
+			}
+		}
+		if (boyfriend.curCharacter == 'bf-guitar')
+		{
+			if (coolNote.mustPress)
+			{
+				FlxG.camera.shake(0.0015, 0.2);
+				for (ui in allUIs)
+					ui.shake(0.0005, 0.1);
+				/*
+					FlxTween.tween(boyfriend,{x:boyfriend.x+20},1,{
+						ease:FlxEase.quadOut,
+						onComplete:function(tsdfvpsdfk:FlxTween){}
+					});
+				 */
 			}
 		}
 		if(curSong.toLowerCase()=='reaper-rhythm'){
@@ -1629,6 +1700,16 @@ class PlayState extends MusicBeatState
 		// give the game the heads up to be able to start
 		generatedMusic = true;
 	}
+	public function tweenCam(zoom:Float,dur:Float,ease:EaseFunction=null)
+	{
+		FlxTween.tween(FlxG.camera,{zoom:zoom},dur,{
+			ease:ease,
+			onComplete:function(twn:FlxTween)
+			{
+				defaultCamZoom=zoom;
+			}
+		});
+	}
 
 	function sortByShit(Obj1:Note, Obj2:Note):Int
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
@@ -1685,6 +1766,58 @@ class PlayState extends MusicBeatState
 					defaultCamZoom=0.85;
 				case 1184:
 					defaultCamZoom=0.6;
+			}
+		}
+		if (curSong.toLowerCase()=='behold the apocalypse')
+		{
+			switch (curStep)
+			{
+				case 1538:
+					FlxTween.tween(camGame,{alpha:0},0.8);
+					FlxTween.tween(camHUD,{alpha:0},0.8);
+				case 1549:
+					grandpaspeech.text=grampalyrics[0];
+				case 1558:
+					grandpaspeech.text=grampalyrics[1];
+				case 1585:
+					grandpaspeech.text=grampalyrics[2];
+
+				case 1621:
+					grandpaspeech.text=grampalyrics[3];
+				case 1635:
+					//dont ask pls
+					dadOpponent.setCharacter(88.05, 289.1,'gd-true');
+					dadOpponent.setPosition(150,314.1);
+					boyfriend.setCharacter(1029.7,709.1,'bf-guitar');
+					boyfriend.setPosition(959.7,714.1);
+				case 1650:
+					FlxTween.tween(camGame,{alpha:1},0.8,{ease:FlxEase.cubeOut});
+					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
+				case 1653:
+					FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
+				case 1664:
+					defaultCamZoom=0.75;
+				case 1792:
+					tweenCam(0.6,1.4);
+				case 1808:
+					defaultCamZoom=0.7;
+				case 1936:
+					defaultCamZoom=0.65;
+				case 1984:
+					defaultCamZoom=0.75;
+				case 2064:
+					defaultCamZoom=0.6;
+				case 2176:
+					tweenCam(0.8,6.5,FlxEase.quadInOut);
+					FlxTween.tween(vignette,{alpha:0.8},7.5,{ease:FlxEase.quartIn});
+				case 2415:
+					FlxTween.tween(vignette,{alpha:0.5},2.2,{ease:FlxEase.quartIn});
+				case 2432:
+					tweenCam(0.6,2.3);
+				case 2720:
+					camHUD.alpha=camGame.alpha=0;
+					bta.alpha=1;
+					bta.animation.play('bta',false);
 			}
 		}
 	}

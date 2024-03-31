@@ -65,7 +65,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var oldcages:FlxSprite;
 	var oldcage:FlxSprite;
 	var overlay:FlxSprite;
-	var vignette:FlxSprite;
 	//
 
 	//granpappy death new hell
@@ -184,11 +183,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					foreground.add(dumbfucks);
 					dumbFUCKS.push(dumbfucks);
 				}		
-				vignette=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
-				vignette.screenCenter();
-				vignette.cameras=[PlayState.camHUD];
-				vignette.alpha=0.5;
-				add(vignette);
 			case 'gramps':
 				curStage='gramps';
 				PlayState.defaultCamZoom=0.8;

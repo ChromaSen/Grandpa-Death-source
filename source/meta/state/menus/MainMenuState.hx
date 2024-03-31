@@ -115,6 +115,7 @@ class MainMenuState extends MusicBeatState
 			{
 				trace('overlap');
 				if (menuItem.animation.curAnim.name!='selected'){menuItem.animation.play("selected");}
+				menuItem.offset.set(0,0);
 			}
 
 			switch (optionShit[i]){
@@ -123,7 +124,6 @@ class MainMenuState extends MusicBeatState
 					menuItem.animation.play("idle");
 					menuItem.onClick=function(){
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						Offset(menuItem);
 						persistentUpdate=false;
 
 
@@ -158,7 +158,6 @@ class MainMenuState extends MusicBeatState
 					menuItem.x=350;
 					menuItem.onClick=function(){
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						Offset(menuItem);
 						trace('test');
 					}
 				case 'freeplay':
@@ -167,7 +166,6 @@ class MainMenuState extends MusicBeatState
 					menuItem.onClick=function()
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						Offset(menuItem);
 						trace('test');
 						//hiiii sorry i need to check the chart works sooooooooooo - gdd
 						new FlxTimer().start(1,function(tmr:FlxTimer)
@@ -181,7 +179,6 @@ class MainMenuState extends MusicBeatState
 					menuItem.onClick=function()
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						Offset(menuItem);
 						trace('test');
 						//and this is because i refuse to play without upscroll and DFJK - gdd
 						new FlxTimer().start(1,function(tmr:FlxTimer)
@@ -292,14 +289,6 @@ class MainMenuState extends MusicBeatState
 		return FlxRect.get(newX, newY, newWidth, newHeight);
 	}
 
-	private function Offset(ghffdghfdghdfgh:MainMenuItem)
-	{
-		ghffdghfdghdfgh.offset.set(3,3);
-		new FlxTimer().start(0.03,function(dssdadsfadfsa:FlxTimer)
-		{
-			ghffdghfdghdfgh.offset.set();
-		});
-	}
 
 }
 
