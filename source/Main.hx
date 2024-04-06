@@ -56,8 +56,8 @@ class Main extends Sprite
 	public static var gameWeeks:Array<Dynamic> = [
 		[['Tutorial'], ['gf'], [FlxColor.fromRGB(129, 100, 223)], 'Funky Beginnings'],
 		[
-			['Bopeebo', 'Fresh', 'Dadbattle', 'Granddad-Battle', 'Reaper-Rhythm'],
-			['dad', 'dad', 'dad', 'grandpadeath-cloaked', 'gd-true'],
+			['Dadbattle', 'Granddad-Battle', 'Reaper-Rhythm', 'Behold-The-Apocalypse'],
+			['dad', 'grandpadeath-cloaked', 'gd-true', 'grandpadeath-cloaked'],
 			[FlxColor.fromRGB(129, 100, 223)],
 			'vs. DADDY DEAREST'
 		]

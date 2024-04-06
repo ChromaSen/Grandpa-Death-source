@@ -51,7 +51,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	private var timingsMap:Map<String, FlxText> = [];
 
 	var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song);
-	var diffDisplay:String = CoolUtil.difficultyFromNumber(PlayState.storyDifficulty);
+	var diffDisplay:String = "HARD";
 	var engineDisplay:String = " ";
 
 	public var curMixDebugText:FlxText; //debug text for multi-inst tracks
