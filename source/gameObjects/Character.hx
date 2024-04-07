@@ -178,29 +178,6 @@ class Character extends FNFSprite
 				animation.addByPrefix('singLEFT', 'left', 24);
 				playAnim('idle');
 
-			case 'gramps-head':
-				tex = Paths.getSparrowAtlas('characters/gramps-head');
-				frames = tex;
-				animation.addByPrefix('idle', 'gramps idle', 24, false);
-				animation.addByPrefix('singUP', 'gramps up', 24);
-				animation.addByPrefix('singRIGHT', 'gramps right', 24);
-				animation.addByPrefix('singDOWN', 'gramps down', 24);
-				animation.addByPrefix('singLEFT', 'gramps left', 24);
-				animation.addByPrefix('laser', 'gramps blue laser shoot', 24, false);
-
-			case 'gramps-body':
-				tex = Paths.getSparrowAtlas('characters/gramps-body');
-				frames = tex;
-				animation.addByPrefix('idle', 'gramps idle body', 24, false);
-				animation.addByPrefix('singUP', 'gramps up body', 24);
-				animation.addByPrefix('singRIGHT', 'gramps right body', 24);
-				animation.addByPrefix('singDOWN', 'gramps down body', 24);
-				animation.addByPrefix('singLEFT', 'gramps left body', 24);
-				animation.addByPrefix('laser', 'gramps blue laser body', 24, false);
-
-				characterData.offsetX = 82;
-				characterData.offsetY = 482;
-
 			default:
 				// set up animations if they aren't already
 

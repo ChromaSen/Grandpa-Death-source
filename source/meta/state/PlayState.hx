@@ -256,34 +256,38 @@ class PlayState extends MusicBeatState
 		stageBuild = new Stage(curStage);
 		add(stageBuild);
 
-		switch(curStage){
-			case 'hell':
-				bta=new FlxSprite();
-				bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
-				bta.screenCenter();
-				bta.animation.addByPrefix('bta','bta',30,false);
-				bta.cameras = [lyrics];
-				bta.alpha=0;
-				add(bta);
-				vignette = new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
-				vignette.screenCenter();
-				vignette.cameras = [camHUD];
-				vignette.alpha = 0.5;
-				add(vignette);
+		vignette = new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
+		vignette.screenCenter();
+		vignette.cameras = [camHUD];
+		vignette.alpha = 0.5;
+		add(vignette);
 
-				trace('test');
-				grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
-				grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-				grandpaspeech.borderSize=1;
-				grandpaspeech.scrollFactor.set();
-				grandpaspeech.alpha=1;
-				grandpaspeech.updateHitbox();
-				grandpaspeech.screenCenter();
-				grandpaspeech.y+=180;
-				grandpaspeech.scale.set(1.5,1.5);
 
-				grandpaspeech.cameras=[lyrics];
-				add(grandpaspeech);
+		if(SONG.song.toLowerCase()=='behold the apocalypse'){
+			switch (curStage)
+			{
+				case 'hell':
+					bta=new FlxSprite();
+					bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
+					bta.screenCenter();
+					bta.animation.addByPrefix('bta','bta',30,false);
+					bta.cameras=[lyrics];
+					bta.alpha=0;
+					add(bta);
+					trace('test');
+					grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
+					grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+					grandpaspeech.borderSize=1;
+					grandpaspeech.scrollFactor.set();
+					grandpaspeech.alpha=1;
+					grandpaspeech.updateHitbox();
+					grandpaspeech.screenCenter();
+					grandpaspeech.y+=180;
+					grandpaspeech.scale.set(1.5,1.5);
+
+					grandpaspeech.cameras=[lyrics];
+					add(grandpaspeech);
+			}
 		}
 
 		// set up characters here too

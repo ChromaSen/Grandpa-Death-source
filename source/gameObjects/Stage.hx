@@ -300,6 +300,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'hell':
 				boyfriend.setPosition(1029.7, 709.1);
 				dad.setPosition(88.05,dad.curCharacter=='gd-true'?289.1:429.1);
+				if(dad.curCharacter=='grandpadeath'){
+					dad.setPosition(178.05,389.1);
+					trace('gramper');
+				}
 				trace(dad.getPosition());
 				gf.setPosition(538,250);
 			case 'highway':

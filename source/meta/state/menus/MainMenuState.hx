@@ -127,7 +127,7 @@ class MainMenuState extends MusicBeatState
 						persistentUpdate=false;
 
 
-							PlayState.storyPlaylist=['reaper-rhythm'];
+							PlayState.storyPlaylist=['deadbattle','reaper-rhythm','behold-the-apocalypse'];
 
 							/*
 							add in the playlist all the week songs when you're done with charting them
