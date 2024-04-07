@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="dialogue.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="G 10000" x="4" y="4" width="771" height="788"/>
+	<SubTexture name="G 20000" x="780" y="4" width="538" height="780"/>
+	<SubTexture name="cloaked 10000" x="1323" y="4" width="638" height="734"/>
+	<SubTexture name="cloaked 20000" x="4" y="797" width="638" height="734"/>
+	<SubTexture name="cloaked 30000" x="647" y="797" width="550" height="706"/>
+</TextureAtlas>

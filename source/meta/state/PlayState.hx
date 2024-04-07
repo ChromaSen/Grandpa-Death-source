@@ -1816,8 +1816,9 @@ class PlayState extends MusicBeatState
 					tweenCam(0.6,2.3);
 				case 2720:
 					camHUD.alpha=camGame.alpha=0;
-					bta.alpha=1;
 					bta.animation.play('bta',false);
+				case 2723:
+					bta.alpha=1;
 			}
 		}
 	}
