@@ -364,7 +364,7 @@ class AlphaCharacter extends FlxSprite
 		scale.set(textSize, textSize);
 		updateHitbox();
 
-		FlxG.log.add('the row' + row);
+		//FlxG.log.add('the row' + row); WHY WERE YOU CAUSING THE FRAMERATE TO FUCKING SHIT ITSELF FUCK YOUUUUUUUUUU
 
 		y = (110 - height);
 		y += row * 50;

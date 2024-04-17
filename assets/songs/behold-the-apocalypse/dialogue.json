@@ -1,0 +1,37 @@
+{
+	"box": "speech_bubble_talking",
+	"boxState": "normal",
+	"dialogue":[
+			{			
+				"portrait": "bf",
+				"expression": "Angry Talk",
+				"text": "*Heavy Panting*"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Haha! What's wrong, boy? \nCan't handle someone NOT giving \nyou a window to breathe?"
+			},
+			{
+				"portrait": "bf",
+				"expression": "Angry Talk",
+				"text": "Beepo! Baba dee bo bap!"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Hmph... Using a guitar is 'unfair'? \nLike I give a damn!"
+			},
+			{
+				"text":  "But... I'll admit, your singing is \nimpeccable. I honestly didn't expect \nyou to keep up."
+			},
+			{
+				"text": "Hmm, very well boy. \nYou want me to sing?"
+			},
+			{
+				"portrait": "bf",
+				"expression": "Smug Talk",
+				"text":  "CLOAK REVEAL ANIM HERE"
+			}
+	]
+}

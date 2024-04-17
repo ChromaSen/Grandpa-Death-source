@@ -459,7 +459,12 @@ class PlayState extends MusicBeatState
 
 		// call the funny intro cutscene depending on the song
 		if (!skipCutscenes())
-			songIntroCutscene();
+		{
+			//hi gdd here to ruin everything
+			//songIntroCutscene();
+			callTextbox();
+
+		}
 		else
 			startCountdown();
 
@@ -2201,7 +2206,7 @@ class PlayState extends MusicBeatState
 					}
 				});
 			default:
-				callTextbox();
+				startCountdown();
 		}
 		//
 	}
@@ -2215,12 +2220,12 @@ class PlayState extends MusicBeatState
 
 			dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(dialogPath));
 			dialogueBox.cameras = [dialogueHUD];
-			dialogueBox.whenDaFinish = startCountdown;
+			dialogueBox.whenDaFinish = songIntroCutscene;
 
 			add(dialogueBox);
 		}
 		else
-			startCountdown();
+			songIntroCutscene();
 	}
 
 	public static function skipCutscenes():Bool

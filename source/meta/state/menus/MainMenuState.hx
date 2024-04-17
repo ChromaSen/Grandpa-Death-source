@@ -233,6 +233,12 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.watch.addQuick(optionShit[i] + " x and y", positions[i]);
 		}
+
+		//im not sorry -gdd
+		if (FlxG.keys.justPressed.FIVE)
+		{
+			Main.switchState(this, new StoryMenuState());
+		}
 		#end
 
 		for (i in 0...menuItems.length)
