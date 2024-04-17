@@ -31,7 +31,7 @@ class MainMenuState extends MusicBeatState
 	public var curSelected:Int = -1;
 	public var bg:FlxSprite; // the background has been separated for more control
 	public var magenta:FlxSprite;
-	public var optionShit:Array<String> = ['story', 'bonus', 'freeplay', 'options'];
+	public var optionShit:Array<String> = ['story', 'freeplay', 'options'];
 	public var curDiff:Int=1;
 
 	public var camFollow:FlxObject;
@@ -153,16 +153,9 @@ class MainMenuState extends MusicBeatState
 								Main.switchState(this,new PlayState());
 							});
 					}
-				case 'bonus':
-					menuItem.animation.play("idle");
-					menuItem.x=350;
-					menuItem.onClick=function(){
-						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						trace('test');
-					}
 				case 'freeplay':
 					menuItem.animation.play("idle");
-					menuItem.x=696;
+					menuItem.x = 350;
 					menuItem.onClick=function()
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -175,7 +168,7 @@ class MainMenuState extends MusicBeatState
 					}
 				case 'options':
 					menuItem.animation.play("idle");
-					menuItem.x=1010;
+					menuItem.x=696;
 					menuItem.onClick=function()
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
