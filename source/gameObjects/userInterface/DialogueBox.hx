@@ -415,7 +415,7 @@ class DialogueBox extends FlxSpriteGroup
 				// this causes problems, and i know exactly what the problem is... i just cant fix it
 				// basically i need to get rid of the last tween before doing a new one, or else the portraits slide around all over the place
 				// ngl its kinda funny
-				FlxTween.tween(portrait, {x: newX + enterX}, 0.2, {ease: FlxEase.quadInOut});
+				FlxTween.tween(portrait, {x: newX + enterX}, 0.0001);
 			}
 		}
 

@@ -1,0 +1,17 @@
+
+{
+"lyrics": [
+    {
+        "steps":[0],
+        "curString":""
+    },
+    {
+        "steps":[50, 60, 63, 66],
+        "curString":"This/Is/A/TEST"
+    },
+    {
+      "steps":[1172,1176,1180],
+      "curString":"HA/ HA/ HAAAAA!" 
+    }
+  ]
+}

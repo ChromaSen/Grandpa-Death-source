@@ -31,6 +31,7 @@ import meta.*;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.*;
 import meta.data.Song.SwagSong;
+import meta.state.Lyrics;
 import meta.state.charting.*;
 import meta.state.menus.*;
 import meta.subState.*;
@@ -177,6 +178,7 @@ class PlayState extends MusicBeatState
 	public var vignette:FlxSprite;
 	public var fadein:FlxSprite;
 	public var bta:FlxSprite;
+	public static var instance:PlayState;
 
 	public var grampalyrics:Array<String>=[
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
@@ -206,6 +208,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
+		instance = this;
 
 		resetStatics();
 
@@ -440,6 +443,14 @@ class PlayState extends MusicBeatState
 		dialogueHUD = new FlxCamera();
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD, false);
+
+		if (sys.FileSystem.exists(Paths.songJson(SONG.song.toLowerCase(), 'lyrics', null))) {
+			trace('ly rics');
+			var myLyrics:Array<LyricMeasure> = Lyrics.parseLyrics(SONG.song.toLowerCase());
+			var nlyrics:Lyrics = new Lyrics(myLyrics);
+			add(nlyrics);
+			nlyrics.cameras = [lyrics];
+		}
 
 		//
 		keysArray = [
@@ -1767,10 +1778,14 @@ class PlayState extends MusicBeatState
 		*/
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
-				case 1172:
-					defaultCamZoom=0.85;
+				case 1169:
+					camGame.alpha=camHUD.alpha=0;
+					dadStrums.visible=boyfriendStrums.visible=false;
+					//defaultCamZoom=0.85;
 				case 1184:
-					defaultCamZoom=0.6;
+					//defaultCamZoom=0.6;
+					camGame.alpha=camHUD.alpha=1;
+					dadStrums.visible=boyfriendStrums.visible=true;
 			}
 		}
 		if (curSong.toLowerCase()=='behold the apocalypse')
