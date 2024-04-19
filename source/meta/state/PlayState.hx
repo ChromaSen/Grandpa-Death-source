@@ -1182,13 +1182,15 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.0033,0.2);
 				for (ui in allUIs)
 					ui.shake(0.0015,0.1);
-/*
-				FlxTween.tween(boyfriend,{x:boyfriend.x+20},1,{
-					ease:FlxEase.quadOut,
-					onComplete:function(tsdfvpsdfk:FlxTween){}
-				});
-				*/
 			}
+		}
+		if(SONG.song.toLowerCase()=='deadbattle'){
+			if (!coolNote.mustPress)
+				{
+					FlxG.camera.shake(0.0015,0.2);
+					for (ui in allUIs)
+					ui.shake(0.0005,0.1);
+				}
 		}
 		if (boyfriend.curCharacter == 'bf-guitar')
 		{
@@ -1197,12 +1199,6 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.0015, 0.2);
 				for (ui in allUIs)
 					ui.shake(0.0005, 0.1);
-				/*
-					FlxTween.tween(boyfriend,{x:boyfriend.x+20},1,{
-						ease:FlxEase.quadOut,
-						onComplete:function(tsdfvpsdfk:FlxTween){}
-					});
-				 */
 			}
 		}
 		if(curSong.toLowerCase()=='reaper-rhythm'){

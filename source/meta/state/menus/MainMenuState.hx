@@ -32,7 +32,7 @@ class MainMenuState extends MusicBeatState
 	public var bg:FlxSprite; // the background has been separated for more control
 	public var magenta:FlxSprite;
 	public var optionShit:Array<String> = ['story', 'freeplay', 'options'];
-	public var curDiff:Int=1;
+	public var curDiff:Int=2;
 
 	public var camFollow:FlxObject;
 
@@ -115,7 +115,6 @@ class MainMenuState extends MusicBeatState
 			{
 				trace('overlap');
 				if (menuItem.animation.curAnim.name!='selected'){menuItem.animation.play("selected");}
-				menuItem.offset.set(0,0);
 			}
 
 			switch (optionShit[i]){

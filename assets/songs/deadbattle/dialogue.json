@@ -4,34 +4,94 @@
 	"dialogue":[
 			{			
 				"portrait": "bf",
-				"expression": "Angry Talk",
-				"text": "*Heavy Panting*"
+				"expression": "Normal Talk",
+				"text": "Ugh..."
+			},
+			{
+
+				"text": "How rude! Who sent us to hell right \nwhen we were about to have some fun?! \nWhen I get you I'll-"
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Haha! What's wrong, boy? \nCan't handle someone NOT giving \nyou a window to breathe?"
+				"text": "..."
 			},
 			{
 				"portrait": "bf",
-				"expression": "Angry Talk",
-				"text": "Beepo! Baba dee bo bap!"
+				"expression": "Normal Talk",
+				"text": "!"
+			},
+			{
+				"text":  "OMG GRANDPAAAAAAAAAA!!!"
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Hmph... Using a guitar is 'unfair'? \nLike I give a damn!"
-			},
-			{
-				"text":  "But... I'll admit, your singing is \nimpeccable. I honestly didn't expect \nyou to keep up."
-			},
-			{
-				"text": "Hmm, very well boy. \nYou want me to sing?"
+				"text": "Hello darling, good to see you again."
 			},
 			{
 				"portrait": "bf",
-				"expression": "Smug Talk",
-				"text":  "CLOAK REVEAL ANIM HERE"
+				"expression": "Angry Talk",
+				"text":  "Beep bap bobo bep?"
+			},
+			{
+				"expression": "Normal Talk",
+				"text": "Well duh! Of course I have a grandpa! \nI just never got the chance to \ntalk about him."
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "So... You must be the 'rising star' \nI've been hearing about..."
+			},
+			{
+				"portrait": "bf",
+				"expression": "Normal Talk",
+				"text": "Oh? You know Boyfriend? \n Oh em gee, I didn't know \nword spread so fast!"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Yes, and I heard how he treated you. \nAnd I'm not happy about it."
+			},
+			{
+				"portrait": "bf",
+				"expression": "Normal Talk",
+				"text": "Huh?"
+			},
+			{
+				"portrait": "bf",
+				"expression": "Angry Talk",
+				"text": "Bloop?! Bap bop beep bep bep boo ba be-"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "SILENCE!"
+			},
+			{
+				"portrait": "bf",
+				"expression": "Angry Talk",
+				"text": "Ep!"
+			},
+			{
+				"portrait": "bf",
+				"expression": "Normal Talk",
+				"text": "Gramps? He didn't-"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Now, now, sweetheart. I'll deal with him, \nyou sit down and let your old man teach \nthis boy a lesson he won't forget."
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "So... Boy, you think you can mess with my kin?"
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Let me tell you now, that's a sin."
 			}
 	]
 }
