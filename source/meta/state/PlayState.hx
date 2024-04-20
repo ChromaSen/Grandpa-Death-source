@@ -697,7 +697,6 @@ class PlayState extends MusicBeatState
 					else
 						Main.switchState(this, new AnimationDebug(boyfriend.curCharacter));
 				}
-
 				if ((FlxG.keys.justPressed.SIX))
 				{
 					boyfriendStrums.autoplay = !boyfriendStrums.autoplay;
@@ -705,7 +704,6 @@ class PlayState extends MusicBeatState
 					PlayState.SONG.validScore = false;
 				}
 			}
-
 			///*
 			if (startingSong)
 			{
@@ -2138,6 +2136,7 @@ class PlayState extends MusicBeatState
 
 	public function songIntroCutscene()
 	{
+		FlxG.sound.music.fadeOut(2,0);
 		switch (curSong.toLowerCase())
 		{
 			case "winter-horrorland":
@@ -2235,6 +2234,15 @@ class PlayState extends MusicBeatState
 			dialogueBox.whenDaFinish = songIntroCutscene;
 
 			add(dialogueBox);
+
+			switch(SONG.song.toLowerCase()){
+				case 'deadbattle':
+					FlxG.sound.playMusic(Paths.music("PreSong1"),1);
+				case 'reaper rhythm':
+					FlxG.sound.playMusic(Paths.music("PreSong2"),1);
+				case 'behold the apocalypse':
+					FlxG.sound.playMusic(Paths.music("PreSong3"),1);
+			}
 		}
 		else
 			songIntroCutscene();
