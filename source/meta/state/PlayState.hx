@@ -1795,7 +1795,7 @@ class PlayState extends MusicBeatState
 				case 1538:
 					FlxTween.tween(camGame,{alpha:0},0.8);
 					FlxTween.tween(camHUD,{alpha:0},0.8);
-				case 1549:
+				/*case 1549:
 					grandpaspeech.text=grampalyrics[0];
 				case 1558:
 					grandpaspeech.text=grampalyrics[1];
@@ -1804,6 +1804,7 @@ class PlayState extends MusicBeatState
 
 				case 1621:
 					grandpaspeech.text=grampalyrics[3];
+				*/	
 				case 1635:
 					//dont ask pls
 					dadOpponent.setCharacter(88.05, 289.1,'gd-true');

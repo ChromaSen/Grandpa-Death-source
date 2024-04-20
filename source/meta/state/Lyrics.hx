@@ -22,10 +22,6 @@ class Lyrics extends FlxTypedGroup<FlxText> {
     static var cachedLyrics:Map<String, Array<LyricMeasure>>=new Map();
     public static function parseLyrics(song:String){
 
-    var songKey = song.toLowerCase();
-    if (cachedLyrics.exists(songKey)) {
-        return cachedLyrics.get(songKey);
-    }
     var lyricsFile = File.getContent(Paths.songJson(song.toLowerCase(), 'lyrics')).trim();
         while (!lyricsFile.endsWith("}"))
             lyricsFile = lyricsFile.substr(0, lyricsFile.length - 1);
@@ -39,7 +35,7 @@ class Lyrics extends FlxTypedGroup<FlxText> {
     public var stepProgression:Float = 0;
     public function new(lyrics:Array<LyricMeasure>){
         this.lyrics=lyrics;
-        lyrics.sort((lyric1,lyric2)->lyric1.steps[0]<lyric2.steps[0]?-1:1);
+        lyrics.sort((lyric1,lyric2)->Std.int(lyric1.steps[0]-lyric2.steps[0])); 
         trace(lyrics);
         super();
     }
@@ -55,76 +51,70 @@ class Lyrics extends FlxTypedGroup<FlxText> {
     public var currentFocusedLyric:LyricMeasure;
     public var currentDivisionAmount:Int = 0;
     public function updateLyrics() {
-        while (lyrics.length > 0 && lyrics[0] != null && lyrics[0].steps[0] <= stepProgression) {
+        while (lyrics.length > 0 && lyrics[0].steps[0] <= stepProgression) {
             clearOldText();
             var myLyrics:LyricMeasure=lyrics.shift();
             var myLyricArray:Array<String> = myLyrics.curString.split('/');
             currentDivisionAmount = myLyricArray.length;
             var textPool:Array<FlxText> = [];
-            for (i in 0...myLyricArray.length){
-                var text:FlxText;
-                if (i<members.length){
-                    text=members[i];
-                    text.text=myLyricArray[i] + "\n";
-                } else {
-                    text = new FlxText(0, 0, FlxG.width, myLyricArray[i] + "\n");
-                    text.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-                    text.antialiasing = false;
-                    text.scrollFactor.set();
-                    text.scale.set(1.5,1.5);
-                    add(text);
-                    textPool.push(text);
-                }
+            for (text in myLyricArray) {
+                var newText:FlxText = new FlxText(0,0,0,text+"\n");
+                newText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+                newText.antialiasing = false;
+                newText.scrollFactor.set();
+                newText.borderSize=1.5;
+                add(newText);
             }
             trace(members);
-            for (i in myLyricArray.length...members.length){
-                textPool.push(members[i]);
-                remove(members[i],true);
-            }
 
             currentFocusedLyric = myLyrics;
+            lyrics.splice(lyrics.indexOf(myLyrics),1);
         }
 
         if (currentFocusedLyric != null) {
-            var mySteps:Array<Float> = currentFocusedLyric.steps;
-            mySteps.sort((step,otherStep)->step<otherStep?-1:1);
-            // reset all lyrics
-            var totalTextLength:Float = 0;
-            for (text in members) totalTextLength += text.width;
+            var mySteps:Array<Int>=currentFocusedLyric.steps.map(Std.int);
+            mySteps.sort((a,b)->a-b); 
 
-            for (i in 0...members.length) {
-                var text:FlxText = members[i];
-                text.x = FlxG.width/2-totalTextLength/2+(i>0?members[i-1].x+members[i-1].width:0);
+            var totalTextLength = 0;
+            for (text in members) 
+                totalTextLength+=Std.int(text.width);
+            
+            var xpos=FlxG.width/2-totalTextLength/2;
+            for (text in members){
+                text.x=xpos;
                 text.y = 534;
+                text.scale.set(1.5,1.5);
                 text.color = FlxColor.fromRGB(255, 255, 255);
+                xpos += text.width;
             }
 
-            var curDivision:Int = 0;
-            for (i in 0...mySteps.length) {
-                if (stepProgression >= mySteps[i]) {
-                    curDivision = i;
-                    // break;
-                }
-            }
+           var curDivision:Int = 0;
+           while(curDivision<mySteps.length&&stepProgression>=mySteps[curDivision]){
+               curDivision++;
+           }
 
-            if (curDivision < currentDivisionAmount) {
-                members[curDivision].color = FlxColor.RED;
-                members[curDivision].y -= 4;
+           if (curDivision < currentDivisionAmount&&members[curDivision]!= null){
+                var highlightedLyric:FlxText = members[curDivision];
+                highlightedLyric.color = FlxColor.RED;
+                highlightedLyric.y -= 4;
             } else if (curDivision >= currentDivisionAmount) {
                 clearOldText();
             }
-        }
+        
+       }
 
-    }
+   }
 
-    public function clearOldText() {
-        // delete old text
-        var textPool:Array<FlxText> = [];
-        for (text in members) {
-            textPool.push(text);
-            remove(text, true);
-        }
-        currentFocusedLyric = null;
-    }
+   public function clearOldText() {
+       // delete old text
+       if (this.members.length > 0) {
+           this.forEach(function(textMember:FlxText){
+           if (textMember != null) 
+               textMember.destroy();
+           });
+       }
+       clear();
+       currentFocusedLyric = null;
+   }
 }
 
