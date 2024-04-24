@@ -180,6 +180,9 @@ class PlayState extends MusicBeatState
 	public var bta:FlxSprite;
 	public static var instance:PlayState;
 
+	public var gramps:Character;
+	public var bfguitar:Character;
+
 	public var grampalyrics:Array<String>=[
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
 	];
@@ -302,14 +305,14 @@ class PlayState extends MusicBeatState
 		switch(curStage){
 			case 'hell':
 				//dont ask aswell
-				dadOpponent=new Character();
-				dadOpponent.setCharacter(88.05,289.1,'gd-true');
-				add(dadOpponent);
-				remove(dadOpponent);
-				boyfriend=new Boyfriend();
-				boyfriend.setCharacter(1029.7,709.1,'bf-guitar');
-				add(boyfriend);
-				remove(boyfriend);
+				gramps=new Character();
+				gramps.setCharacter(88.05,289.1,'gd-true');
+				add(gramps);
+				gramps.visible=false;
+				bfguitar=new Boyfriend();
+				bfguitar.setCharacter(1029.7,709.1,'bf-guitar');
+				add(bfguitar);
+				bfguitar.visible=false;
 		}
 
 		//hey tinb here can you move grandpadeath up a bit i cant do it lol
@@ -1812,8 +1815,8 @@ class PlayState extends MusicBeatState
 				case 1650:
 					FlxTween.tween(camGame,{alpha:1},0.8,{ease:FlxEase.cubeOut});
 					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
-				case 1653:
-					FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
+				//case 1653:
+				//	FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
 				case 1664:
 					defaultCamZoom=0.75;
 				case 1792:
@@ -1834,9 +1837,9 @@ class PlayState extends MusicBeatState
 				case 2432:
 					tweenCam(0.6,2.3);
 				case 2720:
-					camHUD.alpha=camGame.alpha=0;
+					camGame.alpha=0;
 					bta.animation.play('bta',false);
-				case 2723:
+				case 2726:
 					bta.alpha=1;
 			}
 		}
