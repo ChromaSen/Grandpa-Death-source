@@ -127,7 +127,8 @@ class DialogueBox extends FlxSpriteGroup
 		add(bgFade);
 
 		// add the dialog box
-		box = new FNFSprite(0, 370);
+		box = new FNFSprite(0, 370).loadGraphic(Paths.image("dialogue/boxes/gd/gd"));
+		box.antialiasing=false;
 
 		// cur portrait
 		portrait = new FNFSprite(800, 160);
@@ -135,10 +136,11 @@ class DialogueBox extends FlxSpriteGroup
 		// thank u sammu for fixing alphabet.hx
 		// i dont wanna touch it ever
 		alphabetText = new Alphabet(100, 425, "cool", false, true, 0.7);
+		alphabetText.color=FlxColor.WHITE;
 
 		// text
 		text = new FlxText(100, 480, 1000, "", 35);
-		text.color = FlxColor.BLACK;
+		text.color = FlxColor.WHITE;
 		text.visible = false;
 
 		updateDialog(true);
@@ -231,7 +233,6 @@ class DialogueBox extends FlxSpriteGroup
 
 			// load the json and sprite
 			boxData = haxe.Json.parse(sys.io.File.getContent(boxJson));
-			box.frames = Paths.getSparrowAtlas('dialogue/boxes/$curBox/$curBox');
 
 			// get the states sectioon
 			var curStateData = Reflect.field(boxData.states, curBoxState);
@@ -270,11 +271,6 @@ class DialogueBox extends FlxSpriteGroup
 			}
 
 			// add the animations
-			box.animation.addByPrefix('normal', defaultAnim[0], 24, true);
-			box.addOffset('normal', defaultAnim[1][0], defaultAnim[1][1]);
-
-			box.animation.addByPrefix('normalOpen', openAnim[0], 24, false);
-			box.addOffset('normalOpen', openAnim[1][0], openAnim[1][1]);
 
 			// if the box doesnt have a position set it to 0 0
 			if (boxData.position == null)
@@ -299,7 +295,7 @@ class DialogueBox extends FlxSpriteGroup
 				text.y = boxData.textPos[1];
 			}
 
-			box.playAnim('normalOpen');
+			box.visible=true;
 		}
 	}
 
@@ -510,13 +506,6 @@ class DialogueBox extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
-		if (box.animation.finished)
-		{
-			if (boxData.singleFrame != true)
-				box.playAnim('normal');
-
-			text.visible = true;
-		}
 
 		portrait.animation.paused = alphabetText.finishedLine;
 		if (portrait.animation.paused)

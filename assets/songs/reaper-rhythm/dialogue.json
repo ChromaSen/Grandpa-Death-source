@@ -10,7 +10,9 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Haha! What's wrong, boy? \nCan't handle someone NOT giving \nyou a window to breathe?"
+				"text": "Haha! What's wrong, boy? \nCan't handle someone NOT giving \nyou a window to breathe?",
+				"sounds":"whatswrong1",
+				"soundPath":"assets/sounds/"
 			},
 			{
 				"portrait": "bf",

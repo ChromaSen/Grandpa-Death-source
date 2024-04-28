@@ -31,7 +31,6 @@ import meta.*;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.*;
 import meta.data.Song.SwagSong;
-import meta.state.Lyrics;
 import meta.state.charting.*;
 import meta.state.menus.*;
 import meta.subState.*;
@@ -446,14 +445,6 @@ class PlayState extends MusicBeatState
 		dialogueHUD = new FlxCamera();
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD, false);
-
-		if (sys.FileSystem.exists(Paths.songJson(SONG.song.toLowerCase(), 'lyrics', null))) {
-			trace('ly rics');
-			var myLyrics:Array<LyricMeasure> = Lyrics.parseLyrics(SONG.song.toLowerCase());
-			var nlyrics:Lyrics = new Lyrics(myLyrics);
-			add(nlyrics);
-			nlyrics.cameras = [lyrics];
-		}
 
 		//
 		keysArray = [
@@ -1796,7 +1787,7 @@ class PlayState extends MusicBeatState
 				case 1538:
 					FlxTween.tween(camGame,{alpha:0},0.8);
 					FlxTween.tween(camHUD,{alpha:0},0.8);
-				/*case 1549:
+				case 1549:
 					grandpaspeech.text=grampalyrics[0];
 				case 1558:
 					grandpaspeech.text=grampalyrics[1];
@@ -1805,7 +1796,7 @@ class PlayState extends MusicBeatState
 
 				case 1621:
 					grandpaspeech.text=grampalyrics[3];
-				*/	
+				
 				case 1635:
 					//dont ask pls
 					dadOpponent.setCharacter(88.05, 289.1,'gd-true');
@@ -1815,8 +1806,8 @@ class PlayState extends MusicBeatState
 				case 1650:
 					FlxTween.tween(camGame,{alpha:1},0.8,{ease:FlxEase.cubeOut});
 					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
-				//case 1653:
-				//	FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
+				case 1653:
+					FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
 				case 1664:
 					defaultCamZoom=0.75;
 				case 1792:

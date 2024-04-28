@@ -178,7 +178,7 @@ class Init extends FlxState
 			NOT_FORCED
 		],
 		'GPU Caching' => [
-			false,
+			true,
 			Checkmark,
 			"Enables GPU Caching, which can improve performance on some systems and reduce RAM usage.",
 			NOT_FORCED
