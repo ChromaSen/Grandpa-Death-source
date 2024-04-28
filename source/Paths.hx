@@ -118,7 +118,59 @@ class Paths
 		localTrackedAssets = [];
 	}
 
-	public static function returnGraphic(key:String, ?library:String, ?textureCompression:Bool = false)
+	//did i rip this straight from CC? maybe.
+	//do i care? as long as it works, no. -gdd
+	public static function returnGraphic(key:String, ?library:String)
+		{
+			var path = getPath('images/$key.png', IMAGE, library);
+			if (Init.trueSettings.get('GPU Caching') == true)
+			{
+				if (OpenFlAssets.exists(path, IMAGE))
+				{
+					if (!currentTrackedAssets.exists(path))
+					{
+						var newBitmap:BitmapData = OpenFlAssets.getBitmapData(path);
+						var newGraphic:FlxGraphic;
+		
+						var newTexture:Texture = FlxG.stage.context3D.createTexture(newBitmap.width, newBitmap.height, BGRA, false);
+						newTexture.uploadFromBitmapData(newBitmap);
+						currentTrackedTextures.set(path, newTexture);
+						newBitmap.dispose();
+						newBitmap.disposeImage();
+						newBitmap = null;
+						newGraphic = FlxG.bitmap.add(BitmapData.fromTexture(newTexture), false, path);
+		
+						newGraphic.persist = true;
+						currentTrackedAssets.set(path, newGraphic);
+					}
+					localTrackedAssets.push(path);
+					return currentTrackedAssets.get(path);
+				}
+				trace('oh no its returning null NOOOO');
+				return null;
+			}
+			else
+			{
+				if (FileSystem.exists(path))
+				{
+					if (!currentTrackedAssets.exists(key))
+					{
+						var bitmap = BitmapData.fromFile(path);
+						var newGraphic:FlxGraphic;
+						newGraphic = FlxGraphic.fromBitmapData(bitmap, false, key, false);
+						trace('new bitmap $key, not textured');
+						currentTrackedAssets.set(key, newGraphic);
+					}
+					localTrackedAssets.push(key);
+					return currentTrackedAssets.get(key);
+				}
+				trace('oh no ' + key + ' is returning null NOOOO');
+				return null;
+			}
+			
+		}
+
+	/*public static function returnGraphic(key:String, ?library:String, ?textureCompression:Bool = false) OLD
 	{
 		var path = getPath('images/$key.png', IMAGE, library);
 		if (FileSystem.exists(path))
@@ -129,7 +181,7 @@ class Paths
 				var newGraphic:FlxGraphic;
 				if (textureCompression)
 				{
-					var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, /*false*/ true,0);
+					var texture = FlxG.stage.context3D.createTexture(bitmap.width, bitmap.height, BGRA, /*false true,0);
 					texture.uploadFromBitmapData(bitmap);
 					currentTrackedTextures.set(key, texture);
 					bitmap.dispose();
@@ -150,7 +202,7 @@ class Paths
 		}
 		trace('oh no ' + key + ' is returning null NOOOO');
 		return null;
-	}
+	}*/
 
 	public static function returnSound(path:String, key:String, ?library:String)
 	{
@@ -349,9 +401,9 @@ class Paths
 	}
 	//gdd is gone again
 
-	inline static public function image(key:String, ?library:String, ?textureCompression:Bool = false)
+	inline static public function image(key:String, ?library:String)
 	{
-		var returnAsset:FlxGraphic = returnGraphic(key, library, textureCompression);
+		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		return returnAsset;
 	}
 

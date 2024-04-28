@@ -79,6 +79,7 @@ class OptionsMenuState extends MusicBeatState
 					['FPS Counter', getFromOption],
 					['Memory Counter', getFromOption],
 					#if !neko ['Debug Info', getFromOption], #end
+					['GPU Caching', getFromOption],
 				]
 			],
 			'appearance' => [

@@ -757,8 +757,8 @@ class PlayState extends MusicBeatState
 						camDisplaceY = 0;
 					}
 					lastSection = Std.int(curStep / 16);
-					if (hasInstSwitching)
-						perSectionAccuracyBullshit();
+					//if (hasInstSwitching)
+						//perSectionAccuracyBullshit();
 				}
 
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
@@ -1625,7 +1625,7 @@ class PlayState extends MusicBeatState
 			}
 			songMusic.onComplete = endSong;
 			vocals.play();
-			vocalsOpp.play();
+			//vocalsOpp.play();
 
 			resyncVocals();
 
@@ -1661,7 +1661,7 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
 
-		hasInstSwitching = Paths.multiInstCheck(SONG.song);
+		/*hasInstSwitching = Paths.multiInstCheck(SONG.song);
 
 		if (hasInstSwitching)
 		{
@@ -1671,22 +1671,22 @@ class PlayState extends MusicBeatState
 			songMusicBad.volume = 0;
 			songMusicSick = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Sick"), false, true);
 			songMusicSick.volume = 0;
-		}
+		}*/
 
-		hasSplitVocals = Paths.doSplitVocalsExist(SONG.song);
+		/*hasSplitVocals = Paths.doSplitVocalsExist(SONG.song);
 
 		if (SONG.needsVoices && hasSplitVocals)
 		{
 			trace("loading split vocals");
 			vocals = new FlxSound().loadEmbedded(Paths.voicesBf(SONG.song), false, true); //bf vocals
 			vocalsOpp = new FlxSound().loadEmbedded(Paths.voicesOpp(SONG.song), false, true); //op vocals
-		}
+		}*/
 
-		else if (SONG.needsVoices && !hasSplitVocals)
+		/*else if (SONG.needsVoices && !hasSplitVocals)
 		{	
-			trace("loading normal voices");
+			trace("loading normal voices");*/
 			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song), false, true);
-			vocalsOpp = new FlxSound();
+			/*vocalsOpp = new FlxSound();
 		}
 
 		else
@@ -1694,19 +1694,19 @@ class PlayState extends MusicBeatState
 			trace("loading no vocals");
 			vocals = new FlxSound();
 			vocalsOpp = new FlxSound();
-		}
+		}*/
 
 		FlxG.sound.list.add(songMusic);
 
-		if (hasInstSwitching)
+		/*if (hasInstSwitching)
 		{
 			FlxG.sound.list.add(songMusicShit);
 			FlxG.sound.list.add(songMusicBad);
 			FlxG.sound.list.add(songMusicSick);
-		}
+		}*/
 
 		FlxG.sound.list.add(vocals);
-		FlxG.sound.list.add(vocalsOpp);
+		//FlxG.sound.list.add(vocalsOpp);
 
 		// generate the chart
 		unspawnNotes = ChartLoader.generateChartType(SONG, determinedChartType);
@@ -1741,7 +1741,7 @@ class PlayState extends MusicBeatState
 			songMusicSick.pause();
 		}
 		vocals.pause();
-		vocalsOpp.pause();
+		//vocalsOpp.pause();
 		Conductor.songPosition = songMusic.time;
 		if (hasInstSwitching)
 		{
@@ -1750,7 +1750,7 @@ class PlayState extends MusicBeatState
 			songMusicSick.time = Conductor.songPosition;	
 		}
 		vocals.time = Conductor.songPosition;
-		vocalsOpp.time = Conductor.songPosition;
+		//vocalsOpp.time = Conductor.songPosition;
 		songMusic.play();
 		if (hasInstSwitching)
 		{
@@ -1759,7 +1759,7 @@ class PlayState extends MusicBeatState
 			songMusicSick.play();	
 		}
 		vocals.play();
-		vocalsOpp.play();
+		//vocalsOpp.play();
 	}
 
 	override function stepHit()
@@ -1966,8 +1966,8 @@ class PlayState extends MusicBeatState
 		if (vocals != null)
 			vocals.stop();
 
-		if (vocalsOpp != null)
-			vocalsOpp.stop();
+		//if (vocalsOpp != null)
+			//vocalsOpp.stop();
 	}
 
 	override function openSubState(SubState:FlxSubState)
@@ -1986,7 +1986,7 @@ class PlayState extends MusicBeatState
 					songMusicSick.pause();	
 				}
 				vocals.pause();
-				vocalsOpp.pause();
+				//vocalsOpp.pause();
 				//	trace('nulled song finished');
 			}
 		}
@@ -2045,7 +2045,7 @@ class PlayState extends MusicBeatState
 			songMusicSick.volume = 0;	
 		}
 		vocals.volume = 0;
-		vocalsOpp.volume = 0;
+		//vocalsOpp.volume = 0;
 		if (SONG.validScore)
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
@@ -2126,10 +2126,10 @@ class PlayState extends MusicBeatState
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 		if (hasInstSwitching)
 		{
-			ForeverTools.killMusic([songMusic, vocals, vocalsOpp, songMusicShit, songMusicBad, songMusicSick]);
+			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp,*/ songMusicShit, songMusicBad, songMusicSick]);
 		}
 		else
-			ForeverTools.killMusic([songMusic, vocals, vocalsOpp]);
+			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp*/]);
 
 		// deliberately did not use the main.switchstate as to not unload the assets
 		FlxG.switchState(new PlayState());
@@ -2381,7 +2381,7 @@ class PlayState extends MusicBeatState
 		return super.add(Object);
 	}
 
-	function perSectionAccuracyBullshit() //by GDD
+	/*function perSectionAccuracyBullshit() //by GDD - now unused ;-;
 	{
 		//ALRIGHT RAMBLERS, LET'S GET RAMBLIN
 		var accuracy:Float = 0;
@@ -2482,5 +2482,5 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-	}
+	}*/
 }

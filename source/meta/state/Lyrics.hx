@@ -36,7 +36,7 @@ class Lyrics extends FlxTypedGroup<FlxText> {
     public function new(lyrics:Array<LyricMeasure>){
         this.lyrics=lyrics;
         lyrics.sort((lyric1,lyric2)->Std.int(lyric1.steps[0]-lyric2.steps[0])); 
-        trace(lyrics);
+        //trace(lyrics);
         super();
     }
 
@@ -65,7 +65,7 @@ class Lyrics extends FlxTypedGroup<FlxText> {
                 newText.borderSize=1.5;
                 add(newText);
             }
-            trace(members);
+            //trace(members);
 
             currentFocusedLyric = myLyrics;
             lyrics.splice(lyrics.indexOf(myLyrics),1);

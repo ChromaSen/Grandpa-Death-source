@@ -177,6 +177,12 @@ class Init extends FlxState
 			"Simplifies the judgement animations, displaying only one judgement / rating sprite at a time.",
 			NOT_FORCED
 		],
+		'GPU Caching' => [
+			false,
+			Checkmark,
+			"Enables GPU Caching, which can improve performance on some systems and reduce RAM usage.",
+			NOT_FORCED
+		],
 	];
 
 	public static var trueSettings:Map<String, Dynamic> = [];
