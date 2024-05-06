@@ -467,6 +467,7 @@ class PlayState extends MusicBeatState
 		{
 			//hi gdd here to ruin everything
 			//songIntroCutscene();
+			tweenCam(0.5,0.5);
 			callTextbox();
 
 		}
@@ -651,7 +652,7 @@ class PlayState extends MusicBeatState
 			// the change I made was just so that it would only take accept inputs
 			if (controls.ACCEPT && dialogueBox.textStarted)
 			{
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				dialogueBox.curPage += 1;
 
 				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length)
@@ -1771,13 +1772,9 @@ class PlayState extends MusicBeatState
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
 				case 1169:
-					camGame.alpha=camHUD.alpha=0;
-					dadStrums.visible=boyfriendStrums.visible=false;
-					//defaultCamZoom=0.85;
+					defaultCamZoom=0.85;
 				case 1184:
-					//defaultCamZoom=0.6;
-					camGame.alpha=camHUD.alpha=1;
-					dadStrums.visible=boyfriendStrums.visible=true;
+					defaultCamZoom=0.6;
 			}
 		}
 		if (curSong.toLowerCase()=='behold the apocalypse')
@@ -2130,7 +2127,8 @@ class PlayState extends MusicBeatState
 
 	public function songIntroCutscene()
 	{
-		FlxG.sound.music.fadeOut(2,0);
+		if(FlxG.sound.music!=null)
+		{FlxG.sound.music.fadeOut(2,0);}
 		switch (curSong.toLowerCase())
 		{
 			case "winter-horrorland":
@@ -2231,11 +2229,11 @@ class PlayState extends MusicBeatState
 
 			switch(SONG.song.toLowerCase()){
 				case 'deadbattle':
-					FlxG.sound.playMusic(Paths.music("PreSong1"),1);
-				case 'reaper rhythm':
-					FlxG.sound.playMusic(Paths.music("PreSong2"),1);
-				case 'behold the apocalypse':
-					FlxG.sound.playMusic(Paths.music("PreSong3"),1);
+					FlxG.sound.playMusic(Paths.music("PreSong1"));
+				case 'reaper-rhythm':
+					FlxG.sound.playMusic(Paths.music("PreSong2"));
+				case 'behold-the-apocalypse':
+					FlxG.sound.playMusic(Paths.music("PreSong3"));
 			}
 		}
 		else
@@ -2272,6 +2270,7 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
+		tweenCam(0.6,1,FlxEase.quadIn); //gegegege
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
