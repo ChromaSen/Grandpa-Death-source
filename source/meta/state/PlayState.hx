@@ -65,6 +65,7 @@ class PlayState extends MusicBeatState
 	public static var vocals:FlxSound;
 	public static var vocalsOpp:FlxSound;
 	public static var hasSplitVocals:Bool = false;
+	public static var songDialogue:FlxSound;
 
 	public static var campaignScore:Int = 0;
 
@@ -2119,6 +2120,9 @@ class PlayState extends MusicBeatState
 		else
 			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp*/]);
 
+		if (songDialogue != null)
+			ForeverTools.killMusic([songDialogue]);
+
 		// deliberately did not use the main.switchstate as to not unload the assets
 		FlxG.switchState(new PlayState());
 	}
@@ -2229,12 +2233,18 @@ class PlayState extends MusicBeatState
 
 			switch(SONG.song.toLowerCase()){
 				case 'deadbattle':
-					FlxG.sound.playMusic(Paths.music("PreSong1"));
+					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					//FlxG.sound.playMusic(Paths.music("PreSong1"));
 				case 'reaper-rhythm':
-					FlxG.sound.playMusic(Paths.music("PreSong2"));
+					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					//FlxG.sound.playMusic(Paths.music("PreSong2"));
 				case 'behold-the-apocalypse':
-					FlxG.sound.playMusic(Paths.music("PreSong3"));
+					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					//FlxG.sound.playMusic(Paths.music("PreSong3"));
 			}
+
+			if (songDialogue != null)
+				songDialogue.play();
 		}
 		else
 			songIntroCutscene();
@@ -2265,6 +2275,8 @@ class PlayState extends MusicBeatState
 
 	private function startCountdown():Void
 	{
+		if (songDialogue != null)
+			songDialogue.stop();
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
