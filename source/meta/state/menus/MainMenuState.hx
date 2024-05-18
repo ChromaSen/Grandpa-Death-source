@@ -38,6 +38,7 @@ class MainMenuState extends MusicBeatState
 
 	public var camFollow:FlxObject;
 
+	public var menuItem:MainMenuItem;
 	// the create 'state'
 	override function create()
 	{
@@ -91,7 +92,7 @@ class MainMenuState extends MusicBeatState
 		// loop through the menu options
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:MainMenuItem=new MainMenuItem();
+			menuItem=new MainMenuItem();
 			menuItem.frames = Paths.getSparrowAtlas('menus/base/title/MENU/menu_' + optionShit[i]);
 			menuItem.ID = i;
 			// add the animations in a cool way (real
@@ -130,14 +131,6 @@ class MainMenuState extends MusicBeatState
 
 							PlayState.storyPlaylist=['deadbattle','reaper-rhythm','behold-the-apocalypse'];
 
-							/*
-							add in the playlist all the week songs when you're done with charting them
-							
-							the order is:
-							 	>deadbattle
-							 	>reapers rhythm
-							 	>behold the apocalypse
-							*/
 							
 							PlayState.isStoryMode = true;
 
@@ -184,7 +177,7 @@ class MainMenuState extends MusicBeatState
 				
 			}
 			add(menuItem);
-			menuItem.hitbox=Center(menuItem.x,menuItem.y,menuItem.width,menuItem.height,0.95);
+			menuItem.hitbox=Center(menuItem.x,menuItem.y,menuItem.width,menuItem.height,0.85);
 
 			menuItems.push(menuItem);
 
@@ -255,6 +248,18 @@ class MainMenuState extends MusicBeatState
 						curSelected=i;
 						menuItems[i].onOverlap();
 
+						switch(i){
+							case 0:
+							menuItems[i].x=-15;
+							menuItems[i].y=5.5;			
+							case 1:
+							menuItems[i].x=320;
+							menuItems[i].y=5.5;
+							case 2:
+							menuItems[i].x=676;
+							menuItems[i].y=5.5;
+						}
+
 						break;
 					}
 				}
@@ -263,6 +268,17 @@ class MainMenuState extends MusicBeatState
 			{
 				menuItems[i].onAway();
 				curSelected = -1;
+				switch(i){
+					case 0:
+					menuItems[i].x=15;
+					menuItems[i].y=49.5;
+					case 1:
+					menuItems[i].x=350;
+					menuItems[i].y=49.5;
+					case 2:
+					menuItems[i].x=696;
+					menuItems[i].y=49.5;
+				}
 			}
 		}
 		if (curSelected!=-1&&curSelected<menuItems.length&&menuItems[curSelected]!=null){
