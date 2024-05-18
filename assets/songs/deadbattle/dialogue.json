@@ -27,7 +27,8 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Hello darling, good to see you again."
+				"text": "Hello darling, good to see you again.",
+				"voiceLine":"hidarling1"
 			},
 			{
 				"portrait": "bf",
@@ -41,7 +42,8 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "So... You must be the 'rising star' \nI've been hearing about..."
+				"text": "So... You must be the 'rising star' \nI've been hearing about...",
+				"voiceLine": "risingstar2"
 			},
 			{
 				"portrait": "bf",
@@ -51,7 +53,8 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Yes, and I heard how he treated you. \nAnd I'm not happy about it."
+				"text": "Yes, and I heard how he treated you. \nAnd I'm not happy about it.",
+				"voiceLine": "treatedyou3"
 			},
 			{
 				"portrait": "bf",
@@ -66,7 +69,8 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "SILENCE!"
+				"text": "SILENCE!",
+				"voiceLine": "silence44"
 			},
 			{
 				"portrait": "bf",
@@ -81,17 +85,20 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Now, now, sweetheart. I'll deal with him, \nyou sit down and let your old man teach \nthis boy a lesson he won't forget."
+				"text": "Now, now, sweetheart. I'll deal with him, \nyou sit down and let your old man teach \nthis boy a lesson he won't forget.",
+				"voiceLine": "idk5"
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "So... Boy, you think you can mess with my kin?"
+				"text": "So... Boy, you think you can mess with my kin?",
+				"voiceLine": "mess6"
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Let me tell you now, that's a sin."
+				"text": "Let me tell you now, that's a sin.",
+				"voiceLine": "sin7"
 			}
 	]
 }

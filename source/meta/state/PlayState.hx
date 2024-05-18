@@ -2245,6 +2245,7 @@ class PlayState extends MusicBeatState
 
 			if (songDialogue != null)
 				songDialogue.play();
+				songDialogue.volume=0.7;
 		}
 		else
 			songIntroCutscene();

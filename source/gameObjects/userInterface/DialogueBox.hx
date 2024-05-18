@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -39,6 +40,7 @@ typedef DialogueDataDef =
 
 	var speed:Null<Int>;
 	var scale:Null<Int>;
+	var voiceLine:Null<String>;
 }
 
 typedef BoxDataDef =
@@ -89,6 +91,7 @@ class DialogueBox extends FlxSpriteGroup
 	public var whenDaFinish:Void->Void;
 
 	public var textStarted:Bool = false;
+	public var voiceline:FlxSound;
 
 	public static function createDialogue(thisDialogue:String):DialogueBox
 	{
@@ -211,6 +214,18 @@ class DialogueBox extends FlxSpriteGroup
 		// If the text has started, build the text
 		else
 			startText();
+
+
+		if (voiceline!=null)
+			{
+				voiceline.stop(); 
+			}
+		if (pageData.voiceLine!=null)
+			{
+				voiceline=new FlxSound().loadEmbedded(Paths.file("images/dialogue/boxes/gd/" + pageData.voiceLine + "." + Paths.SOUND_EXT),false,true);
+				voiceline.play();
+			}
+			alphabetText.playSounds=curCharacter!="senpai"; //senpai for now, then should be gd
 	}
 
 	public function updateTextBox(force:Bool = false)
@@ -507,6 +522,10 @@ class DialogueBox extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 
+		if(FlxG.keys.justPressed.SHIFT){
+			if(voiceline!=null){voiceline.stop();}
+			trace('bye bye');
+		}
 		portrait.animation.paused = alphabetText.finishedLine;
 		if (portrait.animation.paused)
 			portrait.animation.finish();
@@ -514,6 +533,11 @@ class DialogueBox extends FlxSpriteGroup
 		bgFade.alpha += 0.02;
 		if (bgFade.alpha > 0.6)
 			bgFade.alpha = 0.6;
+
+		if (FlxG.keys.justPressed.ENTER) 
+			{
+				if(voiceline!=null){voiceline.stop();}
+			}
 
 		super.update(elapsed);
 	}

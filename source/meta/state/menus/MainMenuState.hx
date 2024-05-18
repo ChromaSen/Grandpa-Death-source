@@ -38,7 +38,6 @@ class MainMenuState extends MusicBeatState
 
 	public var camFollow:FlxObject;
 
-	public var menuItem:MainMenuItem;
 	// the create 'state'
 	override function create()
 	{
@@ -92,7 +91,7 @@ class MainMenuState extends MusicBeatState
 		// loop through the menu options
 		for (i in 0...optionShit.length)
 		{
-			menuItem=new MainMenuItem();
+			var menuItem:MainMenuItem=new MainMenuItem();
 			menuItem.frames = Paths.getSparrowAtlas('menus/base/title/MENU/menu_' + optionShit[i]);
 			menuItem.ID = i;
 			// add the animations in a cool way (real
@@ -249,15 +248,15 @@ class MainMenuState extends MusicBeatState
 						menuItems[i].onOverlap();
 
 						switch(i){
-							case 0:
+							case 0://s
 							menuItems[i].x=-15;
 							menuItems[i].y=5.5;			
-							case 1:
+							case 1://f
 							menuItems[i].x=320;
-							menuItems[i].y=5.5;
-							case 2:
+								menuItems[i].y=5.5;
+							case 2://o
 							menuItems[i].x=676;
-							menuItems[i].y=5.5;
+								menuItems[i].y=5.5;
 						}
 
 						break;
@@ -269,18 +268,19 @@ class MainMenuState extends MusicBeatState
 				menuItems[i].onAway();
 				curSelected = -1;
 				switch(i){
-					case 0:
-					menuItems[i].x=15;
-					menuItems[i].y=49.5;
-					case 1:
+					case 0: //s
+						menuItems[i].x=15;
+						menuItems[i].y=49.5;
+					case 1: //f
 					menuItems[i].x=350;
-					menuItems[i].y=49.5;
-					case 2:
+						menuItems[i].y=49.5;
+					case 2: //o
 					menuItems[i].x=696;
-					menuItems[i].y=49.5;
+						menuItems[i].y=49.5;
 				}
 			}
 		}
+
 		if (curSelected!=-1&&curSelected<menuItems.length&&menuItems[curSelected]!=null){
 			if (FlxG.mouse.justPressed&&menuItems[curSelected].onClick!=null){
 				menuItems[curSelected].onClick();

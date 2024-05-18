@@ -56,12 +56,6 @@ class Init extends FlxState
 			'Whether to use a controller instead of the keyboard to play.',
 			NOT_FORCED
 		],
-		'Auto Pause' => [
-			true,
-			Checkmark,
-			'Whether to pause the game automatically if the window is unfocused.',
-			NOT_FORCED
-		],
 		'FPS Counter' => [true, Checkmark, 'Whether to display the FPS counter.', NOT_FORCED],
 		'Memory Counter' => [
 			true,
@@ -340,7 +334,7 @@ class Init extends FlxState
 
 	public static function updateAll()
 	{
-		FlxG.autoPause = trueSettings.get('Auto Pause');
+		FlxG.autoPause = true;
 
 		Overlay.updateDisplayInfo(trueSettings.get('FPS Counter'), trueSettings.get('Debug Info'), trueSettings.get('Memory Counter'));
 
