@@ -13,6 +13,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import meta.data.dependency.FNFSprite;
 import meta.data.font.Alphabet;
+import meta.state.PlayState;
 
 typedef PortraitDataDef =
 {
@@ -522,7 +523,7 @@ class DialogueBox extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 
-		if(FlxG.keys.justPressed.SHIFT){
+		if(FlxG.keys.justPressed.SHIFT&&!PlayState.midsongdia){
 			if(voiceline!=null){voiceline.stop();}
 			trace('bye bye');
 		}

@@ -39,6 +39,8 @@ import openfl.events.KeyboardEvent;
 import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
+import sys.FileStat;
+import sys.FileSystem;
 import sys.io.File;
 
 using StringTools;
@@ -185,6 +187,8 @@ class PlayState extends MusicBeatState
 	public var grampalyrics:Array<String>=[
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
 	];
+
+	public static var midsongdia:Bool=false;
 
 	function resetStatics()
 	{
@@ -642,15 +646,17 @@ class PlayState extends MusicBeatState
 		if (dialogueBox != null && dialogueBox.alive)
 		{
 			// wheee the shift closes the dialogue
-			if (FlxG.keys.justPressed.SHIFT)
-				dialogueBox.closeDialog();
-
+			if(!midsongdia){
+				if (FlxG.keys.justPressed.SHIFT)
+					dialogueBox.closeDialog();
+			}
 			// the change I made was just so that it would only take accept inputs
-			if (controls.ACCEPT && dialogueBox.textStarted)
+			if (dialogueBox.textStarted)
 			{
-				//FlxG.sound.play(Paths.sound('cancelMenu'));
-				dialogueBox.curPage += 1;
-				trace(dialogueBox.curPage);
+				if(controls.ACCEPT&&!midsongdia){
+					dialogueBox.curPage += 1;
+					trace('nuh uh');
+				}
 
 				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length)
 					dialogueBox.closeDialog()
@@ -1598,7 +1604,7 @@ class PlayState extends MusicBeatState
 	{
 		startingSong = false;
 
-		trace(curSong.toLowerCase());
+		trace(SONG.song.toLowerCase());
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -1781,15 +1787,26 @@ class PlayState extends MusicBeatState
 				case 1538:
 					FlxTween.tween(camGame,{alpha:0},0.8);
 					FlxTween.tween(camHUD,{alpha:0},0.8);
-				case 1549:
-					grandpaspeech.text=grampalyrics[0];
+				case 1544:
+
+					var midsongdialoguepath=Paths.json('behold-the-apocalypse/midsongdialogue');
+					dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(midsongdialoguepath));
+					trace(dialogueBox);
+					dialogueBox.cameras = [dialogueHUD];
+				case 1548:
+					midsongdia=true;
+					add(dialogueBox);	
+				//case 1549:
 				case 1558:
-					grandpaspeech.text=grampalyrics[1];
+					dialogueBox.curPage+=1;
+					trace(dialogueBox.curPage);
 				case 1585:
-					grandpaspeech.text=grampalyrics[2];
+					dialogueBox.curPage+=1;
+					trace(dialogueBox.curPage);
 
 				case 1621:
-					grandpaspeech.text=grampalyrics[3];
+					dialogueBox.curPage+=1;
+					trace(dialogueBox.curPage);
 				
 				case 1635:
 					//dont ask pls
@@ -1797,6 +1814,9 @@ class PlayState extends MusicBeatState
 					dadOpponent.setPosition(150,314.1);
 					boyfriend.setCharacter(1029.7,709.1,'bf-guitar');
 					boyfriend.setPosition(959.7,714.1);
+				case 1646:
+					midsongdia=false;
+					closemidsong();
 				case 1650:
 					FlxTween.tween(camGame,{alpha:1},0.8,{ease:FlxEase.cubeOut});
 					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
@@ -1844,7 +1864,7 @@ class PlayState extends MusicBeatState
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
 			dadOpponent.dance();
 	}
-
+	
 	override function beatHit()
 	{
 		super.beatHit();
@@ -2124,6 +2144,10 @@ class PlayState extends MusicBeatState
 	}
 
 	var dialogueBox:DialogueBox;
+
+	public function closemidsong(){
+		dialogueBox.kill();dialogueBox.alphabetText.playSounds = false;
+	}
 
 	public function songIntroCutscene()
 	{

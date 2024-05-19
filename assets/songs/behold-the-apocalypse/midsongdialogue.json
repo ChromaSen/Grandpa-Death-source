@@ -1,0 +1,24 @@
+{
+	"box": "speech_bubble_talking",
+	"boxState": "normal",
+	"dialogue":[
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Mph.."
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "Very well, boy.."
+			},
+			{
+				"text":  "You've earned my respect."
+			},
+			{
+				"portrait": "senpai",
+				"expression": "Senpai Portrait Enter",
+				"text": "But let's see if you can really keep up!"
+			}
+	]
+}
