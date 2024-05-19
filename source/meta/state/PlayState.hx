@@ -184,6 +184,7 @@ class PlayState extends MusicBeatState
 	public var gramps:Character;
 	public var bfguitar:Character;
 
+	public var cloaked:FlxSprite;
 	public var grampalyrics:Array<String>=[
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
 	];
@@ -296,6 +297,18 @@ class PlayState extends MusicBeatState
 
 					grandpaspeech.cameras=[lyrics];
 					add(grandpaspeech);
+			}
+		}
+		if(SONG.song.toLowerCase()=='reaper-rhythm'){
+			switch (curStage)
+			{
+				case 'hell':
+					cloaked=new FlxSprite();
+					cloaked.frames=Paths.getSparrowAtlas('backgrounds/hell/dialogue');
+					cloaked.animation.addByPrefix('idle','throw',24,false);
+					cloaked.setPosition(178.05,366.1);
+					cloaked.alpha=0;
+					add(cloaked);
 			}
 		}
 
@@ -651,12 +664,10 @@ class PlayState extends MusicBeatState
 					dialogueBox.closeDialog();
 			}
 			// the change I made was just so that it would only take accept inputs
-			if (dialogueBox.textStarted)
+			if (controls.ACCEPT && dialogueBox.textStarted)
 			{
-				if(controls.ACCEPT&&!midsongdia){
-					dialogueBox.curPage += 1;
-					trace('nuh uh');
-				}
+				dialogueBox.curPage += 1;
+				trace(dialogueBox.curPage);
 
 				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length)
 					dialogueBox.closeDialog()
