@@ -172,7 +172,6 @@ class PlayState extends MusicBeatState
 	public var overlay:FlxSprite;
 	public var newdad:Character;
 
-	public var grampsBody:Character;
 
 	public var grandpaspeech:FlxText;
 	public var vignette:FlxSprite;
@@ -328,10 +327,6 @@ class PlayState extends MusicBeatState
 		stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
 		stageBuild.dadPosition(curStage, boyfriend, dadOpponent, gf, camPos);
 
-		if (SONG.player2 == "gramps-head")
-		{
-			grampsBody = new Character().setCharacter(dadOpponent.x, dadOpponent.y, "gramps-body");
-		}
 
 		if (SONG.assetModifier != null && SONG.assetModifier.length > 1)
 			assetModifier = SONG.assetModifier;
@@ -655,6 +650,7 @@ class PlayState extends MusicBeatState
 			{
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				dialogueBox.curPage += 1;
+				trace(dialogueBox.curPage);
 
 				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length)
 					dialogueBox.closeDialog()
@@ -1825,9 +1821,9 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(vignette,{alpha:0.5},2.2,{ease:FlxEase.quartIn});
 				case 2432:
 					tweenCam(0.6,2.3);
-				case 2720:
-					camGame.alpha=0;
+				case 2715:
 					bta.animation.play('bta',false);
+				case 2720:camGame.alpha=0;
 				case 2726:
 					bta.alpha=1;
 			}
@@ -2131,8 +2127,8 @@ class PlayState extends MusicBeatState
 
 	public function songIntroCutscene()
 	{
-		if(FlxG.sound.music!=null)
-		{FlxG.sound.music.fadeOut(2,0);}
+		if(songDialogue!=null)
+			{songDialogue.fadeOut(2,0);}
 		switch (curSong.toLowerCase())
 		{
 			case "winter-horrorland":
@@ -2233,19 +2229,20 @@ class PlayState extends MusicBeatState
 
 			switch(SONG.song.toLowerCase()){
 				case 'deadbattle':
-					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
 					//FlxG.sound.playMusic(Paths.music("PreSong1"));
 				case 'reaper-rhythm':
-					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
 					//FlxG.sound.playMusic(Paths.music("PreSong2"));
 				case 'behold-the-apocalypse':
-					songDialogue = new FlxSound().loadEmbedded(Paths.music("PreSong1"), false, true);
+					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
 					//FlxG.sound.playMusic(Paths.music("PreSong3"));
 			}
 
 			if (songDialogue != null)
 				songDialogue.play();
-				songDialogue.volume=0.7;
+				songDialogue.volume=0.5;
+				trace(songDialogue.volume);
 		}
 		else
 			songIntroCutscene();
@@ -2276,8 +2273,6 @@ class PlayState extends MusicBeatState
 
 	private function startCountdown():Void
 	{
-		if (songDialogue != null)
-			songDialogue.stop();
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;

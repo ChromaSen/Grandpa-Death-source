@@ -5,5 +5,3 @@ grandpadeath-cloaked
 grandpadeath
 gramps
 gd-true
-gramps-head
-gramps-body
