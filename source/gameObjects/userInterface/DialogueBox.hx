@@ -163,6 +163,8 @@ class DialogueBox extends FlxSpriteGroup
 		skipText.borderStyle = FlxTextBorderStyle.OUTLINE;
 		skipText.borderColor = FlxColor.BLACK;
 		skipText.borderSize = 3;
+		skipText.alpha=!PlayState.midsongdia?1:0;
+
 
 		skipText.screenCenter(X);
 		add(skipText);
@@ -206,11 +208,12 @@ class DialogueBox extends FlxSpriteGroup
 			// Set the text to nothing for now
 			alphabetText.startText('', true);
 			// To prevent awkward text not against a dialogue background, a quick fix is to delay the initial text
-			new FlxTimer().start(0.375, function(tmr:FlxTimer)
+		new FlxTimer().start(0.375, function(tmr:FlxTimer)
 			{
 				textStarted = true;
 				startText();
 			});
+			
 		}
 		// If the text has started, build the text
 		else

@@ -660,16 +660,16 @@ class PlayState extends MusicBeatState
 		{
 			// wheee the shift closes the dialogue
 			if(!midsongdia){
-				if (FlxG.keys.justPressed.SHIFT)
-					dialogueBox.closeDialog();
+				if (FlxG.keys.justPressed.SHIFT){dialogueBox.closeDialog();}
+					
 			}
 			// the change I made was just so that it would only take accept inputs
-			if (controls.ACCEPT && dialogueBox.textStarted)
+			if (controls.ACCEPT && dialogueBox.textStarted && !midsongdia)
 			{
 				dialogueBox.curPage += 1;
 				trace(dialogueBox.curPage);
 
-				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length)
+				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length&&!midsongdia)
 					dialogueBox.closeDialog()
 				else
 					dialogueBox.updateDialog();
@@ -706,13 +706,13 @@ class PlayState extends MusicBeatState
 					else
 						Main.switchState(this, new AnimationDebug(boyfriend.curCharacter));
 				}
-				if ((FlxG.keys.justPressed.SIX))
+			}
+			if ((FlxG.keys.justPressed.SIX))
 				{
 					boyfriendStrums.autoplay = !boyfriendStrums.autoplay;
 					uiHUD.autoplayMark.visible = boyfriendStrums.autoplay;
 					PlayState.SONG.validScore = false;
 				}
-			}
 			///*
 			if (startingSong)
 			{
@@ -1799,25 +1799,14 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(camGame,{alpha:0},0.8);
 					FlxTween.tween(camHUD,{alpha:0},0.8);
 				case 1544:
-
 					var midsongdialoguepath=Paths.json('behold-the-apocalypse/midsongdialogue');
 					dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(midsongdialoguepath));
 					trace(dialogueBox);
 					dialogueBox.cameras = [dialogueHUD];
-				case 1548:
 					midsongdia=true;
+				case 1548:
 					add(dialogueBox);	
-				//case 1549:
-				case 1558:
-					dialogueBox.curPage+=1;
-					trace(dialogueBox.curPage);
-				case 1585:
-					dialogueBox.curPage+=1;
-					trace(dialogueBox.curPage);
-
-				case 1621:
-					dialogueBox.curPage+=1;
-					trace(dialogueBox.curPage);
+					dadStrums.visible=boyfriendStrums.visible=false;
 				
 				case 1635:
 					//dont ask pls
@@ -1825,15 +1814,14 @@ class PlayState extends MusicBeatState
 					dadOpponent.setPosition(150,314.1);
 					boyfriend.setCharacter(1029.7,709.1,'bf-guitar');
 					boyfriend.setPosition(959.7,714.1);
-				case 1646:
-					midsongdia=false;
-					closemidsong();
 				case 1650:
 					FlxTween.tween(camGame,{alpha:1},0.8,{ease:FlxEase.cubeOut});
 					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
+					midsongdia=false;
+					closemidsong();
 				case 1653:
 					FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
-				case 1664:
+				case 1664,1984:
 					defaultCamZoom=0.75;
 				case 1792:
 					tweenCam(0.6,1.4);
@@ -1841,8 +1829,6 @@ class PlayState extends MusicBeatState
 					defaultCamZoom=0.7;
 				case 1936:
 					defaultCamZoom=0.65;
-				case 1984:
-					defaultCamZoom=0.75;
 				case 2064:
 					defaultCamZoom=0.6;
 				case 2176:
@@ -1855,9 +1841,18 @@ class PlayState extends MusicBeatState
 				case 2715:
 					bta.animation.play('bta',false);
 				case 2720:camGame.alpha=0;
-				case 2726:
+				case 2724:
 					bta.alpha=1;
 			}
+
+			//uhh......
+			if (curStep>=1558&&curStep<=1621&&dialogueBox!=null&&(curStep==1558||curStep==1585||curStep==1621)){
+				dialogueBox.curPage+=1;
+				dialogueBox.updateDialog();
+				trace(dialogueBox.curPage);
+			}
+			
+		
 		}
 	}
 
@@ -2158,6 +2153,7 @@ class PlayState extends MusicBeatState
 
 	public function closemidsong(){
 		dialogueBox.kill();dialogueBox.alphabetText.playSounds = false;
+		dadStrums.visible=boyfriendStrums.visible=true;
 	}
 
 	public function songIntroCutscene()

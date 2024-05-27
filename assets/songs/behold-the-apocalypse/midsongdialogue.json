@@ -5,20 +5,24 @@
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Mph.."
+				"text": "Mph..",
+				"speed":1
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "Very well, boy.."
+				"text": "Very well, boy..",
+				"speed":0.9
 			},
 			{
-				"text":  "You've earned my respect."
+				"text":  "You've earned my respect.",
+				"speed":1.2
 			},
 			{
 				"portrait": "senpai",
 				"expression": "Senpai Portrait Enter",
-				"text": "But let's see if you can really keep up!"
+				"text": "But let's see if you can really keep up!",
+				"speed":1.4
 			}
 	]
 }
