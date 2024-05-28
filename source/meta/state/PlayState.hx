@@ -172,7 +172,6 @@ class PlayState extends MusicBeatState
 
 	public static var hasInstSwitching:Bool = false; //does the song have multiple instrumentals?
 	public var overlay:FlxSprite;
-	public var newdad:Character;
 
 
 	public var grandpaspeech:FlxText;
@@ -306,7 +305,7 @@ class PlayState extends MusicBeatState
 					cloaked=new FlxSprite();
 					cloaked.frames=Paths.getSparrowAtlas('backgrounds/hell/dialogue');
 					cloaked.animation.addByPrefix('idle','throw',24,false);
-					cloaked.setPosition(178.05,366.1);
+					cloaked.setPosition(158.05,366.1);
 					cloaked.alpha=0;
 					add(cloaked);
 			}
@@ -380,15 +379,18 @@ class PlayState extends MusicBeatState
 		add(darknessBG);
 
 		if(curStage=='hell'){
-			//newdad=new Character();
-			//newdad.setCharacter(dadOpponent.x,dadOpponent.y,"grandpadeath");
-			//insert(members.indexOf(dadOpponent),newdad);
-
-			//preloadCharacter("grandpadeath","grandpadeath");
 			overlay=new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/overlay"));
 			overlay.updateHitbox();
 			overlay.scale.set(10,10);
 			add(overlay);
+		}
+
+		if(SONG.song.toLowerCase()=='reaper-rhythm'){
+			dadOpponent.visible=false;
+			cloaked.alpha=1;
+			trace(
+				'bye'
+			);
 		}
 
 		// strum setup
@@ -616,20 +618,16 @@ class PlayState extends MusicBeatState
 	}
 
 	private function getKeyFromEvent(key:FlxKey):Int
-	{
-		if (key != NONE)
 		{
-			for (i in 0...keysArray.length)
+			if(key==NONE)return-1;
+		
+			for(i in 0...keysArray.length) 
 			{
-				for (j in 0...keysArray[i].length)
-				{
-					if (key == keysArray[i][j])
-						return i;
-				}
+				if(keysArray[i].contains(key))return i;	
 			}
+		
+			return-1;
 		}
-		return -1;
-	}
 
 	override public function destroy()
 	{
@@ -868,6 +866,16 @@ class PlayState extends MusicBeatState
 				// push note to its correct strumline
 				strumLines.members[Math.floor((dunceNote.noteData + (dunceNote.mustPress ? 4 : 0)) / numberOfKeys)].push(dunceNote);
 				unspawnNotes.splice(unspawnNotes.indexOf(dunceNote), 1);
+			}
+
+			if(SONG.song.toLowerCase()=='reaper-rhythm'){
+				if(dialogueBox!=null&&dialogueBox.alive){
+					if(dialogueBox.curPage==6){
+						trace('cloak');
+
+						cloakreveal();
+					}
+				}
 			}
 
 			noteCalls();
@@ -1774,15 +1782,6 @@ class PlayState extends MusicBeatState
 		///*
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
-		//*/
-		/*
-		if(curSong.toLowerCase()=='granddad battle'){
-			switch(curStep){
-				case 30:
-					dadOpponent=newdad;
-			}
-		}
-		*/
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
 				case 1169:
@@ -1803,6 +1802,7 @@ class PlayState extends MusicBeatState
 					dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(midsongdialoguepath));
 					trace(dialogueBox);
 					dialogueBox.cameras = [dialogueHUD];
+					DialogueBox.skipText.visible=false;
 					midsongdia=true;
 				case 1548:
 					add(dialogueBox);	
@@ -2154,6 +2154,37 @@ class PlayState extends MusicBeatState
 	public function closemidsong(){
 		dialogueBox.kill();dialogueBox.alphabetText.playSounds = false;
 		dadStrums.visible=boyfriendStrums.visible=true;
+	}
+
+	public function cloakreveal(){
+		dialogueBox.alphabetText.playSounds=false;
+		dialogueBox.kill();
+		dialogueBox.voiceline?.stop();
+		ForeverTools.killMusic([songDialogue]);
+
+		if(cloaked!=null){
+			FlxTween.tween(camHUD,{alpha:0},0.5);
+			for (h in strumHUD){
+				FlxTween.tween(h,{alpha:0},0.5);
+			}
+			tweenCam(0.65,0.5);
+			cloaked.animation.play('idle',false);
+			cloaked.animation.finishCallback=function(dfsjksdfkj:String){
+				dadOpponent.visible=true;
+				cloaked.visible=false;
+				cloaked.active=false;
+				tweenCam(0.5,1);
+				new FlxTimer().start(2,function(sdfjkmasdk:FlxTimer){
+					FlxTween.tween(camHUD,{alpha:1},1);
+					for (h in strumHUD){
+						FlxTween.tween(h,{alpha:1},1);
+					}
+					startCountdown();
+				});
+			}
+
+		}
+		
 	}
 
 	public function songIntroCutscene()

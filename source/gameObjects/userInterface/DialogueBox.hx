@@ -94,6 +94,8 @@ class DialogueBox extends FlxSpriteGroup
 	public var textStarted:Bool = false;
 	public var voiceline:FlxSound;
 
+	public static var skipText:FlxText;
+
 	public static function createDialogue(thisDialogue:String):DialogueBox
 	{
 		//
@@ -157,13 +159,13 @@ class DialogueBox extends FlxSpriteGroup
 		add(alphabetText);
 
 		// skip text
-		var skipText = new FlxText(100, 670, 1000, "PRESS SHIFT TO SKIP", 20);
+		skipText = new FlxText(100, 670, 1000, "PRESS SHIFT TO SKIP", 20);
 		skipText.alignment = FlxTextAlign.CENTER;
 
 		skipText.borderStyle = FlxTextBorderStyle.OUTLINE;
 		skipText.borderColor = FlxColor.BLACK;
 		skipText.borderSize = 3;
-		skipText.alpha=!PlayState.midsongdia?1:0;
+		skipText.visible=true;
 
 
 		skipText.screenCenter(X);
