@@ -92,7 +92,7 @@ class DialogueBox extends FlxSpriteGroup
 	public var whenDaFinish:Void->Void;
 
 	public var textStarted:Bool = false;
-	public var voiceline:FlxSound;
+	public static var voiceline:FlxSound;
 
 	public static var skipText:FlxText;
 
@@ -527,11 +527,6 @@ class DialogueBox extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
-
-		if(FlxG.keys.justPressed.SHIFT&&!PlayState.midsongdia){
-			if(voiceline!=null){voiceline.stop();}
-			trace('bye bye');
-		}
 		portrait.animation.paused = alphabetText.finishedLine;
 		if (portrait.animation.paused)
 			portrait.animation.finish();

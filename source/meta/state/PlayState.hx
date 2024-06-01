@@ -31,6 +31,8 @@ import meta.*;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.*;
 import meta.data.Song.SwagSong;
+import meta.data.font.Alphabet;
+import meta.data.font.Dialogue;
 import meta.state.charting.*;
 import meta.state.menus.*;
 import meta.subState.*;
@@ -180,8 +182,12 @@ class PlayState extends MusicBeatState
 	public var bta:FlxSprite;
 	public static var instance:PlayState;
 
+	public var pleasedont:Bool=true;
+	public var camMovement:Bool=true;
+
 	public var gramps:Character;
 	public var bfguitar:Character;
+	public var twn:FlxTween;
 
 	public var cloaked:FlxSprite;
 	public var grampalyrics:Array<String>=[
@@ -271,44 +277,41 @@ class PlayState extends MusicBeatState
 		vignette.alpha = 0.5;
 		add(vignette);
 
+		var sss=SONG.song.toLowerCase();
 
-		if(SONG.song.toLowerCase()=='behold the apocalypse'){
-			switch (curStage)
-			{
-				case 'hell':
-					bta=new FlxSprite();
-					bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
-					bta.screenCenter();
-					bta.animation.addByPrefix('bta','bta',30,false);
-					bta.cameras=[lyrics];
-					bta.alpha=0;
-					add(bta);
-					trace('test');
-					grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
-					grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-					grandpaspeech.borderSize=1;
-					grandpaspeech.scrollFactor.set();
-					grandpaspeech.alpha=1;
-					grandpaspeech.updateHitbox();
-					grandpaspeech.screenCenter();
-					grandpaspeech.y+=180;
-					grandpaspeech.scale.set(1.5,1.5);
-
-					grandpaspeech.cameras=[lyrics];
-					add(grandpaspeech);
-			}
-		}
-		if(SONG.song.toLowerCase()=='reaper-rhythm'){
-			switch (curStage)
-			{
-				case 'hell':
-					cloaked=new FlxSprite();
-					cloaked.frames=Paths.getSparrowAtlas('backgrounds/hell/dialogue');
-					cloaked.animation.addByPrefix('idle','throw',24,false);
-					cloaked.setPosition(158.05,366.1);
-					cloaked.alpha=0;
-					add(cloaked);
-			}
+		switch(curStage){
+			case 'hell':
+				switch(sss){
+					case 'deadbattle':
+						defaultCamZoom=0.55;
+					case 'behold the apocalypse':
+						bta=new FlxSprite();
+						bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
+						bta.screenCenter();
+						bta.animation.addByPrefix('bta','bta',28,false);
+						bta.cameras=[lyrics];
+						bta.alpha=0;
+						add(bta);
+						trace('test');
+					case 'reaper-rhythm':
+						cloaked=new FlxSprite();
+						cloaked.frames=Paths.getSparrowAtlas('backgrounds/hell/dialogue');
+						cloaked.animation.addByPrefix('idle','throw',24,false);
+						cloaked.setPosition(158.05,366.1);
+						cloaked.alpha=0;
+						add(cloaked);
+						grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
+						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.WHITE);
+						grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
+						grandpaspeech.alpha=1;
+						grandpaspeech.screenCenter();
+						grandpaspeech.y+=180;
+						grandpaspeech.antialiasing=false;
+						grandpaspeech.scale.set(1.5,1.5);
+	
+						grandpaspeech.cameras=[lyrics];
+						add(grandpaspeech);
+				}
 		}
 
 		// set up characters here too
@@ -386,8 +389,12 @@ class PlayState extends MusicBeatState
 		}
 
 		if(SONG.song.toLowerCase()=='reaper-rhythm'){
-			dadOpponent.visible=false;
-			cloaked.alpha=1;
+			/*if(dialogueBox!=null&&dialogueBox.alive){
+				dadOpponent.visible=false;
+				cloaked.alpha=1;
+			}
+			*/
+
 			trace(
 				'bye'
 			);
@@ -657,10 +664,17 @@ class PlayState extends MusicBeatState
 		if (dialogueBox != null && dialogueBox.alive)
 		{
 			// wheee the shift closes the dialogue
-			if(!midsongdia){
-				if (FlxG.keys.justPressed.SHIFT){dialogueBox.closeDialog();}
-					
-			}
+			if (!midsongdia){
+				if (FlxG.keys.justPressed.SHIFT){dialogueBox.closeDialog();if(DialogueBox.voiceline!=null){DialogueBox.voiceline.stop();}}
+				/*
+				find a way to stop checking for the song name literally every millisecond
+				DialogueBox.skipText.visible=SONG.song.toLowerCase()=="reaper-rhythm"?false:DialogueBox.skipText.visible;
+				//if(SONG.song.toLowerCase()!="reaper-rhythm"&&FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null){
+					//DialogueBox.voiceline.stop();
+				 // dialogueBox.closeDialog();
+				}
+				*/
+			  }
 			// the change I made was just so that it would only take accept inputs
 			if (controls.ACCEPT && dialogueBox.textStarted && !midsongdia)
 			{
@@ -775,7 +789,7 @@ class PlayState extends MusicBeatState
 					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 
-					if (curStage == 'hell' && forceZoom[0] == 0.2)
+					if (curStage == 'hell' && forceZoom[0] == 0.2&&pleasedont)
 					{
 						isCamTweening = true;
 						FlxTween.num(forceZoom[0], 0, (Conductor.stepCrochet * 8) / 1000, {ease: FlxEase.backOut, onComplete: function(tween:FlxTween) {isCamTweening = false;}}, function(val:Float) {forceZoom[0] = val;});
@@ -792,22 +806,16 @@ class PlayState extends MusicBeatState
 					var getCenterY = char.getMidpoint().y - 100;
 					switch (curStage)
 					{
-						case 'limo':
-							getCenterX = char.getMidpoint().x - 300;
-						case 'mall':
-							getCenterY = char.getMidpoint().y - 200;
-						case 'school':
-							getCenterX = char.getMidpoint().x - 200;
-							getCenterY = char.getMidpoint().y - 200;
-						case 'schoolEvil':
-							getCenterX = char.getMidpoint().x - 200;
-							getCenterY = char.getMidpoint().y - 200;
 						case 'hell':
 							getCenterY = char.getMidpoint().y - 200;
 							if (forceZoom[0] != 1.5)
 							{
 								isCamTweening = true;
-								FlxTween.num(forceZoom[0], 0.2, (Conductor.stepCrochet * 8) / 1000, {ease: FlxEase.backOut, onComplete: function(tween:FlxTween) {isCamTweening = false;}}, function(val:Float) {forceZoom[0] = val;});
+								if(SONG.song.toLowerCase()!='deadbattle'&&pleasedont){FlxTween.num(forceZoom[0], 0.2, (Conductor.stepCrochet * 8) / 1000, {ease: FlxEase.backOut, onComplete: function(tween:FlxTween) {isCamTweening = false;}}, function(val:Float) {forceZoom[0] = val;});}
+							}
+							if(SONG.song.toLowerCase()=='deadbattle'){
+								getCenterY = char.getMidpoint().y - 400;
+								getCenterX = char.getMidpoint().x - 350;
 							}
 					}
 
@@ -1187,51 +1195,28 @@ class PlayState extends MusicBeatState
 		// alright so we determine which animation needs to play
 		// get alt strings and stuffs
 		var stringArrow:String = '';
-		var altString:String = '';
-
 		var baseString = 'sing' + UIStaticArrow.getArrowFromNumber(coolNote.noteData).toUpperCase();
+		var altString=coolNote.noteAlt>0?'-alt':'';
+
 
 		// I tried doing xor and it didnt work lollll
-		if (coolNote.noteAlt > 0)
+
+		//stolen from other forever engine mod hehe
+		if (SONG.notes[Math.floor(curStep / 16)] != null &&
+			SONG.notes[Math.floor(curStep / 16)].altAnim &&
+			character.animOffsets.exists(baseString + '-alt')) {
 			altString = '-alt';
-		if (((SONG.notes[Math.floor(curStep / 16)] != null) && (SONG.notes[Math.floor(curStep / 16)].altAnim))
-			&& (character.animOffsets.exists(baseString + '-alt')))
-		{
-			if (altString != '-alt')
-				altString = '-alt';
-			else
-				altString = '';
-		}
-		if(dadOpponent.curCharacter=='grandpadeath-cloaked'||dadOpponent.curCharacter=='gd-true'){
-			if (!coolNote.mustPress)
-			{
-				FlxG.camera.shake(0.0033,0.2);
-				for (ui in allUIs)
-					ui.shake(0.0015,0.1);
-			}
-		}
-		if(SONG.song.toLowerCase()=='deadbattle'){
-			if (!coolNote.mustPress)
-				{
-					FlxG.camera.shake(0.0015,0.2);
-					for (ui in allUIs)
-					ui.shake(0.0005,0.1);
-				}
-		}
-		if (boyfriend.curCharacter == 'bf-guitar')
-		{
-			if (coolNote.mustPress)
-			{
-				FlxG.camera.shake(0.0015, 0.2);
-				for (ui in allUIs)
-					ui.shake(0.0005, 0.1);
-			}
-		}
-		if(curSong.toLowerCase()=='reaper-rhythm'){
-			if(!coolNote.mustPress){
-				FlxG.camera.zoom+=0.0035;
-			}
-		}
+		  }
+
+		  if (dadOpponent.curCharacter=='grandpadeath-cloaked'||dadOpponent.curCharacter=='gd-true'){
+			FlxG.camera.shake(0.0033,0.2);
+			for(ui in allUIs)ui.shake(0.0015,0.1);
+		  }else if(SONG.song.toLowerCase()=='deadbattle'||(boyfriend.curCharacter=='bf-guitar'&&!coolNote.mustPress)){
+			FlxG.camera.shake(0.0015,0.2);
+			for(ui in allUIs)ui.shake(0.0005,0.1);
+		  }else if(curSong.toLowerCase()=='reaper-rhythm'&&pleasedont&&!coolNote.mustPress){
+			FlxG.camera.zoom+=0.0035;
+		  }
 		
 
 		stringArrow = baseString + altString;
@@ -1330,31 +1315,33 @@ class PlayState extends MusicBeatState
 	}
 
 	private function strumCameraRoll(cStrum:FlxTypedGroup<UIStaticArrow>, mustHit:Bool)
-	{
-		if (!Init.trueSettings.get('No Camera Note Movement'))
 		{
-			var camDisplaceExtend:Float = 15;
-			if (PlayState.SONG.notes[Std.int(curStep / 16)] != null)
+			if (Init.trueSettings.get('No Camera Note Movement'))
+				camMovement=false;
+	
+			if(camMovement)
 			{
-				if ((PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && mustHit)
-					|| (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && !mustHit))
+				var camDisplaceExtend:Float = 15;
+				if (PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 				{
-					camDisplaceX = 0;
-					if (cStrum.members[0].animation.curAnim.name == 'confirm')
-						camDisplaceX -= camDisplaceExtend;
-					if (cStrum.members[3].animation.curAnim.name == 'confirm')
-						camDisplaceX += camDisplaceExtend;
-
-					camDisplaceY = 0;
-					if (cStrum.members[1].animation.curAnim.name == 'confirm')
-						camDisplaceY += camDisplaceExtend;
-					if (cStrum.members[2].animation.curAnim.name == 'confirm')
-						camDisplaceY -= camDisplaceExtend;
+					if ((PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && mustHit)
+						|| (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && !mustHit))
+					{
+						camDisplaceX = 0;
+						if (cStrum.members[0].animation.curAnim.name == 'confirm')
+							camDisplaceX -= camDisplaceExtend;
+						if (cStrum.members[3].animation.curAnim.name == 'confirm')
+							camDisplaceX += camDisplaceExtend;
+	
+						camDisplaceY = 0;
+						if (cStrum.members[1].animation.curAnim.name == 'confirm')
+							camDisplaceY += camDisplaceExtend;
+						if (cStrum.members[2].animation.curAnim.name == 'confirm')
+							camDisplaceY -= camDisplaceExtend;
+					}
 				}
 			}
 		}
-		//
-	}
 
 	public function pauseGame()
 	{
@@ -1624,6 +1611,12 @@ class PlayState extends MusicBeatState
 		startingSong = false;
 
 		trace(SONG.song.toLowerCase());
+		/*
+		if(SONG.song.toLowerCase()=='reaper-rhythm'){
+			pleasedont=false;
+			camMovement=false;
+			trace(pleasedont);
+		}*/
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -1784,10 +1777,33 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
+				//funny idea i had in my head to make visuals more interesting, but poorly implemented and not how i wanted really
+				/*
+			case 16:
+				defaultCamZoom=1;
+			case 22:cameraSpeed=150;//immediately shits itself if you put >=150
+			case 144:
+				cameraSpeed=1;
+				camMovement=true;
+				twn=FlxTween.tween(FlxG.camera,{zoom:0.65},10.5,{ease:FlxEase.quadOut,onComplete:function(wtekjewtrkjl:FlxTween){defaultCamZoom=0.65;}
+				});
+			case 273:
+				pleasedont=true;
+				twn.cancel();
+				defaultCamZoom=0.6;
+				*/
 				case 1169:
-					defaultCamZoom=0.85;
+					camGame.alpha=camHUD.alpha=0;
+					dadStrums.visible=boyfriendStrums.visible=false;
+				case 1172:
+					grandpaspeech.text="HA";
+				case 1176:
+					grandpaspeech.text="HA HA";
+				case 1180:grandpaspeech.text="HA HA HAAAAA!";
 				case 1184:
-					defaultCamZoom=0.6;
+					grandpaspeech.alpha=0;
+					camGame.alpha=camHUD.alpha=1;
+					dadStrums.visible=boyfriendStrums.visible=true;
 			}
 		}
 		if (curSong.toLowerCase()=='behold the apocalypse')
@@ -2152,14 +2168,15 @@ class PlayState extends MusicBeatState
 	var dialogueBox:DialogueBox;
 
 	public function closemidsong(){
-		dialogueBox.kill();dialogueBox.alphabetText.playSounds = false;
+		if(dialogueBox!=null){FlxTween.tween(dialogueBox,{alpha:0},1,{ease:FlxEase.quadOut,onComplete:function(gffsgdg:FlxTween){dialogueBox.kill();}});}
+		dialogueBox.alphabetText.playSounds = false;
 		dadStrums.visible=boyfriendStrums.visible=true;
 	}
 
 	public function cloakreveal(){
 		dialogueBox.alphabetText.playSounds=false;
 		dialogueBox.kill();
-		dialogueBox.voiceline?.stop();
+		DialogueBox.voiceline?.stop();
 		ForeverTools.killMusic([songDialogue]);
 
 		if(cloaked!=null){
