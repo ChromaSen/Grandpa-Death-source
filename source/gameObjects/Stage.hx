@@ -309,10 +309,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'highway':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
-			case 'gramps':
-				dad.setPosition(-740,234);
-				boyfriend.setPosition(1050,740);
-				gf.visible=false; //from now
+			
+			//:(
 		}
 	}
 

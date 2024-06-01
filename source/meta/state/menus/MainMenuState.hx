@@ -36,6 +36,7 @@ class MainMenuState extends MusicBeatState
 	public var optionShit:Array<String> = ['story', 'freeplay', 'options'];
 	public var curDiff:Int=2;
 
+	public var mouse:FlxText;
 	public var camFollow:FlxObject;
 
 	// the create 'state'
@@ -60,6 +61,12 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		// background
+		mouse=new FlxText(0,0,0,"Use your mouse to interact with the buttons");
+		mouse.setFormat(Paths.font('vcr.ttf'),18,FlxColor.WHITE);
+		mouse.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
+		mouse.setPosition(800,700);
+		mouse.alpha=0.7;
+		mouse.antialiasing=false;
 		bg = new FlxSprite(-85);
 		bg.loadGraphic(Paths.image('menus/base/menuBG'));
 		bg.scrollFactor.x = 0;
@@ -69,6 +76,7 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = true;
 		add(bg);
+		add(mouse);
 
 		magenta = new FlxSprite(-85).loadGraphic(Paths.image('menus/base/menuDesat'));
 		magenta.scrollFactor.x = 0;
@@ -102,20 +110,17 @@ class MainMenuState extends MusicBeatState
 
 			menuItem.onAway=function()
 			{
-				trace('mouse away');
 				menuItem.animation.play("idle");
 			};
 
 			menuItem.onClick=function()
 			{
-				trace('click');
 				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 				menuItem.animation.play("selected");
 			};
 
 			menuItem.onOverlap=function()
 			{
-				trace('overlap');
 				if (menuItem.animation.curAnim.name!='selected'){menuItem.animation.play("selected");}
 			}
 
@@ -152,7 +157,6 @@ class MainMenuState extends MusicBeatState
 					menuItem.onClick=function()
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-						trace('test');
 						//hiiii sorry i need to check the chart works sooooooooooo - gdd
 						new FlxTimer().start(1,function(tmr:FlxTimer)
 						{
