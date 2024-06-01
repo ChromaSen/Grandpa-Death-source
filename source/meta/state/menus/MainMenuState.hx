@@ -158,7 +158,7 @@ class MainMenuState extends MusicBeatState
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 						//hiiii sorry i need to check the chart works sooooooooooo - gdd
-						new FlxTimer().start(1,function(tmr:FlxTimer)
+						new FlxTimer().start(0.5,function(tmr:FlxTimer)
 						{
 							Main.switchState(this,new FreeplayState());
 						});
@@ -171,7 +171,7 @@ class MainMenuState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 						trace('test');
 						//and this is because i refuse to play without upscroll and DFJK - gdd
-						new FlxTimer().start(1,function(tmr:FlxTimer)
+						new FlxTimer().start(0.5,function(tmr:FlxTimer)
 						{
 							Main.switchState(this,new OptionsMenuState());
 						});
@@ -230,6 +230,10 @@ class MainMenuState extends MusicBeatState
 			Main.switchState(this, new StoryMenuState());
 		}
 		#end
+
+		if(FlxG.keys.justPressed.ESCAPE){
+			Main.switchState(this,new TitleState());
+		}
 
 		for (i in 0...menuItems.length)
 		{

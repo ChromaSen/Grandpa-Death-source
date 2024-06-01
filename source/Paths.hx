@@ -48,6 +48,10 @@ class Paths
 		'assets/music/foreverMenu.$SOUND_EXT',
 		'assets/music/breakfast.$SOUND_EXT',
 	];
+	public static function getFile(path:String):String{
+		var file=path.split("/");
+		return file[file.length-1];
+	}
 
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory()

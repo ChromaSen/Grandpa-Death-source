@@ -189,6 +189,7 @@ class PlayState extends MusicBeatState
 	public var bfguitar:Character;
 	public var twn:FlxTween;
 
+	public var aspdojojdfsapjfds:Bool=false;
 	public var cloaked:FlxSprite;
 	public var grampalyrics:Array<String>=[
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
@@ -302,7 +303,7 @@ class PlayState extends MusicBeatState
 						add(cloaked);
 						grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
 						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.WHITE);
-						grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
+						//grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
 						grandpaspeech.alpha=1;
 						grandpaspeech.screenCenter();
 						grandpaspeech.y+=180;
@@ -665,15 +666,18 @@ class PlayState extends MusicBeatState
 		{
 			// wheee the shift closes the dialogue
 			if (!midsongdia){
-				if (FlxG.keys.justPressed.SHIFT){dialogueBox.closeDialog();if(DialogueBox.voiceline!=null){DialogueBox.voiceline.stop();}}
-				/*
-				find a way to stop checking for the song name literally every millisecond
-				DialogueBox.skipText.visible=SONG.song.toLowerCase()=="reaper-rhythm"?false:DialogueBox.skipText.visible;
-				//if(SONG.song.toLowerCase()!="reaper-rhythm"&&FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null){
-					//DialogueBox.voiceline.stop();
-				 // dialogueBox.closeDialog();
+				//ez fix 2024 no virus
+				if(!aspdojojdfsapjfds){
+					DialogueBox.skipText.visible=SONG.song.toLowerCase()=="reaper-rhythm"?false:DialogueBox.skipText.visible;
+					aspdojojdfsapjfds=true;
+					trace("121212231");
 				}
-				*/
+				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"){
+					DialogueBox.voiceline.stop();
+					dialogueBox.closeDialog();
+				  }
+						
+			
 			  }
 			// the change I made was just so that it would only take accept inputs
 			if (controls.ACCEPT && dialogueBox.textStarted && !midsongdia)
@@ -876,14 +880,20 @@ class PlayState extends MusicBeatState
 				unspawnNotes.splice(unspawnNotes.indexOf(dunceNote), 1);
 			}
 
-			if(SONG.song.toLowerCase()=='reaper-rhythm'){
-				if(dialogueBox!=null&&dialogueBox.alive){
-					if(dialogueBox.curPage==6){
-						trace('cloak');
-
-						cloakreveal();
+			switch(SONG.song.toLowerCase()){
+				case'reaper-rhythm':
+					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==6){
+					trace('cloak');
+					cloakreveal();
 					}
-				}
+			/*	case'deadbattle':
+					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==12){
+						new FlxTimer().start(0.6,function(rtggbsbdsfb:FlxTimer){
+							dialogueBox.curPage+=1;
+							dialogueBox.updateDialog();
+						});
+					}
+				*/
 			}
 
 			noteCalls();
@@ -1835,8 +1845,6 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(camHUD,{alpha:1},0.8,{ease:FlxEase.cubeIn});
 					midsongdia=false;
 					closemidsong();
-				case 1653:
-					FlxTween.tween(grandpaspeech,{alpha:0},0.8,{ease:FlxEase.quartInOut});
 				case 1664,1984:
 					defaultCamZoom=0.75;
 				case 1792:
@@ -1854,7 +1862,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(vignette,{alpha:0.5},2.2,{ease:FlxEase.quartIn});
 				case 2432:
 					tweenCam(0.6,2.3);
-				case 2715:
+				case 2712:
 					bta.animation.play('bta',false);
 				case 2720:camGame.alpha=0;
 				case 2724:
