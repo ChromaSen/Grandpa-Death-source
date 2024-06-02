@@ -1876,9 +1876,9 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(vignette,{alpha:0.5},2.2,{ease:FlxEase.quartIn});
 				case 2432:
 					tweenCam(0.6,2.3);
-				case 2712:
+				case 2713:
 					bta.animation.play('bta',false);
-				case 2720:camGame.alpha=0;
+				case 2718:camGame.alpha=0;
 				case 2724:
 					bta.alpha=1;
 			}
