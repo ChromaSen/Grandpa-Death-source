@@ -195,7 +195,11 @@ class PlayState extends MusicBeatState
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
 	];
 
+	public var dgtmr:Bool=false;
+
 	public static var midsongdia:Bool=false;
+
+	public var snap:Bool=true;
 
 	function resetStatics()
 	{
@@ -302,7 +306,7 @@ class PlayState extends MusicBeatState
 						cloaked.alpha=0;
 						add(cloaked);
 						grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
-						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.WHITE);
+						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 						//grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
 						grandpaspeech.alpha=1;
 						grandpaspeech.screenCenter();
@@ -668,11 +672,11 @@ class PlayState extends MusicBeatState
 			if (!midsongdia){
 				//ez fix 2024 no virus
 				if(!aspdojojdfsapjfds){
-					DialogueBox.skipText.visible=SONG.song.toLowerCase()=="reaper-rhythm"?false:DialogueBox.skipText.visible;
+					DialogueBox.skipText.visible=(SONG.song.toLowerCase()=="reaper-rhythm"||SONG.song.toLowerCase()=="deadbattle")?false:DialogueBox.skipText.visible;
 					aspdojojdfsapjfds=true;
 					trace("121212231");
 				}
-				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"){
+				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"&&SONG.song.toLowerCase()!="deadbattle"){
 					DialogueBox.voiceline.stop();
 					dialogueBox.closeDialog();
 				  }
@@ -829,7 +833,13 @@ class PlayState extends MusicBeatState
 			}
 
 			var lerpVal = (elapsed * 2.4) * cameraSpeed;
-			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+			if(snap){
+				camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+			}else{
+				camFollowPos.setPosition(camFollow.x,camFollow.y); 
+
+			}
+
 
 			var easeLerp = 1 - Main.framerateAdjust(0.05);
 			// camera stuffs
@@ -886,14 +896,20 @@ class PlayState extends MusicBeatState
 					trace('cloak');
 					cloakreveal();
 					}
-			/*	case'deadbattle':
-					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==12){
+				case'deadbattle':
+					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==12&&!dgtmr){
+						dgtmr=true;
+						trace('1');
 						new FlxTimer().start(0.6,function(rtggbsbdsfb:FlxTimer){
-							dialogueBox.curPage+=1;
-							dialogueBox.updateDialog();
+							if(dialogueBox!=null&&dialogueBox.alive){
+								dialogueBox.curPage+=1;
+								dialogueBox.updateDialog();
+							}
+							dgtmr=false;
 						});
+						trace('2');
 					}
-				*/
+				
 			}
 
 			noteCalls();
@@ -1621,12 +1637,12 @@ class PlayState extends MusicBeatState
 		startingSong = false;
 
 		trace(SONG.song.toLowerCase());
-		/*
+		
 		if(SONG.song.toLowerCase()=='reaper-rhythm'){
 			pleasedont=false;
 			camMovement=false;
 			trace(pleasedont);
-		}*/
+		}
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -1787,21 +1803,19 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
-				//funny idea i had in my head to make visuals more interesting, but poorly implemented and not how i wanted really
-				/*
+			case 10:
+				snap=false;
 			case 16:
 				defaultCamZoom=1;
-			case 22:cameraSpeed=150;//immediately shits itself if you put >=150
 			case 144:
-				cameraSpeed=1;
+				snap=true;
 				camMovement=true;
 				twn=FlxTween.tween(FlxG.camera,{zoom:0.65},10.5,{ease:FlxEase.quadOut,onComplete:function(wtekjewtrkjl:FlxTween){defaultCamZoom=0.65;}
 				});
 			case 273:
 				pleasedont=true;
 				twn.cancel();
-				defaultCamZoom=0.6;
-				*/
+				defaultCamZoom=0.65;
 				case 1169:
 					camGame.alpha=camHUD.alpha=0;
 					dadStrums.visible=boyfriendStrums.visible=false;
@@ -2304,36 +2318,56 @@ class PlayState extends MusicBeatState
 	function callTextbox()
 	{
 		var dialogPath = Paths.json(SONG.song.toLowerCase() + '/dialogue');
-		if (sys.FileSystem.exists(dialogPath))
-		{
-			startedCountdown = false;
+		camHUD.alpha=0;
+		for (h in strumHUD){h.alpha=0;}
 
+		if (sys.FileSystem.exists(dialogPath)){
+			startedCountdown = false;
 			dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(dialogPath));
 			dialogueBox.cameras = [dialogueHUD];
+			dialogueHUD.alpha=0;
 			dialogueBox.whenDaFinish = songIntroCutscene;
-
+			dialogueBox.alphabetText.playSounds = false;
+			dialogueBox.alpha=0;
 			add(dialogueBox);
 
-			switch(SONG.song.toLowerCase()){
-				case 'deadbattle':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
-					//FlxG.sound.playMusic(Paths.music("PreSong1"));
-				case 'reaper-rhythm':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
-					//FlxG.sound.playMusic(Paths.music("PreSong2"));
-				case 'behold-the-apocalypse':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true);
-					//FlxG.sound.playMusic(Paths.music("PreSong3"));
-			}
+			FlxG.camera.zoom=0.9;
 
-			if (songDialogue != null)
+
+			//please dont ask
+		FlxTween.tween(FlxG.camera,{zoom:0.5},1.5,{ease:FlxEase.quadInOut,onComplete:function(sdlfklkfsd:FlxTween){
+			FlxTween.tween(dialogueHUD,{alpha:1},0.5,{
+				ease:FlxEase.quadIn,
+				onComplete:function(dfsgersge:FlxTween){
+					dialogueBox.alphabetText.playSounds=true; 
+				}
+			});
+			FlxTween.tween(dialogueBox,{alpha:1},0.5,{ease:FlxEase.quadIn});
+
+			switch (SONG.song.toLowerCase()){ 
+				case 'deadbattle':
+					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true); 
+				case 'reaper-rhythm':
+					songDialogue = FlxG.sound.play(Paths.music("PreSong2"), true, true);
+				case 'behold-the-apocalypse':
+					songDialogue = FlxG.sound.play(Paths.music("PreSong3"), true, true); 
+			} 
+			
+			if (songDialogue != null) {
 				songDialogue.play();
-				songDialogue.volume=0.5;
+				songDialogue.volume = 0;
+				FlxTween.tween(songDialogue,{volume:0.55},1,{ease:FlxEase.linear});
 				trace(songDialogue.volume);
-		}
-		else
-			songIntroCutscene();
+			}
+		}});
+
+
+			}
+			else{
+				songIntroCutscene();
+			}
 	}
+
 
 	public static function skipCutscenes():Bool
 	{
@@ -2364,7 +2398,12 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
 
-		camHUD.visible = true;
+		if(camHUD!=null){
+			for (h in strumHUD){
+				FlxTween.tween(h,{alpha:1},1);
+			}
+			FlxTween.tween(camHUD,{alpha:1},1,{ease:FlxEase.quadIn});
+		}
 		tweenCam(0.6,1,FlxEase.quadIn); //gegegege
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
