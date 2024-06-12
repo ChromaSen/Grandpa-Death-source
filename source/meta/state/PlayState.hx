@@ -676,7 +676,7 @@ class PlayState extends MusicBeatState
 					aspdojojdfsapjfds=true;
 					trace("121212231");
 				}
-				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"&&SONG.song.toLowerCase()!="deadbattle"){
+				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"||SONG.song.toLowerCase()!="deadbattle"){
 					DialogueBox.voiceline.stop();
 					dialogueBox.closeDialog();
 				  }
@@ -726,12 +726,14 @@ class PlayState extends MusicBeatState
 					else
 						Main.switchState(this, new AnimationDebug(boyfriend.curCharacter));
 				}
+				#if debug
 				if ((FlxG.keys.justPressed.SIX))
 					{
 						boyfriendStrums.autoplay = !boyfriendStrums.autoplay;
 						uiHUD.autoplayMark.visible = boyfriendStrums.autoplay;
 						PlayState.SONG.validScore = false;
 					}
+				#end
 			}
 			///*
 			if (startingSong)
@@ -1407,7 +1409,7 @@ class PlayState extends MusicBeatState
 
 	override public function onFocusLost():Void
 	{
-		if (canPause && !paused && !Init.trueSettings.get('Auto Pause'))
+		if (canPause && !paused && !Init.trueSettings.get('Auto Pause')&&!dialogueBox.alive)
 			pauseGame();
 		super.onFocusLost();
 	}
@@ -1522,10 +1524,6 @@ class PlayState extends MusicBeatState
 
 	function decreaseCombo(?popMiss:Bool = false)
 	{
-		// painful if statement
-		if (((combo > 5) || (combo < 0)) && (gf.animOffsets.exists('sad')))
-			gf.playAnim('sad');
-
 		if (combo > 0)
 			combo = 0; // bitch lmao
 		else
@@ -2357,7 +2355,6 @@ class PlayState extends MusicBeatState
 				songDialogue.play();
 				songDialogue.volume = 0;
 				FlxTween.tween(songDialogue,{volume:0.55},1,{ease:FlxEase.linear});
-				trace(songDialogue.volume);
 			}
 		}});
 
