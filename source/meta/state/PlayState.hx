@@ -195,7 +195,7 @@ class PlayState extends MusicBeatState
 		"Mph..","Very well, boy..","You've earned my respect.","But let's see if you can really keep up.."
 	];
 
-	public var dgtmr:Bool=false;
+	public var dgtmr:Bool=false;public var dgtmr1:Bool=false;
 
 	public static var midsongdia:Bool=false;
 
@@ -894,9 +894,13 @@ class PlayState extends MusicBeatState
 
 			switch(SONG.song.toLowerCase()){
 				case'reaper-rhythm':
-					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==6){
+					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==6&&!dgtmr1){
+						dgtmr1=true;
 					trace('cloak');
-					cloakreveal();
+					new FlxTimer().start(0.0001,function(dfskfsdkj:FlxTimer){
+						cloakreveal();
+						dgtmr1=false;
+						});
 					}
 				case'deadbattle':
 					if(dialogueBox!=null&&dialogueBox.alive&&dialogueBox.curPage==12&&!dgtmr){
