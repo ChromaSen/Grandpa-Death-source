@@ -676,7 +676,7 @@ class PlayState extends MusicBeatState
 					aspdojojdfsapjfds=true;
 					trace("121212231");
 				}
-				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"||SONG.song.toLowerCase()!="deadbattle"){
+				if(FlxG.keys.justPressed.SHIFT&&DialogueBox.voiceline!=null&&SONG.song.toLowerCase()!="reaper-rhythm"&&SONG.song.toLowerCase()!="deadbattle"){
 					DialogueBox.voiceline.stop();
 					dialogueBox.closeDialog();
 				  }

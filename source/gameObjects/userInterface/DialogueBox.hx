@@ -138,6 +138,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		// cur portrait
 		portrait = new FNFSprite(800, 160);
+		portrait.visible=true;
 
 		// thank u sammu for fixing alphabet.hx
 		// i dont wanna touch it ever
@@ -323,6 +324,9 @@ class DialogueBox extends FlxSpriteGroup
 	public function updatePortrait(force:Bool = false)
 	{
 		var newChar = dialogueData.dialogue[curPage].portrait;
+		if(PlayState.SONG.song.toLowerCase()=='reaper-rhythm'){
+			portrait.visible=false;
+		}else{portrait.visible=true;}
 
 		if (curCharacter != newChar || force)
 		{
