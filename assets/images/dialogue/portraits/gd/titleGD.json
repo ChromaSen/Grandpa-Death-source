@@ -1,0 +1,17 @@
+{
+    "name": "titleGD",
+    "expressions": {
+        "normal": "gd flash instance"
+    },
+    "position": [
+        100,
+        200
+    ],
+    "antialiasing": false,
+    "loop": false,
+    "sounds": [
+        "pixelText"
+    ],
+    "soundChance": 100,
+    "soundPath": "sounds/"
+}

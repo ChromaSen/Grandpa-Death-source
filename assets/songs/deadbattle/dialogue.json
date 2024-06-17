@@ -1,104 +1,104 @@
 {
-	"box": "speech_bubble_talking",
-	"boxState": "normal",
-	"dialogue":[
-			{			
-				"portrait": "bf",
-				"expression": "Normal Talk",
-				"text": "Ugh..."
-			},
-			{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue":[
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "Ugh..."
+            },
+            {
 
-				"text": "How rude! Who sent us to hell right \nwhen we were about to have some fun?! \nWhen I get you I'll-"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "..."
-			},
-			{
-				"portrait": "bf",
-				"expression": "Normal Talk",
-				"text": "!"
-			},
-			{
-				"text":  "OMG GRANDPAAAAAAAAAA!!!"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "Hello darling, good to see you again.",
-				"voiceLine":"hidarling1"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Angry Talk",
-				"text":  "Beep bap bobo bep?"
-			},
-			{
-				"expression": "Normal Talk",
-				"text": "Well duh! Of course I have a grandpa! \nI just never got the chance to \ntalk about him."
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "So... You must be the 'rising star' \nI've been hearing about...",
-				"voiceLine": "risingstar2"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Normal Talk",
-				"text": "Oh? You know Boyfriend? \n Oh em gee, I didn't know \nword spread so fast!"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "Yes, and I heard how he treated you. \nAnd I'm not happy about it.",
-				"voiceLine": "treatedyou3"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Normal Talk",
-				"text": "Huh?"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Angry Talk",
-				"text": "Bloop?! Bap bop beep bep bep boo ba be-"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "SILENCE!",
-				"voiceLine": "silence44"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Angry Talk",
-				"text": "Ep!"
-			},
-			{
-				"portrait": "bf",
-				"expression": "Normal Talk",
-				"text": "Gramps? He didn't-"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "Now, now, sweetheart. I'll deal with him, \nyou sit down and let your old man teach \nthis boy a lesson he won't forget.",
-				"voiceLine": "idk5"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "So... Boy, you think you can mess with my \nkin?",
-				"voiceLine": "mess6"
-			},
-			{
-				"portrait": "senpai",
-				"expression": "Senpai Portrait Enter",
-				"text": "Let me tell you now, that's a sin.",
-				"voiceLine": "sin7"
-			}
-	]
+                "text": "How rude! Who sent us to hell right \nwhen we were about to have some fun?! \nWhen I get you I'll-"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "..."
+            },
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "!"
+            },
+            {
+                "text":  "OMG GRANDPAAAAAAAAAA!!!"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Hello darling, good to see you again.",
+                "voiceLine":"hidarling1"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text":  "Beep bap bobo bep?"
+            },
+            {
+                "expression": "Normal Talk",
+                "text": "Well duh! Of course I have a grandpa! \nI just never got the chance to \ntalk about him."
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "So... You must be the 'rising star' \nI've been hearing about...",
+                "voiceLine": "risingstar2"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "Oh? You know Boyfriend? \n Oh em gee, I didn't know \nword spread so fast!"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Yes, and I heard how he treated you. \nAnd I'm not happy about it.",
+                "voiceLine": "treatedyou3"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "Huh?"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Bloop?! Bap bop beep bep bep boo ba be-"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "SILENCE!",
+                "voiceLine": "silence44"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Ep!"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "Gramps? He didn't-"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Now, now, sweetheart. I'll deal with him, \nyou sit down and let your old man teach \nthis boy a lesson he won't forget.",
+                "voiceLine": "idk5"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "So... Boy, you think you can mess with my \nkin?",
+                "voiceLine": "mess6"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Let me tell you now, that's a sin.",
+                "voiceLine": "sin7"
+            }
+    ]
 }

@@ -8,7 +8,7 @@
 				"text": "*Heavy Panting*"
 			},
 			{
-				"portrait": "senpai",
+				"portrait": "titleGD",
 				"expression": "Senpai Portrait Enter",
 				"text": "Haha! What's wrong, boy? \nCan't handle someone NOT giving \nyou a window to breathe?",
 				"voiceLine": "whatswrong1"
@@ -19,7 +19,7 @@
 				"text": "Beepo! Baba dee bo bap!"
 			},
 			{
-				"portrait": "senpai",
+				"portrait": "titleGD",
 				"expression": "Senpai Portrait Enter",
 				"text": "Hmph... Using a guitar is 'unfair'? \nLike I give a damn!",
 				"voiceLine":"igiveadamn2"

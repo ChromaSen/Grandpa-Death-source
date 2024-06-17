@@ -232,7 +232,7 @@ class DialogueBox extends FlxSpriteGroup
 				voiceline=new FlxSound().loadEmbedded(Paths.file("images/dialogue/boxes/gd/" + pageData.voiceLine + "." + Paths.SOUND_EXT),false,true);
 				voiceline.play();
 			}
-			alphabetText.playSounds=curCharacter!="senpai"; //senpai for now, then should be gd
+			alphabetText.playSounds=curCharacter!="titleGD";
 	}
 
 	public function updateTextBox(force:Bool = false)
@@ -324,9 +324,6 @@ class DialogueBox extends FlxSpriteGroup
 	public function updatePortrait(force:Bool = false)
 	{
 		var newChar = dialogueData.dialogue[curPage].portrait;
-		if(PlayState.SONG.song.toLowerCase()=='reaper-rhythm'){
-			portrait.visible=false;
-		}else{portrait.visible=true;}
 
 		if (curCharacter != newChar || force)
 		{
@@ -536,8 +533,8 @@ class DialogueBox extends FlxSpriteGroup
 			portrait.animation.finish();
 
 		bgFade.alpha += 0.02;
-		if (bgFade.alpha > 0.6)
-			bgFade.alpha = 0.6;
+		if (bgFade.alpha > 0.3)
+			bgFade.alpha = 0.3;
 
 		if (FlxG.keys.justPressed.ENTER) 
 			{

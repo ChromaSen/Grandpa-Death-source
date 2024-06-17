@@ -63,9 +63,6 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 2;
 
 	public static var songMusic:FlxSound;
-	public static var songMusicShit:FlxSound;
-	public static var songMusicBad:FlxSound;
-	public static var songMusicSick:FlxSound;
 	public static var vocals:FlxSound;
 	public static var vocalsOpp:FlxSound;
 	public static var hasSplitVocals:Bool = false;
@@ -293,7 +290,7 @@ class PlayState extends MusicBeatState
 						bta=new FlxSprite();
 						bta.frames=Paths.getSparrowAtlas('backgrounds/hell/bta');
 						bta.screenCenter();
-						bta.animation.addByPrefix('bta','bta',28,false);
+						bta.animation.addByPrefix('bta','bta',26,false);
 						bta.cameras=[lyrics];
 						bta.alpha=0;
 						add(bta);
@@ -494,7 +491,7 @@ class PlayState extends MusicBeatState
 		{
 			//hi gdd here to ruin everything
 			//songIntroCutscene();
-			tweenCam(0.5,0.5);
+			tweenCam(0.7,0.5);
 			callTextbox();
 
 		}
@@ -531,6 +528,19 @@ class PlayState extends MusicBeatState
 			var shader:GraphicsShader = new GraphicsShader("", File.getContent("./assets/shaders/vhs.frag"));
 			FlxG.camera.setFilters([new ShaderFilter(shader)]);
 		 */
+
+		 if(isStoryMode&&dialogueBox!=null&&dialogueBox.alive){
+			switch(SONG.song.toLowerCase()){
+				case "deadbattle":
+					songDialogue=FlxG.sound.play(Paths.music("PreSong1"),0,false);
+				case 'reaper-rhythm':
+					songDialogue=FlxG.sound.play(Paths.music("PreSong2"),0,false);
+				case 'behold the apocalypse':
+					songDialogue=FlxG.sound.play(Paths.music("PreSong3"),0,false);
+			}
+		 }
+
+
 	}
 
 	public static function copyKey(arrayToCopy:Array<FlxKey>):Array<FlxKey>
@@ -652,9 +662,15 @@ class PlayState extends MusicBeatState
 		super.destroy();
 	}
 
+	function cameramove(char:Character){
+		camFollow.setPosition(char.getMidpoint().x+camDisplaceX+char.characterData.camOffsetX,char.getMidpoint().y+camDisplaceY+char.characterData.camOffsetY);
+	}
+
 	var staticDisplace:Int = 0;
 
 	var lastSection:Int = 0;
+
+	
 
 	override public function update(elapsed:Float)
 	{
@@ -665,6 +681,7 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
+		var lerpVal = (elapsed * 2.4) * cameraSpeed;
 		// dialogue checks
 		if (dialogueBox != null && dialogueBox.alive)
 		{
@@ -684,15 +701,32 @@ class PlayState extends MusicBeatState
 			
 			  }
 			// the change I made was just so that it would only take accept inputs
+
+			var curpage1=dialogueBox.curPage;
+			dialogueBox.portrait.visible=(SONG.song.toLowerCase()=='reaper-rhythm'||SONG.song.toLowerCase()=='behold the apocalypse'||SONG.song.toLowerCase()=='deadbattle'||dialogueBox.curCharacter=='bf')?false:(dialogueBox.curCharacter=="titleGD");
 			if (controls.ACCEPT && dialogueBox.textStarted && !midsongdia)
 			{
 				dialogueBox.curPage += 1;
-				trace(dialogueBox.curPage);
 
 				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length&&!midsongdia)
 					dialogueBox.closeDialog()
 				else
 					dialogueBox.updateDialog();
+				
+
+			}
+			if (dialogueBox!=null&&dialogueBox.curPage!=curpage1){ 
+				trace(dialogueBox.curPage);
+				if(dialogueBox.curCharacter=="titleGD"){cameramove(dadOpponent);
+				}
+				//for some reason it doesn't move the camera if titleGD is inside the switch below
+				switch(dialogueBox.curCharacter){
+					case "bf":
+						var getCenterY1 = boyfriend.getMidpoint().y - 200;
+						camFollow.setPosition(boyfriend.getMidpoint().x + camDisplaceX - boyfriend.characterData.camOffsetX, getCenterY1 + camDisplaceY + boyfriend.characterData.camOffsetY);
+					case "gf":
+						cameramove(gf);
+				  }
 			}
 		}
 
@@ -833,8 +867,6 @@ class PlayState extends MusicBeatState
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 				}
 			}
-
-			var lerpVal = (elapsed * 2.4) * cameraSpeed;
 			if(snap){
 				camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 			}else{
@@ -908,6 +940,7 @@ class PlayState extends MusicBeatState
 						trace('1');
 						new FlxTimer().start(0.6,function(rtggbsbdsfb:FlxTimer){
 							if(dialogueBox!=null&&dialogueBox.alive){
+								cameramove(dadOpponent);
 								dialogueBox.curPage+=1;
 								dialogueBox.updateDialog();
 							}
@@ -1413,7 +1446,7 @@ class PlayState extends MusicBeatState
 
 	override public function onFocusLost():Void
 	{
-		if (canPause && !paused && !Init.trueSettings.get('Auto Pause')&&!dialogueBox.alive)
+		if (canPause && !paused && !Init.trueSettings.get('Auto Pause'))
 			pauseGame();
 		super.onFocusLost();
 	}
@@ -1652,12 +1685,6 @@ class PlayState extends MusicBeatState
 		if (!paused)
 		{
 			songMusic.play();
-			if (hasInstSwitching)
-			{
-				songMusicShit.play();
-				songMusicBad.play();
-				songMusicSick.play();
-			}
 			songMusic.onComplete = endSong;
 			vocals.play();
 			//vocalsOpp.play();
@@ -1696,49 +1723,11 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
 
-		/*hasInstSwitching = Paths.multiInstCheck(SONG.song);
-
-		if (hasInstSwitching)
-		{
-			songMusicShit = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Shit"), false, true);
-			songMusicShit.volume = 0;
-			songMusicBad = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Bad"), false, true);
-			songMusicBad.volume = 0;
-			songMusicSick = new FlxSound().loadEmbedded(Paths.multiInst(SONG.song, "Sick"), false, true);
-			songMusicSick.volume = 0;
-		}*/
-
-		/*hasSplitVocals = Paths.doSplitVocalsExist(SONG.song);
-
-		if (SONG.needsVoices && hasSplitVocals)
-		{
-			trace("loading split vocals");
-			vocals = new FlxSound().loadEmbedded(Paths.voicesBf(SONG.song), false, true); //bf vocals
-			vocalsOpp = new FlxSound().loadEmbedded(Paths.voicesOpp(SONG.song), false, true); //op vocals
-		}*/
-
-		/*else if (SONG.needsVoices && !hasSplitVocals)
-		{	
-			trace("loading normal voices");*/
+	
 			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song), false, true);
-			/*vocalsOpp = new FlxSound();
-		}
 
-		else
-		{
-			trace("loading no vocals");
-			vocals = new FlxSound();
-			vocalsOpp = new FlxSound();
-		}*/
 
 		FlxG.sound.list.add(songMusic);
-
-		/*if (hasInstSwitching)
-		{
-			FlxG.sound.list.add(songMusicShit);
-			FlxG.sound.list.add(songMusicBad);
-			FlxG.sound.list.add(songMusicSick);
-		}*/
 
 		FlxG.sound.list.add(vocals);
 		//FlxG.sound.list.add(vocalsOpp);
@@ -1769,30 +1758,12 @@ class PlayState extends MusicBeatState
 	function resyncVocals():Void
 	{
 		songMusic.pause();
-		if (hasInstSwitching)
-		{
-			songMusicShit.pause();
-			songMusicBad.pause();
-			songMusicSick.pause();
-		}
 		vocals.pause();
 		//vocalsOpp.pause();
 		Conductor.songPosition = songMusic.time;
-		if (hasInstSwitching)
-		{
-			songMusicShit.time = Conductor.songPosition;
-			songMusicBad.time = Conductor.songPosition;
-			songMusicSick.time = Conductor.songPosition;	
-		}
 		vocals.time = Conductor.songPosition;
 		//vocalsOpp.time = Conductor.songPosition;
 		songMusic.play();
-		if (hasInstSwitching)
-		{
-			songMusicShit.play();
-			songMusicBad.play();
-			songMusicSick.play();	
-		}
 		vocals.play();
 		//vocalsOpp.play();
 	}
@@ -1845,10 +1816,13 @@ class PlayState extends MusicBeatState
 					trace(dialogueBox);
 					dialogueBox.cameras = [dialogueHUD];
 					DialogueBox.skipText.visible=false;
+					dialogueBox.alphabetText.playSounds = false;
 					midsongdia=true;
 				case 1548:
 					add(dialogueBox);	
-					dadStrums.visible=boyfriendStrums.visible=false;
+					for (h in strumHUD){
+						FlxTween.tween(h,{alpha:0},0.3);
+					}
 				
 				case 1635:
 					//dont ask pls
@@ -2004,15 +1978,6 @@ class PlayState extends MusicBeatState
 		if (songMusic != null)
 			songMusic.stop();
 
-		if (hasInstSwitching)
-		{
-			if (songMusicShit != null)
-				songMusicShit.stop();
-			if (songMusicBad != null)
-				songMusicBad.stop();
-			if (songMusicSick != null)
-				songMusicSick.stop();	
-		}
 
 		if (vocals != null)
 			vocals.stop();
@@ -2030,12 +1995,6 @@ class PlayState extends MusicBeatState
 			{
 				//	trace('nulled song');
 				songMusic.pause();
-				if (hasInstSwitching)
-				{
-					songMusicShit.pause();
-					songMusicBad.pause();
-					songMusicSick.pause();	
-				}
 				vocals.pause();
 				//vocalsOpp.pause();
 				//	trace('nulled song finished');
@@ -2089,12 +2048,6 @@ class PlayState extends MusicBeatState
 	{
 		canPause = false;
 		songMusic.volume = 0;
-		if (hasInstSwitching)
-		{
-			songMusicShit.volume = 0;
-			songMusicBad.volume = 0;
-			songMusicSick.volume = 0;	
-		}
 		vocals.volume = 0;
 		//vocalsOpp.volume = 0;
 		if (SONG.validScore)
@@ -2177,13 +2130,11 @@ class PlayState extends MusicBeatState
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 		if (hasInstSwitching)
 		{
-			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp,*/ songMusicShit, songMusicBad, songMusicSick]);
+			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp,*/]);
 		}
 		else
 			ForeverTools.killMusic([songMusic, vocals, /*vocalsOpp*/]);
 
-		if (songDialogue != null)
-			ForeverTools.killMusic([songDialogue]);
 
 		// deliberately did not use the main.switchstate as to not unload the assets
 		FlxG.switchState(new PlayState());
@@ -2194,14 +2145,17 @@ class PlayState extends MusicBeatState
 	public function closemidsong(){
 		if(dialogueBox!=null){FlxTween.tween(dialogueBox,{alpha:0},1,{ease:FlxEase.quadOut,onComplete:function(gffsgdg:FlxTween){dialogueBox.kill();}});}
 		dialogueBox.alphabetText.playSounds = false;
-		dadStrums.visible=boyfriendStrums.visible=true;
+		for (h in strumHUD){
+			FlxTween.tween(h,{alpha:1},0.4);
+		}
 	}
 
 	public function cloakreveal(){
 		dialogueBox.alphabetText.playSounds=false;
 		dialogueBox.kill();
 		DialogueBox.voiceline?.stop();
-		ForeverTools.killMusic([songDialogue]);
+		songDialogue?.stop();
+		songDialogue=null;
 
 		if(cloaked!=null){
 			FlxTween.tween(camHUD,{alpha:0},0.5);
@@ -2230,8 +2184,8 @@ class PlayState extends MusicBeatState
 
 	public function songIntroCutscene()
 	{
-		if(songDialogue!=null)
-			{songDialogue.fadeOut(2,0);}
+		songDialogue?.stop();
+		songDialogue=null;
 		switch (curSong.toLowerCase())
 		{
 			case "winter-horrorland":
@@ -2337,7 +2291,10 @@ class PlayState extends MusicBeatState
 
 
 			//please dont ask
-		FlxTween.tween(FlxG.camera,{zoom:0.5},1.5,{ease:FlxEase.quadInOut,onComplete:function(sdlfklkfsd:FlxTween){
+		FlxTween.tween(FlxG.camera,{zoom:0.7},1.5,{ease:FlxEase.quadInOut,onComplete:function(sdlfklkfsd:FlxTween){
+			if(songDialogue!=null){
+				FlxTween.tween(songDialogue,{volume:0.4},1,{ease:FlxEase.linear});
+			}
 			FlxTween.tween(dialogueHUD,{alpha:1},0.5,{
 				ease:FlxEase.quadIn,
 				onComplete:function(dfsgersge:FlxTween){
@@ -2346,20 +2303,6 @@ class PlayState extends MusicBeatState
 			});
 			FlxTween.tween(dialogueBox,{alpha:1},0.5,{ease:FlxEase.quadIn});
 
-			switch (SONG.song.toLowerCase()){ 
-				case 'deadbattle':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong1"), true, true); 
-				case 'reaper-rhythm':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong2"), true, true);
-				case 'behold-the-apocalypse':
-					songDialogue = FlxG.sound.play(Paths.music("PreSong3"), true, true); 
-			} 
-			
-			if (songDialogue != null) {
-				songDialogue.play();
-				songDialogue.volume = 0;
-				FlxTween.tween(songDialogue,{volume:0.55},1,{ease:FlxEase.linear});
-			}
 		}});
 
 
@@ -2505,107 +2448,4 @@ class PlayState extends MusicBeatState
 			cast(Object, FlxSprite).antialiasing = false;
 		return super.add(Object);
 	}
-
-	/*function perSectionAccuracyBullshit() //by GDD - now unused ;-;
-	{
-		//ALRIGHT RAMBLERS, LET'S GET RAMBLIN
-		var accuracy:Float = 0;
-		var ratingKeys:Array<String> = [];
-
-		//pre-flight check, don't wanna run this if we haven't hit any notes!
-		if (sectionNotesHit == 0)
-			return;
-
-		//start off by getting the rating keys to properly convert them into accuracies later
-		for (rating in sectionJudgements)
-		{
-			switch (rating)
-			{
-				case 0: //sick
-					ratingKeys.push('sick');
-				
-				case 1: //good
-					ratingKeys.push('good');
-
-				case 2: //bad
-					ratingKeys.push('bad');
-
-				case 3: //shit
-					ratingKeys.push('shit');
-
-				case 4: //miss
-					ratingKeys.push('miss');
-			}
-		}
-
-		//and now we actually calculate the accuracy
-		for (judgement in ratingKeys)
-		{
-			accuracy += Math.max(0, Timings.judgementsMap.get(judgement)[3]); //maths is scary so i stole this from Timings.hx
-		}
-
-		//should this be floored? maybe! has it broken? no! do i care? also no (until it breaks!)
-		accuracy = (accuracy / sectionNotesHit); //get the true accuracy by taking the total accuracy of all notes hit and dividing it by the notes hit in that section (example, 16 notes at 100% accuracy would be 1600 accuracy, divided by 16 notes equals 100% accuracy.)
-
-
-
-		//and now we update which mix we should be on
-		//accuracy under 75 moves you down a mix
-		//accuracy over 90 moves you up a mix
-		if (accuracy < 75 && curInstTrack > 0)
-			curInstTrack--;
-		else if (accuracy > 90 && curInstTrack < 4)
-			curInstTrack++;
-			
-		//now we actually update the inst
-		switch(curInstTrack)
-		{
-			case 0: //you're going to the SHIT MIX
-				songMusicShit.volume = 1;
-				songMusicBad.volume = 0;
-
-			case 1: //i'm gonna be genuinely surprised if more than a handful of people go to the bad mix
-				songMusicBad.volume = 1;
-				songMusicShit.volume = 0;
-				songMusic.volume = 0;
-
-			case 2: //i wonder how the ost is gonna handle multi-inst tracks? should probably come up with a better name than that, too wordy.
-				songMusic.volume = 1;
-				songMusicSick.volume = 0;
-				songMusicBad.volume = 0;
-
-			case 3: //is the sick mix gonna be considered the default song?
-				songMusicSick.volume = 1;
-				songMusic.volume = 0;
-		}
-
-		//now we just need to clean up after ourselves!
-		sectionJudgements = [];
-
-		sectionNotesHit = 0;
-
-		if (Init.trueSettings.get('Debug Info'))
-		{
-			//some debug info stuff here for testan purposes
-			switch(curInstTrack)
-			{
-				case 0:
-					uiHUD.curMixDebugText.text = 'CUR MIX: SHIT';
-					uiHUD.curMixDebugText.screenCenter(X);
-
-				case 1:
-					uiHUD.curMixDebugText.text = 'CUR MIX: BAD';
-					uiHUD.curMixDebugText.screenCenter(X);
-
-				case 2:
-					uiHUD.curMixDebugText.text = 'CUR MIX: GOOD';
-					uiHUD.curMixDebugText.screenCenter(X);
-
-				case 3:
-					uiHUD.curMixDebugText.text = 'CUR MIX: SICK';
-					uiHUD.curMixDebugText.screenCenter(X);
-			}
-		}
-
-	}*/
 }
