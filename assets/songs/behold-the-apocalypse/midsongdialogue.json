@@ -3,14 +3,10 @@
 	"boxState": "normal",
 	"dialogue":[
 			{
-				"portrait": "titleGD",
-				"expression": "Senpai Portrait Enter",
 				"text": "Mph..",
 				"speed":1
 			},
 			{
-				"portrait": "titleGD",
-				"expression": "Senpai Portrait Enter",
 				"text": "Very well, boy..",
 				"speed":0.9
 			},
@@ -19,8 +15,6 @@
 				"speed":1.2
 			},
 			{
-				"portrait": "titleGD",
-				"expression": "Senpai Portrait Enter",
 				"text": "But let's see if you can really keep up!",
 				"speed":1.4
 			}

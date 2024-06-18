@@ -394,8 +394,8 @@ class PlayState extends MusicBeatState
 		}
 
 		if(SONG.song.toLowerCase()=='reaper-rhythm'){
-				dadOpponent.visible=false;
-				cloaked.alpha=1;
+			if(isStoryMode){dadOpponent.visible=false;
+				cloaked.alpha=1;}
 			
 			trace(
 				'bye'
@@ -559,11 +559,11 @@ class PlayState extends MusicBeatState
 		 if(isStoryMode&&dialogueBox!=null&&dialogueBox.alive){
 			switch(SONG.song.toLowerCase()){
 				case "deadbattle":
-					songDialogue=FlxG.sound.play(Paths.music("PreSong1"),0,false);
+					songDialogue=FlxG.sound.play(Paths.music("PreSong1"),0,true);
 				case 'reaper-rhythm':
-					songDialogue=FlxG.sound.play(Paths.music("PreSong2"),0,false);
+					songDialogue=FlxG.sound.play(Paths.music("PreSong2"),0,true);
 				case 'behold the apocalypse':
-					songDialogue=FlxG.sound.play(Paths.music("PreSong3"),0,false);
+					songDialogue=FlxG.sound.play(Paths.music("PreSong3"),0,true);
 			}
 		 }
 
@@ -753,7 +753,8 @@ class PlayState extends MusicBeatState
 				trace(dialogueBox.curPage);
 				if(dialogueBox.curCharacter=="titleGD"){cameramove(dadOpponent);if(SONG.song.toLowerCase()=='deadbattle'){
 					camFollow.y-=180;
-				}defaultCamZoom=0.7;
+				}if(SONG.song.toLowerCase()=='behold the apocalypse'){camFollow.y-=140;camFollow.x+=50;}
+					defaultCamZoom=0.75;
 			}
 				switch(dialogueBox.curCharacter){
 					case "bf":
@@ -1872,7 +1873,7 @@ class PlayState extends MusicBeatState
 					trace(dialogueBox);
 					dialogueBox.cameras = [dialogueHUD];
 					DialogueBox.skipText.visible=false;
-					dialogueBox.alphabetText.playSounds = false;
+					//dialogueBox.alphabetText.playSounds = false;
 					midsongdia=true;
 				case 1548:
 					add(dialogueBox);	
@@ -2419,7 +2420,11 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(camHUD,{alpha:1},1,{ease:FlxEase.quadIn});
 		}
 		if(vignetteh!=null){FlxTween.tween(vignetteh,{alpha:0},0.6,{ease:FlxEase.quadOut,onComplete:function(gffsgdg:FlxTween){vignetteh.alpha=0;}});}
-		tweenCam(0.6,1); //gegegege
+		if(SONG.song.toLowerCase()=='behold the apocalypse'){
+			tweenCam(0.7,1);
+		}else{
+			tweenCam(0.6,1);
+		}
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{

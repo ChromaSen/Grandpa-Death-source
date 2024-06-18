@@ -59,20 +59,8 @@ class Main extends Sprite
 			['grandpadeath-cloaked', 'grandpadeath', 'grandpadeath'],
 			[FlxColor.fromRGB(129, 100, 223)],
 			'vs. GRANDPA DEATH'
-		]#if debug ,
-		[
-			['Reaper-Rhythm'],
-			['grandpadeath'],
-			[FlxColor.fromRGB(129, 100, 223)],
-			'RR TESTING'
-		],
-		[
-			['Behold-The-Apocalypse'],
-			['grandpadeath'],
-			[FlxColor.fromRGB(129, 100, 223)],
-			'BTA TESTING'
 		]
-		#end
+		
 	
 	];
 
@@ -209,7 +197,7 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Yoshubs/Forever-Engine";
+		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error in the thread, i'll get to it asap";
 
 		if (!FileSystem.exists("crash/"))
 			FileSystem.createDirectory("crash/");

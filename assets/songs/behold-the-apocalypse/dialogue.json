@@ -1,0 +1,147 @@
+{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue":[
+            {
+                "portrait": "bf",
+                "expression": "Normal Talk",
+                "text": "Skaboo bedeep!"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Hmph, an amazing performance, young man.\nYou have what it takes to be a true\nsinger.","voiceLine":"1amazingperfomance"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "BUT. That still doesn't excuse how you\ntreat my granddaughter.",
+                "voiceLine":"2treatgranddaughter"
+            },
+            {
+                "portrait": "gf",
+                "expression": "Normal Talk",
+                "text": "Grandpa, for the last time, he didn't-"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Hush now, dear. I need to give little \nrunt a piece of my mind.",
+                "voiceLine":"3wtfhesayshere"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text":  "Beep... BE DO SKAP DEDEBO!"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "Huh? 'Just like his father?'\nYou mean YOU hate him?",
+                "voiceLine":"4likehisfather"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Bah! Skebo bee dap do beb bee bab!"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "..."
+            },
+            {
+                "text":"","voiceLine":"chuckle"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "I'm sorry, boy. It looks like this was all a\nbig misunderstanding.",
+                "voiceLine":"misunderstanding"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Beh?"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "You see, I hate that cocky blockhead.",
+                "voiceLine":"cocky","speed":1
+            },
+            {
+                "text":"Always so full of himself and sees himself\nas the best.",
+                "voiceLine":"sofull"
+            },
+            {
+                "text":"I never wanted to approve the marriage\nbetween him and my daughter, but",
+                "voiceLine":"marriage","speed":1.35
+            },
+            {
+                "text":"her feelings for him were so big that\nI couldn't get myself to deny it.",
+                "voiceLine":"feelings","speed":1.32
+            },
+            {
+                "portrait": "titleGD", 
+                "expression": "gd flash instance",
+                "text": "When she conceived Girlfriend here to the\nworld, I swore that if anything bad were\nto happen to her","voiceLine":"badhappentoher","speed":1.25
+            },
+            {
+                "text":"I'd give whoever was responsible a quick\ncheck up, shall we say.","voiceLine":"checkup","speed":0.85
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "gulp"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "But since you didn't do anything bad to\nher, I won't do such a thing.",
+                "voiceLine":"8iwouldnotdosuchathing","speed":0.95
+            },
+            {
+                "portrait": "gf",
+                "expression": "Normal Talk",
+                "text": "Whew, so you're fine with him now, right?"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "I'm afraid not, dear.\nNot yet at least.",
+                "voiceLine":"9afraidnotdear","speed":0.95
+            },
+            {
+                "portrait": "gf",
+                "expression": "Normal Talk",
+                "text": "Huh?"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Beep?"
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "While I won't kill you, I'm still not positive\nabout you dating my granddaughter.",
+                "voiceLine":"10"
+            },
+            {
+                "text": "So, I want you to show me your worth,\nand that you're capable of being with her.",
+                "voiceLine":"11capableofbeingwithher","speed":1.25
+            },
+            {
+                "portrait": "titleGD",
+                "expression": "gd flash instance",
+                "text": "One more song, boy?",
+                "voiceLine":"12onemoresong"
+            },
+            {
+                "portrait": "bf",
+                "expression": "Angry Talk",
+                "text": "Beep!"
+            }
+    ]
+}
