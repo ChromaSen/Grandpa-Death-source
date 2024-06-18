@@ -225,11 +225,11 @@ class MainMenuState extends MusicBeatState
 		}
 
 		//im not sorry -gdd
-		if (FlxG.keys.justPressed.FIVE)
-		{
-			Main.switchState(this, new StoryMenuState());
-		}
 		#end
+		if (FlxG.keys.justPressed.FIVE)
+			{
+				Main.switchState(this, new StoryMenuState());
+			}
 
 		if(FlxG.keys.justPressed.ESCAPE){
 			Main.switchState(this,new TitleState());

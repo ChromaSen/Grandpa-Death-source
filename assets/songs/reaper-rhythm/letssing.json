@@ -1,0 +1,12 @@
+{
+	"box": "speech_bubble_talking",
+	"boxState": "normal",
+	"dialogue":[
+			{
+				"portrait": "titleGD",
+				"expression": "Senpai Portrait Enter",
+				"text": "Then let's sing!",
+				"voiceLine": "letssing5","speed":1.4
+			}
+	]
+}

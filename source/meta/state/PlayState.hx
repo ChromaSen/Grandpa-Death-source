@@ -198,6 +198,8 @@ class PlayState extends MusicBeatState
 
 	public var snap:Bool=true;
 
+	public static var fuckinghell:Bool=true;
+
 	function resetStatics()
 	{
 		// reset any values and variables that are static
@@ -661,6 +663,16 @@ class PlayState extends MusicBeatState
 
 	function cameramove(char:Character){
 		camFollow.setPosition(char.getMidpoint().x+camDisplaceX+char.characterData.camOffsetX,char.getMidpoint().y+camDisplaceY+char.characterData.camOffsetY);
+		var offsetX:Float=90;
+		var offsetY:Float=-40;
+		if(char==dadOpponent&&SONG.song.toLowerCase()=='reaper-rhythm'){
+			camFollow.setPosition(
+				char.getMidpoint().x + camDisplaceX + char.characterData.camOffsetX + offsetX,
+				char.getMidpoint().y + camDisplaceY + char.characterData.camOffsetY + offsetY 
+			);
+		}else{
+			camFollow.setPosition(char.getMidpoint().x + camDisplaceX + char.characterData.camOffsetX,char.getMidpoint().y + camDisplaceY + char.characterData.camOffsetY);
+		}
 	}
 
 	var staticDisplace:Int = 0;
@@ -716,7 +728,6 @@ class PlayState extends MusicBeatState
 				trace(dialogueBox.curPage);
 				if(dialogueBox.curCharacter=="titleGD"){cameramove(dadOpponent);
 				}
-				//for some reason it doesn't move the camera if titleGD is inside the switch below
 				switch(dialogueBox.curCharacter){
 					case "bf":
 						var getCenterY1 = boyfriend.getMidpoint().y - 200;
@@ -1771,6 +1782,13 @@ class PlayState extends MusicBeatState
 		///*
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
+
+		if(curSong.toLowerCase()=='deadbattle'){
+			switch(curStep){
+				case 272:
+					defaultCamZoom=0.75;
+			}
+		}
 		if (curSong.toLowerCase()=='reaper-rhythm'){
 			switch(curStep){
 			case 10:
@@ -2075,7 +2093,7 @@ class PlayState extends MusicBeatState
 				transOut = FlxTransitionableState.defaultTransOut;
 
 				// change to the menu state
-				Main.switchState(this, new StoryMenuState());
+				Main.switchState(this, new MainMenuState());
 
 				// save the week's score if the score is valid
 				if (SONG.validScore)
@@ -2147,29 +2165,44 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	public function whatthesigma(){
+		songDialogue?.stop();
+		songDialogue=null;
+		FlxTween.tween(camHUD,{alpha:1},1);
+		for (h in strumHUD){
+			FlxTween.tween(h,{alpha:1},1);
+		}
+		startCountdown();
+	}
+
 	public function cloakreveal(){
 		dialogueBox.alphabetText.playSounds=false;
 		dialogueBox.kill();
 		DialogueBox.voiceline?.stop();
-		songDialogue?.stop();
-		songDialogue=null;
+		fuckinghell=false;
 
 		if(cloaked!=null){
 			FlxTween.tween(camHUD,{alpha:0},0.5);
 			for (h in strumHUD){
 				FlxTween.tween(h,{alpha:0},0.5);
 			}
-			defaultCamZoom=0.7;
+			tweenCam(0.7,0.2);
 			cloaked.animation.play('idle',false);
+			FlxG.sound.play(Paths.sound('cape'),3);
+			camMovement=true;
 			cloaked.animation.finishCallback=function(dfsjksdfkj:String){
 				dadOpponent.visible=true;
+				dadOpponent.dance();
 				cloaked.kill();
 				new FlxTimer().start(1,function(sdfjkmasdk:FlxTimer){
-					FlxTween.tween(camHUD,{alpha:1},1);
-					for (h in strumHUD){
-						FlxTween.tween(h,{alpha:1},1);
-					}
-					startCountdown();
+					var letssing=Paths.json('reaper-rhythm/letssing');
+					dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(letssing));
+					trace(dialogueBox);
+					dialogueBox.cameras = [dialogueHUD];
+					dialogueBox.whenDaFinish = whatthesigma;
+					dialogueBox.alphabetText.playSounds=false;
+					DialogueBox.skipText.visible=false;
+					add(dialogueBox);
 				});
 			}
 
