@@ -299,9 +299,8 @@ class PlayState extends MusicBeatState
 						cloaked=new FlxSprite();
 						cloaked.frames=Paths.getSparrowAtlas('backgrounds/hell/dialogue');
 						cloaked.animation.addByPrefix('idle','throw',24,false);
-						cloaked.setPosition(158.05,366.1);
+						cloaked.setPosition(193.05,366.1);
 						cloaked.alpha=0;
-						add(cloaked);
 						grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
 						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 						//grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
@@ -358,6 +357,7 @@ class PlayState extends MusicBeatState
 
 		// add characters
 		add(gf);
+		add(cloaked);
 
 		// add limo cus dumb layering
 		if (curStage == 'highway')
@@ -391,12 +391,9 @@ class PlayState extends MusicBeatState
 		}
 
 		if(SONG.song.toLowerCase()=='reaper-rhythm'){
-			/*if(dialogueBox!=null&&dialogueBox.alive){
 				dadOpponent.visible=false;
 				cloaked.alpha=1;
-			}
-			*/
-
+			
 			trace(
 				'bye'
 			);
@@ -2162,14 +2159,12 @@ class PlayState extends MusicBeatState
 			for (h in strumHUD){
 				FlxTween.tween(h,{alpha:0},0.5);
 			}
-			tweenCam(0.65,0.5);
+			defaultCamZoom=0.7;
 			cloaked.animation.play('idle',false);
 			cloaked.animation.finishCallback=function(dfsjksdfkj:String){
 				dadOpponent.visible=true;
-				cloaked.visible=false;
-				cloaked.active=false;
-				tweenCam(0.5,1);
-				new FlxTimer().start(2,function(sdfjkmasdk:FlxTimer){
+				cloaked.kill();
+				new FlxTimer().start(1,function(sdfjkmasdk:FlxTimer){
 					FlxTween.tween(camHUD,{alpha:1},1);
 					for (h in strumHUD){
 						FlxTween.tween(h,{alpha:1},1);
@@ -2342,13 +2337,13 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
 
-		if(camHUD!=null){
+		if(camHUD!=null){//??? that never happens
 			for (h in strumHUD){
 				FlxTween.tween(h,{alpha:1},1);
 			}
 			FlxTween.tween(camHUD,{alpha:1},1,{ease:FlxEase.quadIn});
 		}
-		tweenCam(0.6,1,FlxEase.quadIn); //gegegege
+		tweenCam(0.6,1); //gegegege
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{

@@ -17,7 +17,7 @@
                 "text": "..."
             },
             {
-                "portrait": "bf",
+                "portrait": "gf",
                 "expression": "Normal Talk",
                 "text": "!"
             },
@@ -36,6 +36,7 @@
                 "text":  "Beep bap bobo bep?"
             },
             {
+                "portrait": "gf",
                 "expression": "Normal Talk",
                 "text": "Well duh! Of course I have a grandpa! \nI just never got the chance to \ntalk about him."
             },
@@ -46,7 +47,7 @@
                 "voiceLine": "risingstar2"
             },
             {
-                "portrait": "bf",
+                "portrait": "gf",
                 "expression": "Normal Talk",
                 "text": "Oh? You know Boyfriend? \n Oh em gee, I didn't know \nword spread so fast!"
             },
@@ -57,7 +58,7 @@
                 "voiceLine": "treatedyou3"
             },
             {
-                "portrait": "bf",
+                "portrait": "gf",
                 "expression": "Normal Talk",
                 "text": "Huh?"
             },
@@ -78,7 +79,7 @@
                 "text": "Ep!"
             },
             {
-                "portrait": "bf",
+                "portrait": "gf",
                 "expression": "Normal Talk",
                 "text": "Gramps? He didn't-"
             },
