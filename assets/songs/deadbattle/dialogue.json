@@ -3,12 +3,13 @@
     "boxState": "normal",
     "dialogue":[
             {
-                "portrait": "gf",
+                "portrait": "bf",
                 "expression": "Normal Talk",
                 "text": "Ugh..."
             },
             {
-
+                "portrait": "gf",
+                "expression": "Normal Talk",
                 "text": "How rude! Who sent us to hell right \nwhen we were about to have some fun?! \nWhen I get you I'll-"
             },
             {

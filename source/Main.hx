@@ -59,7 +59,7 @@ class Main extends Sprite
 			['grandpadeath-cloaked', 'grandpadeath', 'grandpadeath'],
 			[FlxColor.fromRGB(129, 100, 223)],
 			'vs. GRANDPA DEATH'
-		],
+		]#if debug ,
 		[
 			['Reaper-Rhythm'],
 			['grandpadeath'],
@@ -72,6 +72,7 @@ class Main extends Sprite
 			[FlxColor.fromRGB(129, 100, 223)],
 			'BTA TESTING'
 		]
+		#end
 	
 	];
 

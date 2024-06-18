@@ -122,6 +122,7 @@ class PlayState extends MusicBeatState
 
 	public static var camHUD:FlxCamera;
 	public static var camGame:FlxCamera;
+	public static var vignetteHUD:FlxCamera;
 	public static var dialogueHUD:FlxCamera;
 	public static var lyrics:FlxCamera;
 	public var camDisplaceX:Float = 0;
@@ -174,7 +175,6 @@ class PlayState extends MusicBeatState
 
 
 	public var grandpaspeech:FlxText;
-	public var vignette:FlxSprite;
 	public var fadein:FlxSprite;
 	public var bta:FlxSprite;
 	public static var instance:PlayState;
@@ -199,6 +199,7 @@ class PlayState extends MusicBeatState
 	public var snap:Bool=true;
 
 	public static var fuckinghell:Bool=true;
+	public var vignetteh:FlxSprite;public var vignette:FlxSprite;
 
 	function resetStatics()
 	{
@@ -280,7 +281,7 @@ class PlayState extends MusicBeatState
 		vignette.cameras = [camHUD];
 		vignette.alpha = 0.5;
 		add(vignette);
-
+		
 		var sss=SONG.song.toLowerCase();
 
 		switch(curStage){
@@ -305,7 +306,7 @@ class PlayState extends MusicBeatState
 						cloaked.alpha=0;
 						grandpaspeech=new FlxText(0,0,FlxG.width,"",20);
 						grandpaspeech.setFormat(Paths.font("vcr.ttf"),20,FlxColor.RED,CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-						//grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
+						grandpaspeech.setBorderStyle(OUTLINE, FlxColor.BLACK, 1.5);
 						grandpaspeech.alpha=1;
 						grandpaspeech.screenCenter();
 						grandpaspeech.y+=180;
@@ -465,9 +466,36 @@ class PlayState extends MusicBeatState
 		//
 
 		// create a hud over the hud camera for dialogue
+		/*
+		 					⠀⠀⠀⠀⠀⢀⣤⠖⠒⠒⠒⢒⡒⠒⠒⠒⠒⠒⠲⠦⠤⢤⣤⣄⣀⠀⠀⠀⠀⠀
+							⠀⠀⠀⠀⣠⠟⠀⢀⠠⣐⢭⡐⠂⠬⠭⡁⠐⠒⠀⠀⣀⣒⣒⠐⠈⠙⢦⠀⠀⠀
+							⠀⠀⠀⣰⠏⠀⠐⠡⠪⠂⣁⣀⣀⣀⡀⠰⠀⠀⠀⢨⠂⠀⠀⠈⢢⠀⠀⢹⠀⠀
+							⠀⣠⣾⠿⠤⣤⡀⠤⡢⡾⠿⠿⠿⣬⣉⣷⠀⠀⢀⣨⣶⣾⡿⠿⠆⠤⠤⠌⡳⣄
+							⣰⢫⢁⡾⠋⢹⡙⠓⠦⠤⠴⠛⠀⠀⠈⠁⠀⠀⠀⢹⡀⠀⢠⣄⣤⢶⠲⠍⡎⣾
+							⢿⠸⠸⡇⠶⢿⡙⠳⢦⣄⣀⠐⠒⠚⣞⢛⣀⡀⠀⠀⢹⣶⢄⡀⠀⣸⡄⠠⣃⣿
+							⠈⢷⣕⠋⠀⠘⢿⡶⣤⣧⡉⠙⠓⣶⠿⣬⣀⣀⣐⡶⠋⣀⣀⣬⢾⢻⣿⠀⣼⠃
+							⠀⠀⠙⣦⠀⠀⠈⠳⣄⡟⠛⠿⣶⣯⣤⣀⣀⣏⣉⣙⣏⣉⣸⣧⣼⣾⣿⠀⡇⠀
+							⠀⠀⠀⠘⢧⡀⠀⠀⠈⠳⣄⡀⣸⠃⠉⠙⢻⠻⠿⢿⡿⢿⡿⢿⢿⣿⡟⠀⣧⠀
+							⠀⠀⠀⠀⠀⠙⢦⣐⠤⣒⠄⣉⠓⠶⠤⣤⣼⣀⣀⣼⣀⣼⣥⠿⠾⠛⠁⠀⢿⠀
+							⠀⠀⠀⠀⠀⠀⠀⠈⠙⠦⣭⣐⠉⠴⢂⡤⠀⠐⠀⠒⠒⢀⡀⠀⠄⠁⡠⠀⢸⠀
+							⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠲⢤⣀⣀⠉⠁⠀⠀⠀⠒⠒⠒⠉⠀⢀⡾⠀
+							⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠲⠦⠤⠤⠤⠤⠴⠞⠋⠀⠀
+												problem? 
+
+		*/
+
+		vignetteHUD = new FlxCamera();
+		vignetteHUD.bgColor.alpha = 0;
+		FlxG.cameras.add(vignetteHUD, false);
 		dialogueHUD = new FlxCamera();
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD, false);
+
+		vignetteh = new FlxSprite().loadGraphic(Paths.image("backgrounds/hell/vignette"));
+		vignetteh.screenCenter();
+		vignetteh.cameras = [vignetteHUD];
+		vignetteh.alpha = 0.5;
+		add(vignetteh);
 
 		//
 		keysArray = [
@@ -664,7 +692,7 @@ class PlayState extends MusicBeatState
 	function cameramove(char:Character){
 		camFollow.setPosition(char.getMidpoint().x+camDisplaceX+char.characterData.camOffsetX,char.getMidpoint().y+camDisplaceY+char.characterData.camOffsetY);
 		var offsetX:Float=90;
-		var offsetY:Float=-40;
+		var offsetY:Float=-60;
 		if(char==dadOpponent&&SONG.song.toLowerCase()=='reaper-rhythm'){
 			camFollow.setPosition(
 				char.getMidpoint().x + camDisplaceX + char.characterData.camOffsetX + offsetX,
@@ -717,23 +745,24 @@ class PlayState extends MusicBeatState
 			{
 				dialogueBox.curPage += 1;
 
-				if (dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length&&!midsongdia)
-					dialogueBox.closeDialog()
-				else
-					dialogueBox.updateDialog();
+				dialogueBox.curPage == dialogueBox.dialogueData.dialogue.length&&!midsongdia?dialogueBox.closeDialog():dialogueBox.updateDialog();
 				
 
 			}
 			if (dialogueBox!=null&&dialogueBox.curPage!=curpage1){ 
 				trace(dialogueBox.curPage);
-				if(dialogueBox.curCharacter=="titleGD"){cameramove(dadOpponent);
-				}
+				if(dialogueBox.curCharacter=="titleGD"){cameramove(dadOpponent);if(SONG.song.toLowerCase()=='deadbattle'){
+					camFollow.y-=180;
+				}defaultCamZoom=0.7;
+			}
 				switch(dialogueBox.curCharacter){
 					case "bf":
-						var getCenterY1 = boyfriend.getMidpoint().y - 200;
+						var getCenterY1 = boyfriend.getMidpoint().y - 95;
 						camFollow.setPosition(boyfriend.getMidpoint().x + camDisplaceX - boyfriend.characterData.camOffsetX, getCenterY1 + camDisplaceY + boyfriend.characterData.camOffsetY);
+						defaultCamZoom=0.95;
 					case "gf":
-						cameramove(gf);
+						cameramove(gf);camFollow.x+=50;camFollow.y-=115;defaultCamZoom=1.1;
+
 				  }
 			}
 		}
@@ -949,6 +978,7 @@ class PlayState extends MusicBeatState
 						new FlxTimer().start(0.6,function(rtggbsbdsfb:FlxTimer){
 							if(dialogueBox!=null&&dialogueBox.alive){
 								cameramove(dadOpponent);
+								defaultCamZoom=0.7;camFollow.y-=180;
 								dialogueBox.curPage+=1;
 								dialogueBox.updateDialog();
 							}
@@ -1786,7 +1816,18 @@ class PlayState extends MusicBeatState
 		if(curSong.toLowerCase()=='deadbattle'){
 			switch(curStep){
 				case 272:
-					defaultCamZoom=0.75;
+					defaultCamZoom=0.7;
+				case 528,1456,1905:defaultCamZoom=0.6;
+				case 784:
+					twn=FlxTween.tween(FlxG.camera,{zoom:0.75},7.5,{ease:FlxEase.quadIn,onComplete:function(wtekjewtrkjl:FlxTween){defaultCamZoom=0.6;}
+				});
+				case 848:
+					twn.cancel();
+					defaultCamZoom=0.6;
+				case 1200,1744:defaultCamZoom=0.65;
+			case 1872:defaultCamZoom=0.7;
+			case 1878:defaultCamZoom=0.75;
+			case 1884:defaultCamZoom=0.8;
 			}
 		}
 		if (curSong.toLowerCase()=='reaper-rhythm'){
@@ -2180,21 +2221,22 @@ class PlayState extends MusicBeatState
 		dialogueBox.kill();
 		DialogueBox.voiceline?.stop();
 		fuckinghell=false;
+		camFollow.y-=60;
 
 		if(cloaked!=null){
 			FlxTween.tween(camHUD,{alpha:0},0.5);
 			for (h in strumHUD){
 				FlxTween.tween(h,{alpha:0},0.5);
 			}
-			tweenCam(0.7,0.2);
+			tweenCam(0.85,0.2);
+			FlxTween.tween(vignette,{alpha:0.75},0.4);
 			cloaked.animation.play('idle',false);
 			FlxG.sound.play(Paths.sound('cape'),3);
-			camMovement=true;
 			cloaked.animation.finishCallback=function(dfsjksdfkj:String){
 				dadOpponent.visible=true;
 				dadOpponent.dance();
 				cloaked.kill();
-				new FlxTimer().start(1,function(sdfjkmasdk:FlxTimer){
+				new FlxTimer().start(0.6,function(sdfjkmasdk:FlxTimer){
 					var letssing=Paths.json('reaper-rhythm/letssing');
 					dialogueBox = DialogueBox.createDialogue(sys.io.File.getContent(letssing));
 					trace(dialogueBox);
@@ -2376,6 +2418,7 @@ class PlayState extends MusicBeatState
 			}
 			FlxTween.tween(camHUD,{alpha:1},1,{ease:FlxEase.quadIn});
 		}
+		if(vignetteh!=null){FlxTween.tween(vignetteh,{alpha:0},0.6,{ease:FlxEase.quadOut,onComplete:function(gffsgdg:FlxTween){vignetteh.alpha=0;}});}
 		tweenCam(0.6,1); //gegegege
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)

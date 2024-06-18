@@ -327,7 +327,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		if (curCharacter != newChar || force)
 		{
-			if (newChar != null&&PlayState.fuckinghell==true)
+			if (newChar != null)
 			{
 				// made the curCharacter the new character
 				curCharacter = newChar;
