@@ -1893,7 +1893,7 @@ class PlayState extends MusicBeatState
 					midsongdia=false;
 					closemidsong();
 				case 1664,1984:
-					defaultCamZoom=0.75;
+					defaultCamZoom=0.8;
 				case 1792:
 					tweenCam(0.6,1.4);
 				case 1808:
