@@ -198,7 +198,6 @@ class PlayState extends MusicBeatState
 
 	public var snap:Bool=true;
 
-	public static var fuckinghell:Bool=true;
 	public var vignetteh:FlxSprite;public var vignette:FlxSprite;
 
 	function resetStatics()
@@ -2221,8 +2220,7 @@ class PlayState extends MusicBeatState
 		dialogueBox.alphabetText.playSounds=false;
 		dialogueBox.kill();
 		DialogueBox.voiceline?.stop();
-		fuckinghell=false;
-		camFollow.y-=60;
+		camFollow.y-=80;
 
 		if(cloaked!=null){
 			FlxTween.tween(camHUD,{alpha:0},0.5);
@@ -2230,9 +2228,10 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(h,{alpha:0},0.5);
 			}
 			tweenCam(0.85,0.2);
-			FlxTween.tween(vignette,{alpha:0.75},0.4);
+			FlxTween.tween(vignetteh,{alpha:0.8},0.4);
+			cloaked.alpha=1;
 			cloaked.animation.play('idle',false);
-			FlxG.sound.play(Paths.sound('cape'),3);
+			FlxG.sound.play(Paths.sound('cape'),5);
 			cloaked.animation.finishCallback=function(dfsjksdfkj:String){
 				dadOpponent.visible=true;
 				dadOpponent.dance();

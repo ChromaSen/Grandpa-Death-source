@@ -59,7 +59,20 @@ class Main extends Sprite
 			['grandpadeath-cloaked', 'grandpadeath', 'grandpadeath'],
 			[FlxColor.fromRGB(129, 100, 223)],
 			'vs. GRANDPA DEATH'
+		]#if debug ,
+		[
+			['Reaper-Rhythm'],
+			['grandpadeath'],
+			[FlxColor.fromRGB(129, 100, 223)],
+			'test'
+		],
+		[
+			['Behold-The-Apocalypse'],
+			['grandpadeath'],
+			[FlxColor.fromRGB(129, 100, 223)],
+			'test1'
 		]
+		#end
 		
 	
 	];
